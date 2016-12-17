@@ -919,6 +919,7 @@ installJaxx()
 #  refind-mkdefault 
 #} 
 #------------------------------------------------------------------------------ 
+# INSTRUCTIONS
 # To add a new task, add a new section above this block copying and pasting the following 5 lines:
 
 # taskNames+=("<Task Name>")                 
