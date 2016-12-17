@@ -27,7 +27,7 @@ taskDefaults=("TRUE")
 updateSystem()
 {
   apt-get update
-  apt-get -y upgrade
+  apt-get -y dist-upgrade
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install drivers")                 
