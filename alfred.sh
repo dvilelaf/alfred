@@ -825,6 +825,20 @@ installJaxx()
   echo "StartupNotify=false" >> $desktopFile
 }
 #------------------------------------------------------------------------------
+#taskNames+=("Install rEFInd")                  
+#taskMessages+=("Installing rEFInd")            
+#taskDescriptions+=("An EFI boot manager")    
+#taskRecipes+=("installrEFInd")    
+#taskDefaults+=("FALSE")  
+ 
+#installrEFInd() 
+# { 
+#  addRepository "ppa:rodsmith/refind" 
+#  apt-get -y install refind 
+#  refind-install --shim /boot/efi/EFI/ubuntu/shimx64.efi --localkeys 
+#  refind-mkdefault 
+#} 
+#------------------------------------------------------------------------------ 
 # To add a new task, add a new section above this block copying and pasting the following 5 lines:
 
 # taskNames+=("<Task Name>")                 
