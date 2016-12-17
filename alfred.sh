@@ -556,7 +556,7 @@ installDiffPdf()
 #------------------------------------------------------------------------------
 taskNames+=("Install Steam")                 
 taskMessages+=("Installing Steam")           
-taskDescriptions+=("Steam is a game digital distribution platform developed by Valve")   
+taskDescriptions+=("A game digital distribution platform developed by Valve")   
 taskRecipes+=("installSteam")   
 taskDefaults+=("FALSE") 
 
@@ -713,7 +713,7 @@ installDevBundle()
 #------------------------------------------------------------------------------
 taskNames+=("Install Swift")                 
 taskMessages+=("Installing Swift")           
-taskDescriptions+=("Swift is a programming language from Apple")   
+taskDescriptions+=("A compiler and interpreter for Apple's programming language")   
 taskRecipes+=("installSwift")   
 taskDefaults+=("FALSE") 
 
