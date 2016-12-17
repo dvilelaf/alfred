@@ -352,6 +352,37 @@ installLeoCad()
   apt-get -y install leocad
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install Paraview")                 
+taskMessages+=("Installing Paraview")           
+taskDescriptions+=("An application for interactive, scientific visualization")   
+taskRecipes+=("installParaview")   
+taskDefaults+=("FALSE") 
+
+installParaview()
+{
+  if [[ $OSarch != "x86_64" ]]; then
+    (>&2 echo "Your system is not supported by Paraview")
+    return
+  fi
+
+  wget -O /tmp/paraview.tar.gz "http://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v5.2&type=binary&os=linux64&downloadFile=ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz"
+  tar xzf /tmp/paraview.tar.gz -C /tmp
+
+  mv ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit /opt/paraview
+
+  desktopFile="/usr/share/applications/paraview.desktop"
+
+  echo "[Desktop Entry]" > $desktopFile
+  echo "Name=Paraview" >> $desktopFile
+  echo "GenericName=Data visualizer" >> $desktopFile
+  echo "Exec=/opt/paraview/bin/paraview" >> $desktopFile
+  echo "Terminal=false" >> $desktopFile
+  echo "Type=Application" >> $desktopFile
+  echo "Icon=/opt/paraview/share/icons/hicolor/96x96/apps/paraview.png" >> $desktopFile
+  echo "Categories=Graphics;" >> $desktopFile
+  echo "StartupNotify=false" >> $desktopFile
+}
+#------------------------------------------------------------------------------
 taskNames+=("Install LibreOffice suite")                 
 taskMessages+=("Installing LibreOffice")           
 taskDescriptions+=("A complete office suite: word processor, spreadsheets, slideshows, diagrams, drawings, databases and equations")   
