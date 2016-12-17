@@ -49,7 +49,7 @@ taskDefaults+=("FALSE")
 
 installRestrictedExtras()
 {
-  apt-get install ubuntu-restricted-extras
+  apt-get -y install ubuntu-restricted-extras
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Chrome")                 
@@ -63,7 +63,7 @@ installChrome()
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
   sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
   apt-get update 
-  apt-get install google-chrome-stable
+  apt-get -y install google-chrome-stable
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Firefox")                 
@@ -75,7 +75,7 @@ taskDefaults+=("FALSE")
 installFirefox()
 {
   addRepository "ppa:ubuntu-mozilla-security/ppa"
-  apt-get install firefox firefox-locale-$(locale | grep LANGUAGE | cut -d= -f2 | cut -d_ -f1)
+  apt-get -y install firefox firefox-locale-$(locale | grep LANGUAGE | cut -d= -f2 | cut -d_ -f1)
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Opera")                 
@@ -89,7 +89,7 @@ installOpera()
   wget -O - http://deb.opera.com/archive.key | apt-key add -
   sh -c 'echo "deb http://deb.opera.com/opera-stable/ stable non-free" >> /etc/apt/sources.list.d/opera.list'
   apt-get update 
-  apt-get install opera
+  apt-get -y install opera
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Transmission")                 
@@ -101,7 +101,7 @@ taskDefaults+=("FALSE")
 installTransmission()
 {
   addRepository "ppa:transmissionbt/ppa"
-  apt-get install transmission-gtk
+  apt-get -y install transmission-gtk
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Dropbox")                 
@@ -143,7 +143,7 @@ installVirtualBox()
   sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $OSbaseCodeName contrib" >> /etc/apt/sources.list.d/virtualbox.list'
   wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
   apt-get update
-  apt-get install -y virtualbox-5.1
+  apt-get -y install virtualbox-5.1
 
   wget -O /tmp/extensionPack.vbox-extpack http://download.virtualbox.org/virtualbox/5.1.10/Oracle_VM_VirtualBox_Extension_Pack-5.1.10-112026.vbox-extpack
   VBoxManage extpack install /tmp/extensionPack.vbox-extpack
@@ -160,7 +160,7 @@ installSkype()
   dpkg --add-architecture i386
   add-apt-repository "deb http://archive.canonical.com/ $OSbaseCodeName partner"
   apt-get update
-  apt-get install -y skype pulseaudio:i386
+  apt-get -y install skype pulseaudio:i386
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Thunderbird")                 
@@ -171,7 +171,7 @@ taskDefaults+=("FALSE")
 
 installThunderbird()
 {
-  apt-get install -y thunderbird
+  apt-get -y install thunderbird
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Telegram")                 
@@ -254,7 +254,7 @@ installSpotify()
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
 	echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.list.d/spotify.list
   apt-get update
-  apt-get install -y spotify-client
+  apt-get -y install spotify-client
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Audacity")                 
@@ -551,7 +551,7 @@ taskDefaults+=("FALSE")
 
 installDiffPdf()
 {
-  apt-get install diffpdf
+  apt-get -y install diffpdf
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Steam")                 
@@ -764,7 +764,7 @@ installCodeLite()
 {
   apt-key adv --fetch-keys https://repos.codelite.org/CodeLite.asc
   addRepository "deb https://repos.codelite.org/ubuntu/ $OSbaseCodeName universe"
-  apt-get install codelite wxcrafter
+  apt-get -y install codelite wxcrafter
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Visual Studio Code")                 
