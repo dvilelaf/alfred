@@ -20,7 +20,7 @@
 #------------------------------------------------------------------------------
 taskNames=("Update system")
 taskMessages=("Updating system")
-taskDescriptions=("Update system packages to its last version")
+taskDescriptions=("Update system packages to its latest version")
 taskRecipes=("updateSystem")
 taskDefaults=("TRUE")
 
