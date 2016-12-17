@@ -291,6 +291,17 @@ installMixxx()
   apt-get -y install mixxx
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install LMMS")                 
+taskMessages+=("Installing LMMS")           
+taskDescriptions+=("Music production for everyone: loops, synthesizers, mixer...")   
+taskRecipes+=("installLMMS")   
+taskDefaults+=("FALSE") 
+
+installLMMS()
+{
+  apt-get -y lmms 
+}
+#------------------------------------------------------------------------------
 taskNames+=("Install Gimp")                 
 taskMessages+=("Installing Gimp")           
 taskDescriptions+=("Gimp is an image editor")   
@@ -323,6 +334,22 @@ installBlender()
 {
   addRepository "ppa:thomas-schiex/blender"
   apt-get -y install blender
+}
+#------------------------------------------------------------------------------
+taskNames+=("Install LeoCad")                 
+taskMessages+=("Installing LeoCad")           
+taskDescriptions+=("Virtual LEGO CAD software")   
+taskRecipes+=("installLeoCad")   
+taskDefaults+=("FALSE") 
+
+installLeoCad()
+{
+  apt-get -y install unzip
+
+  wget -O /tmp/ldraw.zip http://www.ldraw.org/library/updates/complete.zip
+  unzip /tmp/ldraw.zip -d /home/$SUDO_USER
+
+  apt-get -y install leocad
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install LibreOffice suite")                 
@@ -468,6 +495,28 @@ taskDefaults+=("FALSE")
 install0AD()
 {
   apt-get -y install 0ad
+}
+#------------------------------------------------------------------------------
+taskNames+=("Install ScummVM")                 
+taskMessages+=("Installing ScummVM")           
+taskDescriptions+=("Loader for Scumm games")   
+taskRecipes+=("installScummVM")   
+taskDefaults+=("FALSE") 
+
+installScummVM()
+{
+  if [[ $OScodeName != "xenial" ]] && [[ $OScodeName != "yakkety" ]]; then
+    (>&2 echo "Your system is not supported by ScummVM")
+    return
+  fi
+
+  if [[ $OSarch == "x86_64" ]]; then
+    arch="amd64"
+  else
+    arch="i386"
+  fi
+
+  installPackage "https://www.scummvm.org/frs/scummvm/1.9.0/scummvm_1.9.0-$OScodeName.1_$arch.deb"
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Disk utility")                 
@@ -678,6 +727,35 @@ installArduino()
   tar xf /tmp/arduino.tar.xz -C /tmp
   mv /tmp/arduino-1.6.13/ /opt/arduino
   /opt/arduino/install.sh
+}
+#------------------------------------------------------------------------------
+taskNames+=("Install Mu")                 
+taskMessages+=("Installing Mu")           
+taskDescriptions+=("A code editor for beginner programmers")   
+taskRecipes+=("installMu")   
+taskDefaults+=("FALSE") 
+
+installMu()
+{
+  mkdir /opt/mu
+  wget -O /opt/mu/mu.bin https://github.com/mu-editor/mu/releases/download/v0.9.13/mu-0.9.13.linux.bin
+  chmod +x /opt/mu/mu.bin
+  adduser $SUDO_USER dialout
+
+  wget -O /opt/mu/icon.png http://www.unixstickers.com/image/data/stickers/python/python.sh.png
+
+  desktopFile="/home/$SUDO_USER/.local/share/applications/mu.desktop"
+
+  echo "[Desktop Entry]" > $desktopFile
+  echo "Name=Mu editor" >> $desktopFile
+  echo "GenericName=IDE" >> $desktopFile
+  echo "Comment=IDE for beginners" >> $desktopFile
+  echo "Exec=/opt/mu/mu.bin" >> $desktopFile
+  echo "Terminal=false" >> $desktopFile
+  echo "Type=Application" >> $desktopFile
+  echo "Icon=/opt/mu/mu.png" >> $desktopFile
+  echo "Categories=Development;IDE;" >> $desktopFile
+  echo "StartupNotify=false" >> $desktopFile
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install GitKraken")                 
