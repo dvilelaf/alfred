@@ -1,5 +1,6 @@
 # Alfred
-A bash script to install all your favourite applications and perform the most common tasks automatically in Ubuntu and derivatives.
+A bash script to install all your favourite applications and perform the most 
+common tasks automatically in Ubuntu and derivatives.
 
 
 <p align="center">
@@ -7,7 +8,10 @@ A bash script to install all your favourite applications and perform the most co
 </p>
 
 
-Alfred can install the most common applications and packages for you, while you take a nap or walk the dog. Just tell Alfred what you want him to do for you and he will take care of it in no time. This is perfect for Linux beginners and lazy users like me, specially for that times when you have just installed the system. 
+Alfred can install the most common applications and packages for you, while you 
+take a nap or walk the dog. Just tell Alfred what you want him to do for you and
+he will take care of it in no time. This is perfect for Linux beginners and lazy
+users like me, specially for those times when you have just installed the system. 
 
 
 ![Imgur](http://i.imgur.com/YMDG3B2.png)
