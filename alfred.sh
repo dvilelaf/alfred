@@ -429,6 +429,21 @@ installEvince()
   apt-get -y install evince
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install Master PDF Editor")                 
+taskMessages+=("Installing Master PDF Editor")           
+taskDescriptions+=("A convenient and smart PDF editor for Linux")   
+taskRecipes+=("installMasterPDF")   
+taskDefaults+=("FALSE") 
+
+installMasterPDF()
+{
+  if [[ $OSarch == "x86_64" ]]; then
+    installPackage "http://get.code-industry.net/public/master-pdf-editor-3.7.10_amd64.deb"
+  else
+    installPackage "http://get.code-industry.net/public/master-pdf-editor-3.7.10_i386.deb"
+  fi
+}
+#------------------------------------------------------------------------------
 taskNames+=("Install Jabref")                 
 taskMessages+=("Installing Jabref")           
 taskDescriptions+=("A graphical editor for bibtex libraries")   
@@ -438,6 +453,40 @@ taskDefaults+=("FALSE")
 installJabref()
 {
   apt-get -y install jabref
+}
+#------------------------------------------------------------------------------
+taskNames+=("Install Zotero")                 
+taskMessages+=("Installing Zotero")           
+taskDescriptions+=("A reference management software to manage bibliographic data and related research materials")   
+taskRecipes+=("installZotero")   
+taskDefaults+=("FALSE") 
+
+installZotero()
+{
+  if [[ $OSarch == "x86_64" ]]; then
+    arch="x86_64"
+  else
+    arch="i686"
+  fi
+
+  wget -O /tmp/zotero.tar.bz2 "https://download.zotero.org/standalone/4.0.29.10/Zotero-4.0.29.10_linux-$arch.tar.bz2"
+
+  tar xjf /tmp/zotero.tar.bz2 -C /tmp
+  mv "/tmp/Zotero_linux-$arch" /opt/zotero
+
+  wget -o /opt/zotero/icon.png http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-5/1024/Zotero-icon.png
+
+  desktopFile="/usr/share/applications/zotero.desktop"
+
+  echo "[Desktop Entry]" > $desktopFile
+  echo "Name=Zotero" >> $desktopFile
+  echo "GenericName=Reference manager" >> $desktopFile
+  echo "Exec=/opt/zotero/run-zotero.sh" >> $desktopFile
+  echo "Terminal=false" >> $desktopFile
+  echo "Type=Application" >> $desktopFile
+  echo "Icon=/opt/zotero/zotero.png" >> $desktopFile
+  echo "Categories=Office;" >> $desktopFile
+  echo "StartupNotify=false" >> $desktopFile
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install TexMaker")                 
