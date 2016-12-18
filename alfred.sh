@@ -405,6 +405,17 @@ installLibreOfficeWriter()
   apt-get -y install libreoffice-writer
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install LibreOffice Impress")                 
+taskMessages+=("Installing LibreOffice Impress")           
+taskDescriptions+=("Install just the LibreOffice slide show editor")   
+taskRecipes+=("installLibreOfficeImpress")   
+taskDefaults+=("FALSE") 
+
+installLibreOfficeImpress()
+{
+  apt-get -y install libreoffice-impress
+}
+#------------------------------------------------------------------------------
 taskNames+=("Install LibreOffice Spreadsheet")                 
 taskMessages+=("Installing LibreOffice Spreadsheet")           
 taskDescriptions+=("Install just the LibreOffice spreadsheet editor")   
