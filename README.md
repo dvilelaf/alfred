@@ -19,7 +19,8 @@ users like me, specially for those times when you have just installed the system
 
 
 ## Usage
-1. Download or clone this repository, or, if you prefer, download only the *alfred.sh file* (right click > save as)
+1. Download and unzip (green button above) or clone this repository and open its folder. If you prefer, you can download only the [*alfred.sh*](https://raw.githubusercontent.com/derkomai/alfred/master/alfred.sh) file 
+(right click on the link > save link as) ensuring that the file name is just *alfred.sh* without any other extensions.
 
 2. Execute *alfred.sh* by clicking on it or, from a terminal:
     ```
