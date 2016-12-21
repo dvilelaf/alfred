@@ -18,15 +18,28 @@ users like me, specially for those times when you have just installed the system
 
 
 
-## Usage
-1. Download and unzip (green button above) or clone this repository and open its folder. If you prefer, you can download only the [*alfred.sh*](https://raw.githubusercontent.com/derkomai/alfred/master/alfred.sh) file 
-(right click on the link > save link as) ensuring that the file name is just *alfred.sh* without any other extensions.
+# Usage
 
-2. Execute *alfred.sh* by clicking on it or, from a terminal:
+### The graphical, beginner-friendly way
+
+1. Download Alfred in [this link](https://raw.githubusercontent.com/derkomai/alfred/master/alfred.sh): right click on the link, select *save link as* and click OK, ensuring that the file name is just *alfred.sh* without any other extensions. 
+2. Open your downloads folder. You should see a file named *alfred.sh*.
+3. Right click *alfred.sh* file, select *Properties* and open the tab named *Permissions* in the dialog.
+4. Now, depending on your system, you should see something like *Allow executing file as a program* or a table where you can give *Execution* permissions for the file owner. Ensure this is activated and click OK.
+5. If you are using Ubuntu or at least the Nautilus file browser, ensure that **Edit > Preferences > Behaviour > Executable text files > Run executable text files when they are opened** option is activated.
+6. Open *alfred.sh* by clicking on it.
+7. You will be asked for your password. Type it and click OK. 
+8. Select the tasks you want to perform and click OK. Wait for them to complete. That's it.
+
+
+
+### The easy command line way
+
+1. Open a terminal and paste the line below, enter your password when asked for it and then press enter:
     ```
-    ./alfred.sh
+    sudo apt install git && git clone https://github.com/derkomai/alfred && sudo ./alfred/alfred.sh
+
     ```
-3. You will be asked for your password. Then, select the tasks you want to perform and click OK. That's it.
 
 
 ## Donation
