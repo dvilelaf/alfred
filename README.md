@@ -37,7 +37,7 @@ users like me, specially for those times when you have just installed the system
 
 1. Open a terminal, paste the line below and then press enter. You will have to type your password.
     ```
-    sudo apt install git && git clone https://github.com/derkomai/alfred && sudo ./alfred/alfred.sh
+    sudo apt -y install git && git clone https://github.com/derkomai/alfred && sudo ./alfred/alfred.sh
 
     ```
 
