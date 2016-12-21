@@ -33,4 +33,4 @@ users like me, specially for those times when you have just installed the system
 If you find Alfred useful and it has saved you some time or trouble, you can buy me a cup of coffee by making a small donation.
 
 
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/dvilela)
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.me/dvilela)
