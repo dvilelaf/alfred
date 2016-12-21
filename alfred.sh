@@ -158,8 +158,7 @@ taskDefaults+=("FALSE")
 installSkype()
 {
   dpkg --add-architecture i386
-  add-apt-repository "deb http://archive.canonical.com/ $OSbaseCodeName partner"
-  apt-get update
+  addRepository "deb http://archive.canonical.com/ $OSbaseCodeName partner"
   apt-get -y install skype pulseaudio:i386
 }
 #------------------------------------------------------------------------------
