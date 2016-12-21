@@ -35,7 +35,7 @@ users like me, specially for those times when you have just installed the system
 
 ### The easy command line way
 
-1. Open a terminal and paste the line below, enter your password when asked for it and then press enter:
+1. Open a terminal, paste the line below and then press enter. You will have to type your password.
     ```
     sudo apt install git && git clone https://github.com/derkomai/alfred && sudo ./alfred/alfred.sh
 
