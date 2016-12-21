@@ -26,3 +26,11 @@ users like me, specially for those times when you have just installed the system
     ./alfred.sh
     ```
 3. You will be asked for your password. Then, select the tasks you want to perform and click OK. That's it.
+
+
+## Donation
+If you find Alfred useful and it has saved you some time or trouble, you can buy me a cup of coffee by making a small donation.
+
+<p align="center">
+![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/dvilela)
+</p>
