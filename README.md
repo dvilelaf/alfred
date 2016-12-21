@@ -18,7 +18,7 @@ users like me, specially for those times when you have just installed the system
 
 
 
-# Usage
+## Usage
 
 ### The graphical, beginner-friendly way
 
