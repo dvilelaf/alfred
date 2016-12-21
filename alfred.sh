@@ -709,6 +709,17 @@ installUtilities()
   apt-get -y install icedtea-7-plugin openjdk-8-jre p7zip rar
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install Glipper")                 
+taskMessages+=("Installing Glipper")           
+taskDescriptions+=("Gnome clipboard manager")   
+taskRecipes+=("installGlipper")   
+taskDefaults+=("FALSE") 
+
+installGlipper()
+{
+  apt-get -y install glipper
+}
+#------------------------------------------------------------------------------
 taskNames+=("Install developer bundle")                 
 taskMessages+=("Installing developer bundle")           
 taskDescriptions+=("Tools for developers: build-essential, cmake, git, java, python, octave, autotools...")   
