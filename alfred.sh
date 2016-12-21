@@ -711,14 +711,14 @@ installUtilities()
 #------------------------------------------------------------------------------
 taskNames+=("Install developer bundle")                 
 taskMessages+=("Installing developer bundle")           
-taskDescriptions+=("Tools for developers: build-essential, cmake, git, java, python, octave and other tools")   
+taskDescriptions+=("Tools for developers: build-essential, cmake, git, java, python, octave, autotools...")   
 taskRecipes+=("installDevBundle")   
 taskDefaults+=("FALSE") 
 
 installDevBundle()
 {
   apt-get -y install build-essential cmake cmake-gui cmake-curses-gui python python3 \
-             octave gfortran git kdiff3 kdesvn colordiff openjdk-8-jdk
+             octave gfortran git kdiff3 kdesvn colordiff openjdk-8-jdk autoconf autotools-dev
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Swift")                 
@@ -878,13 +878,13 @@ installSmartGit()
 #------------------------------------------------------------------------------
 taskNames+=("Install SysAdmin bundle")                 
 taskMessages+=("Installing SysAdmin bundle")           
-taskDescriptions+=("Tools for sysadmins: tmux, cron, screen, ncdu, htop, aptitude, apache, etckeeper and xpra")   
+taskDescriptions+=("Tools for sysadmins: tmux, cron, screen, ncdu, htop, aptitude, apache, etckeeper, xpra and dconf-editor")   
 taskRecipes+=("installSysAdminBundle")   
 taskDefaults+=("FALSE") 
 
 installSysAdminBundle()
 {
-  apt-get -y install tmux cron screen ncdu htop aptitude apache2 etckeeper xpra
+  apt-get -y install tmux cron screen ncdu htop aptitude apache2 etckeeper xpra dconf-editor
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Jaxx")                 
