@@ -1236,9 +1236,3 @@ else
 fi
 
 exit 0
-
-# Donation Buttons
-#[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/dvilela)
-#[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/dvilela)
-
-# donate, check error while installing and notify, mint, debian
