@@ -60,9 +60,12 @@ taskDefaults+=("FALSE")
 
 installChrome()
 {
-  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-  sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-  apt-get update 
+  if [ ! -f /etc/apt/sources.list.d/google.list ]; then
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+    sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    apt-get update 
+  fi
+
   apt-get -y install google-chrome-stable
 }
 #------------------------------------------------------------------------------
@@ -86,9 +89,12 @@ taskDefaults+=("FALSE")
 
 installOpera()
 {
-  wget -O - http://deb.opera.com/archive.key | apt-key add -
-  sh -c 'echo "deb http://deb.opera.com/opera-stable/ stable non-free" >> /etc/apt/sources.list.d/opera.list'
-  apt-get update 
+  if [ ! -f /etc/apt/sources.list.d/opera.list ]; then
+    wget -O - http://deb.opera.com/archive.key | apt-key add -
+    sh -c 'echo "deb http://deb.opera.com/opera-stable/ stable non-free" >> /etc/apt/sources.list.d/opera.list'
+    apt-get update 
+  fi
+
   apt-get -y install opera
 }
 #------------------------------------------------------------------------------
@@ -139,12 +145,14 @@ taskDefaults+=("FALSE")
 installVirtualBox()
 {
   apt-get remove virtualbox virtualbox-5.0 virtualbox-4.*
-  
-  sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $OSbaseCodeName contrib" >> /etc/apt/sources.list.d/virtualbox.list'
-  wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
-  apt-get update
-  apt-get -y install virtualbox-5.1
 
+  if [ ! -f /etc/apt/sources.list.d/virtualbox.list ]; then
+    sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $OSbaseCodeName contrib" >> /etc/apt/sources.list.d/virtualbox.list'
+    wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+    apt-get update
+  fi
+  
+  apt-get -y install virtualbox-5.1
   wget -O /tmp/extensionPack.vbox-extpack http://download.virtualbox.org/virtualbox/5.1.10/Oracle_VM_VirtualBox_Extension_Pack-5.1.10-112026.vbox-extpack
   VBoxManage extpack install /tmp/extensionPack.vbox-extpack
 }
@@ -251,8 +259,12 @@ taskDefaults+=("FALSE")
 installSpotify()
 {
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
-	echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.list.d/spotify.list
-  apt-get update
+  
+  if [ ! -f /etc/apt/sources.list.d/spotify.list ]; then
+    echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.list.d/spotify.list
+    apt-get update
+  fi
+  
   apt-get -y install spotify-client
 }
 #------------------------------------------------------------------------------
