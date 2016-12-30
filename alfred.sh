@@ -734,14 +734,14 @@ installGlipper()
 #------------------------------------------------------------------------------
 taskNames+=("Install developer bundle")                 
 taskMessages+=("Installing developer bundle")           
-taskDescriptions+=("Tools for developers: build-essential, cmake, git, java, python, octave, autotools...")   
+taskDescriptions+=("Tools for developers: build-essential, cmake, git, svn, java, python, octave, autotools...")   
 taskRecipes+=("installDevBundle")   
 taskDefaults+=("FALSE") 
 
 installDevBundle()
 {
   apt-get -y install build-essential cmake cmake-gui cmake-curses-gui python python3 \
-             octave gfortran git kdiff3 kdesvn colordiff openjdk-8-jdk autoconf autotools-dev
+             octave gfortran git git-svn subversion kdiff3 kdesvn colordiff openjdk-8-jdk autoconf autotools-dev
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Swift")                 
