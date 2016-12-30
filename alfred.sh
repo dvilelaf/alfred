@@ -712,13 +712,13 @@ installFileZilla()
 #------------------------------------------------------------------------------
 taskNames+=("Install utilities bundle")                 
 taskMessages+=("Installing utilities bundle")           
-taskDescriptions+=("Java, zip and rar tools")   
+taskDescriptions+=("Java, zip, rar and exfat tools")   
 taskRecipes+=("installUtilities")   
 taskDefaults+=("FALSE") 
 
 installUtilities()
 {
-  apt-get -y install icedtea-7-plugin openjdk-8-jre p7zip rar
+  apt-get -y install icedtea-7-plugin openjdk-8-jre p7zip rar exfat-fuse exfat-utils
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Glipper")                 
