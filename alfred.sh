@@ -976,7 +976,7 @@ taskNames+=("Remove no longer needed packages")
 taskMessages+=("Removing no longer needed packages")
 taskDescriptions+=("Clean the system by removing packages that were installed by other packages and are no longer needed")
 taskRecipes+=("autoRemove")
-taskDefaults+=("TRUE")
+taskDefaults+=("FALSE")
 
 autoRemove()
 {
