@@ -250,6 +250,18 @@ installKazam()
   apt-get -y install kazam
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install Handbrake")                 
+taskMessages+=("Installing Handbrake")           
+taskDescriptions+=("A video transcoder")   
+taskRecipes+=("installHandbrake")   
+taskDefaults+=("FALSE") 
+
+installHandbrake()
+{
+  addRepository "ppa:stebbins/handbrake-releases"
+  apt-get -y install handbrake-gtk handbrake-cli
+}
+#------------------------------------------------------------------------------
 taskNames+=("Install Spotify")
 taskMessages+=("Installing Spotify...")
 taskDescriptions+=("One of the best music streaming apps")
