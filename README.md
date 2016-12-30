@@ -43,7 +43,7 @@ users like me, specially for those times when you have just installed the system
 
 
 ## Donation
-If you find Alfred useful and it has saved you some time or trouble, you can buy me a cup of coffee by making a small donation.
+If you find Alfred useful and it has saved you some time or trouble, you can support it by making a small donation through Paypal.
 
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.me/dvilela)
