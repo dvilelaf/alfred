@@ -22,7 +22,7 @@ taskNames=("Update system")
 taskMessages=("Updating system")
 taskDescriptions=("Update system packages to its latest version")
 taskRecipes=("updateSystem")
-taskDefaults=("TRUE")
+taskDefaults=("FALSE")
 
 updateSystem()
 {
