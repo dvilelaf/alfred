@@ -607,8 +607,12 @@ taskDefaults+=("FALSE")
 
 installSteam()
 {
-  wget -O /tmp/steam.deb https://steamcdn-a.akamaihd.net/client/installer/steam.deb
-  dpkg -i /tmp/steam.deb
+  addRepository "multiverse"
+  apt-get -y install steam
+  cd $HOME/.steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu
+  mv libstdc++.so.6 libstdc++.so.6.bak
+  cd $HOME/.steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu
+  mv libstdc++.so.6 libstdc++.so.6.bak
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install 0 A.D.")                 
