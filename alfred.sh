@@ -69,6 +69,17 @@ installChrome()
   apt-get -y install google-chrome-stable
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install Chromium")                 
+taskMessages+=("Installing Chromium")           
+taskDescriptions+=("The open-source web browser providing the code for Google Chrome.")   
+taskRecipes+=("installChromium")   
+taskDefaults+=("FALSE") 
+
+installChromium()
+{
+  apt-get -y install chromium-browser
+}
+#------------------------------------------------------------------------------
 taskNames+=("Install Firefox")                 
 taskMessages+=("Installing Firefox")           
 taskDescriptions+=("The web browser from Mozilla")   
