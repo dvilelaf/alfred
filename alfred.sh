@@ -1139,8 +1139,10 @@ main()
 
   if $errors ; then
     echo "# Some tasks ended with errors"
+    notify-send -i utilities-terminal Alfred "Some tasks ended with errors"
   else
     echo "# All tasks completed succesfully"
+    notify-send -i utilities-terminal Alfred "All tasks completed succesfully"
   fi
   ) |
   zenity --progress \
