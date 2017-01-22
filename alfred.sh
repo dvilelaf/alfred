@@ -1024,6 +1024,9 @@ main()
     exit 0
   fi
 
+  # Repair installation interruptions
+  dpkg --configure -a
+
   # Get system info
   OSarch=$(uname -m)
   OSname=$(lsb_release -si)
