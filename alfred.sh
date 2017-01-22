@@ -768,7 +768,7 @@ taskDefaults+=("FALSE")
 installDevBundle()
 {
   apt-get -y install build-essential cmake cmake-gui cmake-curses-gui python python3 \
-             octave gfortran git git-svn subversion kdiff3 kdesvn colordiff openjdk-8-jdk autoconf autotools-dev
+             octave gfortran git git-svn subversion kdiff3 colordiff openjdk-8-jdk autoconf autotools-dev
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Swift")                 
