@@ -1101,7 +1101,7 @@ main()
   done
 
   # Write error log file header
-  ErrorLog="/tmp/alfredErrorLog"
+  ErrorLog="/tmp/Alfred.log"
   timestamp="$(date)"
 
   headerSeparator="-------------------------------------------------"
