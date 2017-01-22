@@ -823,7 +823,7 @@ taskDefaults+=("FALSE")
 installCodeLite()
 {
   apt-key adv --fetch-keys https://repos.codelite.org/CodeLite.asc
-  addRepository "deb https://repos.codelite.org/ubuntu/ $OSbaseCodeName universe"
+  addRepository "deb http://repos.codelite.org/ubuntu/ $OSbaseCodeName universe"
   apt-get -y install codelite wxcrafter
 }
 #------------------------------------------------------------------------------
