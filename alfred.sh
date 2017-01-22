@@ -1016,6 +1016,14 @@ autoRemove()
 # Main function
 main()
 {
+  # Test /var/lib/dpkg/lock to ensure we can install packages
+  lock=$(fuser /var/lib/dpkg/lock)
+
+  if [-z "$lock"]; then
+    zenity --error --title="Alfred" --text="Another program is installing or updating packages. Please wait until this process finishes and then launch Alfred again."
+    exit 0
+  fi
+
   # Get system info
   OSarch=$(uname -m)
   OSname=$(lsb_release -si)
