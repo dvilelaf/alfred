@@ -1155,7 +1155,7 @@ main()
 
   # Notify errors
   if [[ $? != 0 ]]; then
-    zenity --error \
+    zenity --error --title="Alfred"\
            --text="An unexpected error occurred. Some tasks may not have been performed."
     exit 1
   fi
