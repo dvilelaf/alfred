@@ -101,7 +101,7 @@ taskDefaults+=("FALSE")
 installOpera()
 {
   if [ ! -f /etc/apt/sources.list.d/opera.list ]; then
-    wget -O - http://deb.opera.com/archive.key | apt-key add -
+    wget -q -O - http://deb.opera.com/archive.key | apt-key add -
     sh -c 'echo "deb http://deb.opera.com/opera-stable/ stable non-free" >> /etc/apt/sources.list.d/opera.list'
     apt-get update 
   fi
@@ -138,9 +138,9 @@ installDropbox()
     bash /tmp/elementary-dropbox/install.sh
   else
     if [[ $OSarch == "x86_64" ]]; then
-        wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+        wget -q -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
     else
-        wget -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -
+        wget -q -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -
     fi
 
     /.dropbox-dist/dropboxd
@@ -164,7 +164,7 @@ installVirtualBox()
   fi
   
   apt-get -y install virtualbox-5.1
-  wget -O /tmp/extensionPack.vbox-extpack http://download.virtualbox.org/virtualbox/5.1.10/Oracle_VM_VirtualBox_Extension_Pack-5.1.10-112026.vbox-extpack
+  wget -q -O /tmp/extensionPack.vbox-extpack http://download.virtualbox.org/virtualbox/5.1.10/Oracle_VM_VirtualBox_Extension_Pack-5.1.10-112026.vbox-extpack
   VBoxManage extpack install /tmp/extensionPack.vbox-extpack
 }
 #------------------------------------------------------------------------------
@@ -211,7 +211,7 @@ installTelegram()
   chmod +x /opt/Telegram/telegram
   sudo chown -R $SUDO_USER:$SUDO_USER /opt/Telegram/
 
-  wget -o /opt/Telegram/icon.png https://desktop.telegram.org/img/td_logo.png
+  wget -q -o /opt/Telegram/icon.png https://desktop.telegram.org/img/td_logo.png
 
   desktopFile="/home/$SUDO_USER/.local/share/applications/telegram.desktop"
 
@@ -380,7 +380,7 @@ installLeoCad()
 {
   apt-get -y install unzip
 
-  wget -O /tmp/ldraw.zip http://www.ldraw.org/library/updates/complete.zip
+  wget -q -O /tmp/ldraw.zip http://www.ldraw.org/library/updates/complete.zip
   unzip /tmp/ldraw.zip -d /home/$SUDO_USER
 
   apt-get -y install leocad
@@ -399,7 +399,7 @@ installParaview()
     return
   fi
 
-  wget -O /tmp/paraview.tar.gz "http://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v5.2&type=binary&os=linux64&downloadFile=ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz"
+  wget -q -O /tmp/paraview.tar.gz "http://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v5.2&type=binary&os=linux64&downloadFile=ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz"
   tar xzf /tmp/paraview.tar.gz -C /tmp
 
   mv ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit /opt/paraview
@@ -545,12 +545,12 @@ installZotero()
     arch="i686"
   fi
 
-  wget -O /tmp/zotero.tar.bz2 "https://download.zotero.org/standalone/4.0.29.10/Zotero-4.0.29.10_linux-$arch.tar.bz2"
+  wget -q -O /tmp/zotero.tar.bz2 "https://download.zotero.org/standalone/4.0.29.10/Zotero-4.0.29.10_linux-$arch.tar.bz2"
 
   tar xjf /tmp/zotero.tar.bz2 -C /tmp
   mv "/tmp/Zotero_linux-$arch" /opt/zotero
 
-  wget -o /opt/zotero/icon.png http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-5/1024/Zotero-icon.png
+  wget -q -o /opt/zotero/icon.png http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-5/1024/Zotero-icon.png
 
   desktopFile="/usr/share/applications/zotero.desktop"
 
@@ -584,7 +584,7 @@ taskDefaults+=("FALSE")
 
 installCalibre()
 {
-  wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | 
+  wget -q -nv -O- https://download.calibre-ebook.com/linux-installer.py | 
   python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 }
 #------------------------------------------------------------------------------
@@ -782,11 +782,11 @@ installSwift()
   apt-get -y install clang libicu-dev
 
   if [[ %OSbaseCodeName == "xenial" ]]; then
-    wget -O /tmp/swift.tar.gz https://swift.org/builds/swift-3.0.2-release/ubuntu1604/swift-3.0.2-RELEASE/swift-3.0.2-RELEASE-ubuntu16.04.tar.gz
-    wget -O /tmp/swift.tar.gz.sig https://swift.org/builds/swift-3.0.2-release/ubuntu1604/swift-3.0.2-RELEASE/swift-3.0.2-RELEASE-ubuntu16.04.tar.gz.sig
+    wget -q -O /tmp/swift.tar.gz https://swift.org/builds/swift-3.0.2-release/ubuntu1604/swift-3.0.2-RELEASE/swift-3.0.2-RELEASE-ubuntu16.04.tar.gz
+    wget -q -O /tmp/swift.tar.gz.sig https://swift.org/builds/swift-3.0.2-release/ubuntu1604/swift-3.0.2-RELEASE/swift-3.0.2-RELEASE-ubuntu16.04.tar.gz.sig
   elif [[ %OSbaseCodeName == "trusty" ]]; then
-    wget -O /tmp/swift.tar.gz https://swift.org/builds/swift-3.0.2-release/ubuntu1404/swift-3.0.2-RELEASE/swift-3.0.2-RELEASE-ubuntu14.04.tar.gz
-    wget -O /tmp/swift.tar.gz.sig https://swift.org/builds/swift-3.0.2-release/ubuntu1404/swift-3.0.2-RELEASE/swift-3.0.2-RELEASE-ubuntu14.04.tar.gz.sig
+    wget -q -O /tmp/swift.tar.gz https://swift.org/builds/swift-3.0.2-release/ubuntu1404/swift-3.0.2-RELEASE/swift-3.0.2-RELEASE-ubuntu14.04.tar.gz
+    wget -q -O /tmp/swift.tar.gz.sig https://swift.org/builds/swift-3.0.2-release/ubuntu1404/swift-3.0.2-RELEASE/swift-3.0.2-RELEASE-ubuntu14.04.tar.gz.sig
   else
     (>&2 echo "Your system is not supported by swift")
     return
@@ -809,7 +809,7 @@ taskDefaults+=("FALSE")
 
 installEclipse()
 {
-  wget -O /tmp/eclipse.tar.gz http://www.mirrorservice.org/sites/download.eclipse.org/eclipseMirror/oomph/epp/neon/R1/eclipse-inst-linux64.tar.gz
+  wget -q -O /tmp/eclipse.tar.gz http://www.mirrorservice.org/sites/download.eclipse.org/eclipseMirror/oomph/epp/neon/R1/eclipse-inst-linux64.tar.gz
   tar xzf /tmp/eclipse.tar.gz -C /tmp
   /tmp/eclipse-installer/eclipse-inst
 }
@@ -859,9 +859,9 @@ taskDefaults+=("FALSE")
 installArduino()
 {
   if [[ $OSarch == "x86_64" ]]; then
-    wget -O /tmp/arduino.tar.xz https://downloads.arduino.cc/arduino-1.6.13-linux64.tar.xz
+    wget -q -O /tmp/arduino.tar.xz https://downloads.arduino.cc/arduino-1.6.13-linux64.tar.xz
   else
-    wget -O /tmp/arduino.tar.xz https://downloads.arduino.cc/arduino-1.6.13-linux32.tar.xz
+    wget -q -O /tmp/arduino.tar.xz https://downloads.arduino.cc/arduino-1.6.13-linux32.tar.xz
   fi
 
   tar xf /tmp/arduino.tar.xz -C /tmp
@@ -878,11 +878,11 @@ taskDefaults+=("FALSE")
 installMu()
 {
   mkdir /opt/mu
-  wget -O /opt/mu/mu.bin https://github.com/mu-editor/mu/releases/download/v0.9.13/mu-0.9.13.linux.bin
+  wget -q -O /opt/mu/mu.bin https://github.com/mu-editor/mu/releases/download/v0.9.13/mu-0.9.13.linux.bin
   chmod +x /opt/mu/mu.bin
   adduser $SUDO_USER dialout
 
-  wget -O /opt/mu/icon.png http://www.unixstickers.com/image/data/stickers/python/python.sh.png
+  wget -q -O /opt/mu/icon.png http://www.unixstickers.com/image/data/stickers/python/python.sh.png
 
   desktopFile="/home/$SUDO_USER/.local/share/applications/mu.desktop"
 
@@ -919,7 +919,7 @@ installSmartGit()
 {
   apt-get -y install icedtea-7-plugin openjdk-8-jre
 
-  wget -O /tmp/smartgit.tar.gz http://www.syntevo.com/static/smart/download/smartgit/smartgit-linux-8_0_3.tar.gz
+  wget -q -O /tmp/smartgit.tar.gz http://www.syntevo.com/static/smart/download/smartgit/smartgit-linux-8_0_3.tar.gz
   tar xzf /tmp/smartgit.tar.gz -C /tmp
   mv /tmp/smartgit/ /opt/smartgit
 
@@ -945,11 +945,11 @@ taskDefaults+=("FALSE")
 
 installJaxx()
 {
-  wget -O /tmp/jaxx.tar.gz https://jaxx.io/files/1.1.7/Jaxx-v1.1.7-linux-x64.tar.gz
+  wget -q -O /tmp/jaxx.tar.gz https://jaxx.io/files/1.1.7/Jaxx-v1.1.7-linux-x64.tar.gz
   tar -zxf /tmp/jaxx.tar.gz -C /tmp
   mv /tmp/Jaxx-v1.1.7_linux-x64 /opt/jaxx
 
-  wget -O /opt/jaxx/icon.png https://jaxx.io/images/mark.png
+  wget -q -O /opt/jaxx/icon.png https://jaxx.io/images/mark.png
 
   desktopFile="/usr/local/share/applications/jaxx.desktop"
 
@@ -1212,7 +1212,7 @@ testPackage()
 installPackage()
 {
   if [[ "$1" == "http"*".deb" ]]; then
-    wget -O /tmp/package.deb $1
+    wget -q -O /tmp/package.deb $1
     apt-get -y install /tmp/package.deb
     rm /tmp/package.deb
   else
