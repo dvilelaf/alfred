@@ -49,7 +49,7 @@ taskDefaults+=("FALSE")
 
 installRestrictedExtras()
 {
-  apt-get -y install ubuntu-restricted-extras
+  installPackage ubuntu-restricted-extras
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Chrome")                 
@@ -77,7 +77,7 @@ taskDefaults+=("FALSE")
 
 installChromium()
 {
-  apt-get -y install chromium-browser
+  installPackage chromium-browser
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Firefox")                 
@@ -89,7 +89,7 @@ taskDefaults+=("FALSE")
 installFirefox()
 {
   addRepository "ppa:ubuntu-mozilla-security/ppa"
-  apt-get -y install firefox firefox-locale-$(locale | grep LANGUAGE | cut -d= -f2 | cut -d_ -f1)
+  installPackage firefox firefox-locale-$(locale | grep LANGUAGE | cut -d= -f2 | cut -d_ -f1)
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Opera")                 
@@ -118,7 +118,7 @@ taskDefaults+=("FALSE")
 installTransmission()
 {
   addRepository "ppa:transmissionbt/ppa"
-  apt-get -y install transmission-gtk
+  installPackage transmission-gtk
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Dropbox")                 
@@ -131,9 +131,9 @@ installDropbox()
 {
   # Handle elementary OS with wingpanel support
   if [[ $OSname == "elementary" ]]; then
-    apt-get -y install git
+    installPackage git
     apt-get --purge remove -y dropbox*
-    apt-get -y install python-gpgme	
+    installPackage python-gpgme	
     git clone https://github.com/zant95/elementary-dropbox /tmp/elementary-dropbox
     bash /tmp/elementary-dropbox/install.sh
   else
@@ -163,7 +163,7 @@ installVirtualBox()
     apt-get update
   fi
   
-  apt-get -y install virtualbox-5.1
+  installPackage virtualbox-5.1
   wget -q -O /tmp/extensionPack.vbox-extpack http://download.virtualbox.org/virtualbox/5.1.10/Oracle_VM_VirtualBox_Extension_Pack-5.1.10-112026.vbox-extpack
   VBoxManage extpack install /tmp/extensionPack.vbox-extpack
 }
@@ -178,7 +178,7 @@ installSkype()
 {
   dpkg --add-architecture i386
   addRepository "deb http://archive.canonical.com/ $OSbaseCodeName partner"
-  apt-get -y install skype pulseaudio:i386
+  installPackage skype pulseaudio:i386
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Thunderbird")                 
@@ -189,7 +189,7 @@ taskDefaults+=("FALSE")
 
 installThunderbird()
 {
-  apt-get -y install thunderbird
+  installPackage thunderbird
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Telegram")                 
@@ -247,7 +247,7 @@ taskDefaults+=("FALSE")
 installVLC()
 {
   addRepository "ppa:videolan/stable-daily"
-  apt-get -y install vlc
+  installPackage vlc
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Kazam")                 
@@ -258,7 +258,7 @@ taskDefaults+=("FALSE")
 
 installKazam()
 {
-  apt-get -y install kazam
+  installPackage kazam
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Handbrake")                 
@@ -270,7 +270,7 @@ taskDefaults+=("FALSE")
 installHandbrake()
 {
   addRepository "ppa:stebbins/handbrake-releases"
-  apt-get -y install handbrake-gtk handbrake-cli
+  installPackage handbrake-gtk handbrake-cli
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Spotify")
@@ -288,7 +288,7 @@ installSpotify()
     apt-get update
   fi
   
-  apt-get -y install spotify-client
+  installPackage spotify-client
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Audacity")                 
@@ -299,7 +299,7 @@ taskDefaults+=("FALSE")
 
 installAudacity()
 {
-  apt-get -y install audacity
+  installPackage audacity
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Soundconverter")                 
@@ -310,7 +310,7 @@ taskDefaults+=("FALSE")
 
 installSoundconverter()
 {
-  apt-get -y install soundconverter
+  installPackage soundconverter
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Mixxx")                 
@@ -322,7 +322,7 @@ taskDefaults+=("FALSE")
 installMixxx()
 {
   addRepository "ppa:mixxx/mixxx"
-  apt-get -y install mixxx
+  installPackage mixxx
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install LMMS")                 
@@ -344,7 +344,7 @@ taskDefaults+=("FALSE")
 
 installGimp()
 {
-  apt-get -y install gimp
+  installPackage gimp
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Inkscape")                 
@@ -355,7 +355,7 @@ taskDefaults+=("FALSE")
 
 installInkscape()
 {
-  apt-get -y install inkscape
+  installPackage inkscape
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Blender")                 
@@ -367,7 +367,7 @@ taskDefaults+=("FALSE")
 installBlender()
 {
   addRepository "ppa:thomas-schiex/blender"
-  apt-get -y install blender
+  installPackage blender
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install LeoCad")                 
@@ -378,12 +378,12 @@ taskDefaults+=("FALSE")
 
 installLeoCad()
 {
-  apt-get -y install unzip
+  installPackage unzip
 
   wget -q -O /tmp/ldraw.zip http://www.ldraw.org/library/updates/complete.zip
   unzip /tmp/ldraw.zip -d /home/$SUDO_USER
 
-  apt-get -y install leocad
+  installPackage leocad
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Paraview")                 
@@ -425,7 +425,7 @@ taskDefaults+=("FALSE")
 
 installLibreOffice()
 {
-  apt-get -y install libreoffice
+  installPackage libreoffice
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install LibreOffice Writer")                 
@@ -436,7 +436,7 @@ taskDefaults+=("FALSE")
 
 installLibreOfficeWriter()
 {
-  apt-get -y install libreoffice-writer
+  installPackage libreoffice-writer
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install LibreOffice Impress")                 
@@ -447,7 +447,7 @@ taskDefaults+=("FALSE")
 
 installLibreOfficeImpress()
 {
-  apt-get -y install libreoffice-impress
+  installPackage libreoffice-impress
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install LibreOffice Spreadsheet")                 
@@ -458,7 +458,7 @@ taskDefaults+=("FALSE")
 
 installLibreOfficeSpreadsheet()
 {
-  apt-get -y install libreoffice-calc
+  installPackage libreoffice-calc
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install LibreOffice Draw")                 
@@ -469,7 +469,7 @@ taskDefaults+=("FALSE")
 
 installLibreOfficeDraw()
 {
-  apt-get -y install libreoffice-draw
+  installPackage libreoffice-draw
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install LibreOffice Base")                 
@@ -480,7 +480,7 @@ taskDefaults+=("FALSE")
 
 installLibreOfficeBase()
 {
-  apt-get -y install libreoffice-base
+  installPackage libreoffice-base
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install LibreOffice Math")                 
@@ -491,7 +491,7 @@ taskDefaults+=("FALSE")
 
 installLibreOfficeMath()
 {
-  apt-get -y install libreoffice-math
+  installPackage libreoffice-math
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Evince")                 
@@ -502,7 +502,7 @@ taskDefaults+=("FALSE")
 
 installEvince()
 {
-  apt-get -y install evince
+  installPackage evince
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Master PDF Editor")                 
@@ -528,7 +528,7 @@ taskDefaults+=("FALSE")
 
 installJabref()
 {
-  apt-get -y install jabref
+  installPackage jabref
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Zotero")                 
@@ -573,7 +573,7 @@ taskDefaults+=("FALSE")
 
 installTexMaker()
 {
-  apt-get -y install texmaker
+  installPackage texmaker
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Calibre")                 
@@ -596,7 +596,7 @@ taskDefaults+=("FALSE")
 
 installDiffPdf()
 {
-  apt-get -y install diffpdf
+  installPackage diffpdf
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Steam")                 
@@ -608,7 +608,7 @@ taskDefaults+=("FALSE")
 installSteam()
 {
   addRepository "multiverse"
-  apt-get -y install steam
+  installPackage steam
   cd $HOME/.steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu
   mv libstdc++.so.6 libstdc++.so.6.bak
   cd $HOME/.steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu
@@ -623,7 +623,7 @@ taskDefaults+=("FALSE")
 
 install0AD()
 {
-  apt-get -y install 0ad
+  installPackage 0ad
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install ScummVM")                 
@@ -656,7 +656,7 @@ taskDefaults+=("FALSE")
 
 installDiskUtility()
 {
-  apt-get -y install gnome-disk-utility
+  installPackage gnome-disk-utility
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install GParted")                 
@@ -667,7 +667,7 @@ taskDefaults+=("FALSE")
 
 installGParted()
 {
-  apt-get -y install gparted
+  installPackage gparted
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install MenuLibre")                 
@@ -678,7 +678,7 @@ taskDefaults+=("FALSE")
 
 installMenuLibre()
 {
-  apt-get -y install menulibre
+  installPackage menulibre
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Seahorse")                 
@@ -689,7 +689,7 @@ taskDefaults+=("FALSE")
 
 installSeahorse()
 {
-  apt-get -y install seahorse
+  installPackage seahorse
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Duplicity")                 
@@ -700,7 +700,7 @@ taskDefaults+=("FALSE")
 
 installDuplicity()
 {
-  apt-get -y install duplicity
+  installPackage duplicity
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install UNetbootin")                 
@@ -711,7 +711,7 @@ taskDefaults+=("FALSE")
 
 installUNetbootin()
 {
-  apt-get -y install unetbootin
+  installPackage unetbootin
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install EncFS")                 
@@ -723,7 +723,7 @@ taskDefaults+=("FALSE")
 installEncFS()
 {
   addRepository "ppa:gencfsm" 
-  apt-get -y install gnome-encfs-manager
+  installPackage gnome-encfs-manager
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install FileZilla")                 
@@ -734,7 +734,7 @@ taskDefaults+=("FALSE")
 
 installFileZilla()
 {
-  apt-get -y install filezilla
+  installPackage filezilla
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install utilities bundle")                 
@@ -745,7 +745,7 @@ taskDefaults+=("FALSE")
 
 installUtilities()
 {
-  apt-get -y install icedtea-7-plugin openjdk-8-jre p7zip rar exfat-fuse exfat-utils
+  installPackage icedtea-7-plugin openjdk-8-jre p7zip rar exfat-fuse exfat-utils
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Glipper")                 
@@ -756,7 +756,7 @@ taskDefaults+=("FALSE")
 
 installGlipper()
 {
-  apt-get -y install glipper
+  installPackage glipper
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install developer bundle")                 
@@ -767,7 +767,7 @@ taskDefaults+=("FALSE")
 
 installDevBundle()
 {
-  apt-get -y install build-essential cmake cmake-gui cmake-curses-gui python python3 \
+  installPackage build-essential cmake cmake-gui cmake-curses-gui python python3 \
              octave gfortran git git-svn subversion kdiff3 colordiff openjdk-8-jdk autoconf autotools-dev
 }
 #------------------------------------------------------------------------------
@@ -779,7 +779,7 @@ taskDefaults+=("FALSE")
 
 installSwift()
 {
-  apt-get -y install clang libicu-dev
+  installPackage clang libicu-dev
 
   if [[ %OSbaseCodeName == "xenial" ]]; then
     wget -q -O /tmp/swift.tar.gz https://swift.org/builds/swift-3.0.2-release/ubuntu1604/swift-3.0.2-RELEASE/swift-3.0.2-RELEASE-ubuntu16.04.tar.gz
@@ -824,7 +824,7 @@ installCodeLite()
 {
   apt-key adv --fetch-keys https://repos.codelite.org/CodeLite.asc
   addRepository "deb http://repos.codelite.org/ubuntu/ $OSbaseCodeName universe"
-  apt-get -y install codelite wxcrafter
+  installPackage codelite wxcrafter
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Visual Studio Code")                 
@@ -847,7 +847,7 @@ taskDefaults+=("FALSE")
 installAtom()
 {
   addRepository "ppa:webupd8team/atom"
-  apt-get -y install atom
+  installPackage atom
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Arduino")                 
@@ -917,7 +917,7 @@ taskDefaults+=("FALSE")
 
 installSmartGit()
 {
-  apt-get -y install icedtea-7-plugin openjdk-8-jre
+  installPackage icedtea-7-plugin openjdk-8-jre
 
   wget -q -O /tmp/smartgit.tar.gz http://www.syntevo.com/static/smart/download/smartgit/smartgit-linux-8_0_3.tar.gz
   tar xzf /tmp/smartgit.tar.gz -C /tmp
@@ -934,7 +934,7 @@ taskDefaults+=("FALSE")
 
 installSysAdminBundle()
 {
-  apt-get -y install tmux cron screen ncdu htop aptitude apache2 etckeeper xpra dconf-editor
+  installPackage tmux cron screen ncdu htop aptitude apache2 etckeeper xpra dconf-editor
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Jaxx")                 
@@ -974,7 +974,7 @@ installJaxx()
 #installrEFInd() 
 # { 
 #  addRepository "ppa:rodsmith/refind" 
-#  apt-get -y install refind 
+#  installPackage refind 
 #  refind-install --shim /boot/efi/EFI/ubuntu/shimx64.efi --localkeys 
 #  refind-mkdefault 
 #} 
@@ -1222,13 +1222,15 @@ testPackage()
 
 installPackage()
 {
-  if [[ "$1" == "http"*".deb" ]]; then
-    wget -q -O /tmp/package.deb $1
-    apt-get -y install /tmp/package.deb
-    rm /tmp/package.deb
-  else
-    apt-get -y install $1
-  fi
+  for arg in $@; do
+    if [[ "$arg" == "http"*".deb" ]]; then
+      wget -q -O /tmp/package.deb $1
+      apt-get -y install /tmp/package.deb
+      rm /tmp/package.deb
+    else
+      apt-get -y install $arg
+    fi
+  done
 }
 
 
