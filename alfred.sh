@@ -1027,6 +1027,12 @@ main()
   # Repair installation interruptions
   dpkg --configure -a
 
+  # Test connectivity
+  if ! nc -zw1 google.com 80; then
+    zenity --error --title="Alfred" --text="There is no connection to the Internet. Please connect and then launch Alfred again."
+    exit 0
+  fi
+
   # Get system info
   OSarch=$(uname -m)
   OSname=$(lsb_release -si)
