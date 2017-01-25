@@ -648,6 +648,21 @@ installScummVM()
   installPackage "https://www.scummvm.org/frs/scummvm/1.9.0/scummvm_1.9.0-$OScodeName.1_$arch.deb"
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install PlayOnLinux")                 
+taskMessages+=("Installing PlayOnLinux")           
+taskDescriptions+=("A tool to install Windows software on Linux")   
+taskRecipes+=("installPlayOnLinux")   
+taskDefaults+=("FALSE") 
+
+installPlayOnLinux()
+{
+  if [[ $OSarch == "x86_64" ]]; then
+    dpkg --add-architecture i386 
+  fi
+  addRepository "ppa:wine/wine-builds"
+  installPackage "--install-recommends winehq-staging"
+}
+#------------------------------------------------------------------------------
 taskNames+=("Install Disk utility")                 
 taskMessages+=("Installing Disk utility")           
 taskDescriptions+=("A tool to manage your drives")   
