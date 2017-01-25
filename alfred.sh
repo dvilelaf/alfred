@@ -648,13 +648,13 @@ installScummVM()
   installPackage "https://www.scummvm.org/frs/scummvm/1.9.0/scummvm_1.9.0-$OScodeName.1_$arch.deb"
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install PlayOnLinux")                 
-taskMessages+=("Installing PlayOnLinux")           
+taskNames+=("Install Wine")                 
+taskMessages+=("Installing Wine")           
 taskDescriptions+=("A tool to install Windows software on Linux")   
-taskRecipes+=("installPlayOnLinux")   
+taskRecipes+=("installWine")   
 taskDefaults+=("FALSE") 
 
-installPlayOnLinux()
+installWine()
 {
   if [[ $OSarch == "x86_64" ]]; then
     dpkg --add-architecture i386 
