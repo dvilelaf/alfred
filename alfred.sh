@@ -663,6 +663,17 @@ installPlayOnLinux()
   installPackage "--install-recommends winehq-staging"
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install PlayOnLinux")                 
+taskMessages+=("Installing PlayOnLinux")           
+taskDescriptions+=("A tool to install Windows games on Linux")   
+taskRecipes+=("installPlayOnLinux")   
+taskDefaults+=("FALSE") 
+
+installPlayOnLinux()
+{
+  installPackage playonlinux
+}
+#------------------------------------------------------------------------------
 taskNames+=("Install Disk utility")                 
 taskMessages+=("Installing Disk utility")           
 taskDescriptions+=("A tool to manage your drives")   
