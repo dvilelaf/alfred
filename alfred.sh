@@ -99,13 +99,11 @@ taskDefaults+=("FALSE")
 
 installOpera()
 {
-  if [ ! -f /etc/apt/sources.list.d/opera.list ]; then
-    wget -q -O - http://deb.opera.com/archive.key | apt-key add -
-    sh -c 'echo "deb http://deb.opera.com/opera-stable/ stable non-free" >> /etc/apt/sources.list.d/opera.list'
-    apt-get update 
+  if [[ $OSarch == "x86_64" ]]; then
+    installPackage "http://download1.operacdn.com/pub/opera/desktop/42.0.2393.137/linux/opera-stable_42.0.2393.137_amd64.deb"
+  else
+    installPackage "http://download1.operacdn.com/pub/opera/desktop/42.0.2393.137/linux/opera-stable_42.0.2393.137_i386.deb"
   fi
-
-  apt-get -y install opera
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Transmission")                 
