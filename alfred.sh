@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+debug=true
 
 # TASK LIST ###################################################################
 #------------------------------------------------------------------------------
@@ -1144,16 +1145,19 @@ main()
   done
 
   # Write error log file header
-  ErrorLog="/tmp/Alfred.log"
-  timestamp="$(date)"
+  log="/tmp/Alfred.log"
+  errorLog="/tmp/AlfredError.log"
 
-  headerSeparator="-------------------------------------------------"
-  headerSeparator+=$headerSeparator
+  logHeader="--------------------------------------------------------------------------------------------------\n"
+  logHeader="${logHeader}NEW SESSION $(date)\n"
+  logHeader="$logHeader$(lsb_release -d | cut -d: -f2 | sed "s/^[ \t]*//")\n"
+  logHeader="$logHeader$(uname -a)\n"
 
-  echo $headerSeparator >> $ErrorLog
-  echo "NEW SESSION "$timestamp >> $ErrorLog
-  echo $(lsb_release -d | cut -d: -f2 | sed "s/^[ \t]*//")  >> $ErrorLog
-  echo $(uname -a)  >> $ErrorLog
+  echo -e "$logHeader" >> $errorLog
+
+  if $debug; then
+    echo -e "$logHeader" >> $log
+  fi
 
   # Perform all tasks and show progress in a progress bar
   ntasks=$(( $(echo "$tasks" | grep -o "\," | wc -l) + 1 ))
@@ -1167,11 +1171,19 @@ main()
       if [[ $tasks == *"${taskNames[$i]}"* ]]; then
         echo "# ${taskMessages[$i]}..."
 
-        error="$(${taskRecipes[$i]} 2>&1 > /dev/null)"
+        outputMsg=$(
+                      set -e
 
-        if [[ ! -z $error ]]; then
-          echo "RECIPE "${taskNames[$i]} >> $ErrorLog
-          echo "$error" >> $ErrorLog
+                      if $debug; then
+                        ${taskRecipes[$i]} > $log
+                      else
+                        ${taskRecipes[$i]} 2>&1
+                      fi
+                   )
+
+        if [[ ! $? == 0 ]]; then
+          echo "RECIPE "${taskNames[$i]} >> $errorLog
+          echo "$outputMsg" >> $errorLog
           errors=true
         fi
 
@@ -1204,13 +1216,13 @@ main()
   fi
 
   # Show error list from the error log
-  test -e $ErrorLog
+  test -e $errorLog
 
   if [[ $? == 0 ]]; then
     errors=()
 
     # Last occurrence of NEW SESSION
-    startLine=$(tac $ErrorLog | grep -n -m1 "NEW SESSION" | cut -d: -f1) 
+    startLine=$(tac $errorLog | grep -n -m1 "NEW SESSION" | cut -d: -f1) 
 
     while read line; do
       firstword=$(echo $line | cut -d' ' -f1)
@@ -1218,7 +1230,7 @@ main()
       if [ "$firstword" == "RECIPE" ]; then # If line starts with RECIPE
           errors+=("${line/RECIPE /}")
       fi
-    done <<< "$(tail -n $startLine $ErrorLog)" # Use the log only from startLine to the end
+    done <<< "$(tail -n $startLine $errorLog)" # Use the error log only from startLine to the end
     
     if [[ ${#errors[@]} > 0 ]]; then
 
@@ -1232,7 +1244,7 @@ main()
       message+="-------------------------------------------------------------"
       message+="---------------------------------------------------------\n\n"
 
-      echo -e $message"$(tail -n $startLine $ErrorLog)" | 
+      echo -e $message"$(tail -n $startLine $errorLog)" | 
       zenity --text-info --height 700 --width 800 --title="Alfred"
     fi
   fi
