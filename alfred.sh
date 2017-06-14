@@ -6,12 +6,12 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -31,33 +31,33 @@ updateSystem()
   apt-get -y dist-upgrade
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install drivers")                 
-taskMessages+=("Installing drivers")           
-taskDescriptions+=("Install drivers that are appropriate for automatic installation")   
-taskRecipes+=("autoInstallDrivers")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install drivers")
+taskMessages+=("Installing drivers")
+taskDescriptions+=("Install drivers that are appropriate for automatic installation")
+taskRecipes+=("autoInstallDrivers")
+taskDefaults+=("FALSE")
 
 autoInstallDrivers()
 {
-  ubuntu-drivers autoinstall 
+  ubuntu-drivers autoinstall
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Java, Flash and codecs")                 
-taskMessages+=("Installing Java, Flash and codecs")           
-taskDescriptions+=("Install non-open-source packages like Java, Flash plugin, Unrar, and some audio and video codecs like MP3/AVI/MPEG")   
-taskRecipes+=("installRestrictedExtras")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Java, Flash and codecs")
+taskMessages+=("Installing Java, Flash and codecs")
+taskDescriptions+=("Install non-open-source packages like Java, Flash plugin, Unrar, and some audio and video codecs like MP3/AVI/MPEG")
+taskRecipes+=("installRestrictedExtras")
+taskDefaults+=("FALSE")
 
 installRestrictedExtras()
 {
   installPackage ubuntu-restricted-extras
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Chrome")                 
-taskMessages+=("Installing Chrome")           
-taskDescriptions+=("The web browser from Google")   
-taskRecipes+=("installChrome")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Chrome")
+taskMessages+=("Installing Chrome")
+taskDescriptions+=("The web browser from Google")
+taskRecipes+=("installChrome")
+taskDefaults+=("FALSE")
 
 installChrome()
 {
@@ -68,22 +68,22 @@ installChrome()
   fi
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Chromium")                 
-taskMessages+=("Installing Chromium")           
-taskDescriptions+=("The open-source web browser providing the code for Google Chrome.")   
-taskRecipes+=("installChromium")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Chromium")
+taskMessages+=("Installing Chromium")
+taskDescriptions+=("The open-source web browser providing the code for Google Chrome.")
+taskRecipes+=("installChromium")
+taskDefaults+=("FALSE")
 
 installChromium()
 {
   installPackage chromium-browser
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Firefox")                 
-taskMessages+=("Installing Firefox")           
-taskDescriptions+=("The web browser from Mozilla")   
-taskRecipes+=("installFirefox")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Firefox")
+taskMessages+=("Installing Firefox")
+taskDescriptions+=("The web browser from Mozilla")
+taskRecipes+=("installFirefox")
+taskDefaults+=("FALSE")
 
 installFirefox()
 {
@@ -91,11 +91,11 @@ installFirefox()
   installPackage firefox firefox-locale-$(locale | grep LANGUAGE | cut -d= -f2 | cut -d_ -f1)
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Opera")                 
-taskMessages+=("Installing Opera")           
-taskDescriptions+=("Just another web browser")   
-taskRecipes+=("installOpera")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Opera")
+taskMessages+=("Installing Opera")
+taskDescriptions+=("Just another web browser")
+taskRecipes+=("installOpera")
+taskDefaults+=("FALSE")
 
 installOpera()
 {
@@ -106,11 +106,11 @@ installOpera()
   fi
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Transmission")                 
-taskMessages+=("Installing Transmission")           
-taskDescriptions+=("A light bittorrent download client")   
-taskRecipes+=("installTransmission")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Transmission")
+taskMessages+=("Installing Transmission")
+taskDescriptions+=("A light bittorrent download client")
+taskRecipes+=("installTransmission")
+taskDefaults+=("FALSE")
 
 installTransmission()
 {
@@ -118,11 +118,11 @@ installTransmission()
   installPackage transmission-gtk
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Dropbox")                 
-taskMessages+=("Installing Dropbox")           
-taskDescriptions+=("A cloud hosting service to store your files online")   
-taskRecipes+=("installDropbox")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Dropbox")
+taskMessages+=("Installing Dropbox")
+taskDescriptions+=("A cloud hosting service to store your files online")
+taskRecipes+=("installDropbox")
+taskDefaults+=("FALSE")
 
 installDropbox()
 {
@@ -130,7 +130,7 @@ installDropbox()
   if [[ $OSname == "elementary" ]]; then
     installPackage git
     apt-get --purge remove -y dropbox*
-    installPackage python-gpgme	
+    installPackage python-gpgme
     git clone https://github.com/zant95/elementary-dropbox /tmp/elementary-dropbox
     bash /tmp/elementary-dropbox/install.sh
   else
@@ -144,11 +144,11 @@ installDropbox()
   fi
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install VirtualBox")                 
-taskMessages+=("Installing VirtualBox")           
-taskDescriptions+=("A virtualization software to run other OSes on top of your current OS")   
-taskRecipes+=("installVirtualBox")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install VirtualBox")
+taskMessages+=("Installing VirtualBox")
+taskDescriptions+=("A virtualization software to run other OSes on top of your current OS")
+taskRecipes+=("installVirtualBox")
+taskDefaults+=("FALSE")
 
 installVirtualBox()
 {
@@ -159,17 +159,17 @@ installVirtualBox()
     wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
     apt-get update
   fi
-  
+
   installPackage virtualbox-5.1
   wget -q -O /tmp/extensionPack.vbox-extpack http://download.virtualbox.org/virtualbox/5.1.10/Oracle_VM_VirtualBox_Extension_Pack-5.1.10-112026.vbox-extpack
   VBoxManage extpack install /tmp/extensionPack.vbox-extpack
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Skype")                 
-taskMessages+=("Installing Skype")           
-taskDescriptions+=("A videocall software from Microsoft")   
-taskRecipes+=("installSkype")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Skype")
+taskMessages+=("Installing Skype")
+taskDescriptions+=("A videocall software from Microsoft")
+taskRecipes+=("installSkype")
+taskDefaults+=("FALSE")
 
 installSkype()
 {
@@ -178,22 +178,22 @@ installSkype()
   installPackage skype pulseaudio:i386
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Thunderbird")                 
-taskMessages+=("Installing Thunderbird")           
-taskDescriptions+=("A mail client from Mozilla")   
-taskRecipes+=("installThunderbird")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Thunderbird")
+taskMessages+=("Installing Thunderbird")
+taskDescriptions+=("A mail client from Mozilla")
+taskRecipes+=("installThunderbird")
+taskDefaults+=("FALSE")
 
 installThunderbird()
 {
   installPackage thunderbird
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Telegram")                 
-taskMessages+=("Installing Telegram")           
-taskDescriptions+=("A chat client, similar to Whatsapp, Viber, Facebook Messenger or Google Hangouts")   
-taskRecipes+=("installTelegram")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Telegram")
+taskMessages+=("Installing Telegram")
+taskDescriptions+=("A chat client, similar to Whatsapp, Viber, Facebook Messenger or Google Hangouts")
+taskRecipes+=("installTelegram")
+taskDefaults+=("FALSE")
 
 installTelegram()
 {
@@ -224,22 +224,22 @@ installTelegram()
   echo "StartupNotify=false" >> $desktopFile
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Slack")                 
-taskMessages+=("Installing Slack")           
-taskDescriptions+=("A team communication application")   
-taskRecipes+=("installSlack")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Slack")
+taskMessages+=("Installing Slack")
+taskDescriptions+=("A team communication application")
+taskRecipes+=("installSlack")
+taskDefaults+=("FALSE")
 
 installSlack()
 {
   installPackage "https://downloads.slack-edge.com/linux_releases/slack-desktop-2.3.3-amd64.deb"
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install VLC")                 
-taskMessages+=("Installing VLC")           
-taskDescriptions+=("The most famous multimedia player")   
-taskRecipes+=("installVLC")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install VLC")
+taskMessages+=("Installing VLC")
+taskDescriptions+=("The most famous multimedia player")
+taskRecipes+=("installVLC")
+taskDefaults+=("FALSE")
 
 installVLC()
 {
@@ -247,22 +247,22 @@ installVLC()
   installPackage vlc
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Kazam")                 
-taskMessages+=("Installing Kazam")           
-taskDescriptions+=("A tool to record your screen and take screenshots")   
-taskRecipes+=("installKazam")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Kazam")
+taskMessages+=("Installing Kazam")
+taskDescriptions+=("A tool to record your screen and take screenshots")
+taskRecipes+=("installKazam")
+taskDefaults+=("FALSE")
 
 installKazam()
 {
   installPackage kazam
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Handbrake")                 
-taskMessages+=("Installing Handbrake")           
-taskDescriptions+=("A video transcoder")   
-taskRecipes+=("installHandbrake")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Handbrake")
+taskMessages+=("Installing Handbrake")
+taskDescriptions+=("A video transcoder")
+taskRecipes+=("installHandbrake")
+taskDefaults+=("FALSE")
 
 installHandbrake()
 {
@@ -279,42 +279,42 @@ taskDefaults+=("FALSE")
 installSpotify()
 {
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
-  
+
   if [ ! -f /etc/apt/sources.list.d/spotify.list ]; then
     echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.list.d/spotify.list
     apt-get update
   fi
-  
+
   installPackage spotify-client
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Audacity")                 
-taskMessages+=("Installing Audacity")           
-taskDescriptions+=("Record and edit audio files")   
-taskRecipes+=("installAudacity")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Audacity")
+taskMessages+=("Installing Audacity")
+taskDescriptions+=("Record and edit audio files")
+taskRecipes+=("installAudacity")
+taskDefaults+=("FALSE")
 
 installAudacity()
 {
   installPackage audacity
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Soundconverter")                 
-taskMessages+=("Installing Soundconverter")           
-taskDescriptions+=("Audio file converter")   
-taskRecipes+=("installSoundconverter")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Soundconverter")
+taskMessages+=("Installing Soundconverter")
+taskDescriptions+=("Audio file converter")
+taskRecipes+=("installSoundconverter")
+taskDefaults+=("FALSE")
 
 installSoundconverter()
 {
   installPackage soundconverter
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Mixxx")                 
-taskMessages+=("Installing Mixxx")           
-taskDescriptions+=("A MP3 DJ mixing software")   
-taskRecipes+=("installMixxx")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Mixxx")
+taskMessages+=("Installing Mixxx")
+taskDescriptions+=("A MP3 DJ mixing software")
+taskRecipes+=("installMixxx")
+taskDefaults+=("FALSE")
 
 installMixxx()
 {
@@ -322,44 +322,44 @@ installMixxx()
   installPackage mixxx
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install LMMS")                 
-taskMessages+=("Installing LMMS")           
-taskDescriptions+=("Music production for everyone: loops, synthesizers, mixer...")   
-taskRecipes+=("installLMMS")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install LMMS")
+taskMessages+=("Installing LMMS")
+taskDescriptions+=("Music production for everyone: loops, synthesizers, mixer...")
+taskRecipes+=("installLMMS")
+taskDefaults+=("FALSE")
 
 installLMMS()
 {
-  apt-get -y lmms 
+  apt-get -y lmms
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Gimp")                 
-taskMessages+=("Installing Gimp")           
-taskDescriptions+=("Gimp is an image editor")   
-taskRecipes+=("installGimp")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Gimp")
+taskMessages+=("Installing Gimp")
+taskDescriptions+=("Gimp is an image editor")
+taskRecipes+=("installGimp")
+taskDefaults+=("FALSE")
 
 installGimp()
 {
   installPackage gimp
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Inkscape")                 
-taskMessages+=("Installing Inkscape")           
-taskDescriptions+=("Create and edit scalable vectorial images")   
-taskRecipes+=("installInkscape")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Inkscape")
+taskMessages+=("Installing Inkscape")
+taskDescriptions+=("Create and edit scalable vectorial images")
+taskRecipes+=("installInkscape")
+taskDefaults+=("FALSE")
 
 installInkscape()
 {
   installPackage inkscape
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Blender")                 
-taskMessages+=("Installing Blender")           
-taskDescriptions+=("3D modelling, animation, rendering and production")   
-taskRecipes+=("installBlender")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Blender")
+taskMessages+=("Installing Blender")
+taskDescriptions+=("3D modelling, animation, rendering and production")
+taskRecipes+=("installBlender")
+taskDefaults+=("FALSE")
 
 installBlender()
 {
@@ -367,11 +367,11 @@ installBlender()
   installPackage blender
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install LeoCad")                 
-taskMessages+=("Installing LeoCad")           
-taskDescriptions+=("Virtual LEGO CAD software")   
-taskRecipes+=("installLeoCad")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install LeoCad")
+taskMessages+=("Installing LeoCad")
+taskDescriptions+=("Virtual LEGO CAD software")
+taskRecipes+=("installLeoCad")
+taskDefaults+=("FALSE")
 
 installLeoCad()
 {
@@ -383,11 +383,11 @@ installLeoCad()
   installPackage leocad
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Paraview")                 
-taskMessages+=("Installing Paraview")           
-taskDescriptions+=("An application for interactive, scientific visualization")   
-taskRecipes+=("installParaview")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Paraview")
+taskMessages+=("Installing Paraview")
+taskDescriptions+=("An application for interactive, scientific visualization")
+taskRecipes+=("installParaview")
+taskDefaults+=("FALSE")
 
 installParaview()
 {
@@ -414,99 +414,99 @@ installParaview()
   echo "StartupNotify=false" >> $desktopFile
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install LibreOffice suite")                 
-taskMessages+=("Installing LibreOffice")           
-taskDescriptions+=("A complete office suite: word processor, spreadsheets, slideshows, diagrams, drawings, databases and equations")   
-taskRecipes+=("installLibreOffice")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install LibreOffice suite")
+taskMessages+=("Installing LibreOffice")
+taskDescriptions+=("A complete office suite: word processor, spreadsheets, slideshows, diagrams, drawings, databases and equations")
+taskRecipes+=("installLibreOffice")
+taskDefaults+=("FALSE")
 
 installLibreOffice()
 {
   installPackage libreoffice
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install LibreOffice Writer")                 
-taskMessages+=("Installing LibreOffice Writer")           
-taskDescriptions+=("Install just the LibreOffice word processor")   
-taskRecipes+=("installLibreOfficeWriter")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install LibreOffice Writer")
+taskMessages+=("Installing LibreOffice Writer")
+taskDescriptions+=("Install just the LibreOffice word processor")
+taskRecipes+=("installLibreOfficeWriter")
+taskDefaults+=("FALSE")
 
 installLibreOfficeWriter()
 {
   installPackage libreoffice-writer
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install LibreOffice Impress")                 
-taskMessages+=("Installing LibreOffice Impress")           
-taskDescriptions+=("Install just the LibreOffice slide show editor")   
-taskRecipes+=("installLibreOfficeImpress")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install LibreOffice Impress")
+taskMessages+=("Installing LibreOffice Impress")
+taskDescriptions+=("Install just the LibreOffice slide show editor")
+taskRecipes+=("installLibreOfficeImpress")
+taskDefaults+=("FALSE")
 
 installLibreOfficeImpress()
 {
   installPackage libreoffice-impress
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install LibreOffice Spreadsheet")                 
-taskMessages+=("Installing LibreOffice Spreadsheet")           
-taskDescriptions+=("Install just the LibreOffice spreadsheet editor")   
-taskRecipes+=("installLibreOfficeSpreadsheet")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install LibreOffice Spreadsheet")
+taskMessages+=("Installing LibreOffice Spreadsheet")
+taskDescriptions+=("Install just the LibreOffice spreadsheet editor")
+taskRecipes+=("installLibreOfficeSpreadsheet")
+taskDefaults+=("FALSE")
 
 installLibreOfficeSpreadsheet()
 {
   installPackage libreoffice-calc
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install LibreOffice Draw")                 
-taskMessages+=("Installing LibreOffice Draw")           
-taskDescriptions+=("Install just the LibreOffice drawing editor")   
-taskRecipes+=("installLibreOfficeDraw")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install LibreOffice Draw")
+taskMessages+=("Installing LibreOffice Draw")
+taskDescriptions+=("Install just the LibreOffice drawing editor")
+taskRecipes+=("installLibreOfficeDraw")
+taskDefaults+=("FALSE")
 
 installLibreOfficeDraw()
 {
   installPackage libreoffice-draw
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install LibreOffice Base")                 
-taskMessages+=("Installing LibreOffice Base")           
-taskDescriptions+=("Install just the LibreOffice database manager")   
-taskRecipes+=("installLibreOfficeBase")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install LibreOffice Base")
+taskMessages+=("Installing LibreOffice Base")
+taskDescriptions+=("Install just the LibreOffice database manager")
+taskRecipes+=("installLibreOfficeBase")
+taskDefaults+=("FALSE")
 
 installLibreOfficeBase()
 {
   installPackage libreoffice-base
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install LibreOffice Math")                 
-taskMessages+=("Installing LibreOffice Math")           
-taskDescriptions+=("Install just the LibreOffice equation editor")   
-taskRecipes+=("installLibreOfficeMath")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install LibreOffice Math")
+taskMessages+=("Installing LibreOffice Math")
+taskDescriptions+=("Install just the LibreOffice equation editor")
+taskRecipes+=("installLibreOfficeMath")
+taskDefaults+=("FALSE")
 
 installLibreOfficeMath()
 {
   installPackage libreoffice-math
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Evince")                 
-taskMessages+=("Installing Evince")           
-taskDescriptions+=("A document viewer with support for PDF, Postscript, djvu, tiff, dvi, XPS and SyncTex")   
-taskRecipes+=("installEvince")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Evince")
+taskMessages+=("Installing Evince")
+taskDescriptions+=("A document viewer with support for PDF, Postscript, djvu, tiff, dvi, XPS and SyncTex")
+taskRecipes+=("installEvince")
+taskDefaults+=("FALSE")
 
 installEvince()
 {
   installPackage evince
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Master PDF Editor")                 
-taskMessages+=("Installing Master PDF Editor")           
-taskDescriptions+=("A convenient and smart PDF editor for Linux")   
-taskRecipes+=("installMasterPDF")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Master PDF Editor")
+taskMessages+=("Installing Master PDF Editor")
+taskDescriptions+=("A convenient and smart PDF editor for Linux")
+taskRecipes+=("installMasterPDF")
+taskDefaults+=("FALSE")
 
 installMasterPDF()
 {
@@ -517,22 +517,22 @@ installMasterPDF()
   fi
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Jabref")                 
-taskMessages+=("Installing Jabref")           
-taskDescriptions+=("A graphical editor for bibtex libraries")   
-taskRecipes+=("installJabref")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Jabref")
+taskMessages+=("Installing Jabref")
+taskDescriptions+=("A graphical editor for bibtex libraries")
+taskRecipes+=("installJabref")
+taskDefaults+=("FALSE")
 
 installJabref()
 {
   installPackage jabref
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Zotero")                 
-taskMessages+=("Installing Zotero")           
-taskDescriptions+=("A reference management software to manage bibliographic data and related research materials")   
-taskRecipes+=("installZotero")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Zotero")
+taskMessages+=("Installing Zotero")
+taskDescriptions+=("A reference management software to manage bibliographic data and related research materials")
+taskRecipes+=("installZotero")
+taskDefaults+=("FALSE")
 
 installZotero()
 {
@@ -562,45 +562,45 @@ installZotero()
   echo "StartupNotify=false" >> $desktopFile
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install TexMaker")                 
-taskMessages+=("Installing TexMaker")           
-taskDescriptions+=("A LateX development environment")   
-taskRecipes+=("installTexMaker")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install TexMaker")
+taskMessages+=("Installing TexMaker")
+taskDescriptions+=("A LateX development environment")
+taskRecipes+=("installTexMaker")
+taskDefaults+=("FALSE")
 
 installTexMaker()
 {
   installPackage texmaker
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Calibre")                 
-taskMessages+=("Installing Calibre")           
-taskDescriptions+=("eBook management application")   
-taskRecipes+=("installCalibre")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Calibre")
+taskMessages+=("Installing Calibre")
+taskDescriptions+=("eBook management application")
+taskRecipes+=("installCalibre")
+taskDefaults+=("FALSE")
 
 installCalibre()
 {
-  wget -q -nv -O- https://download.calibre-ebook.com/linux-installer.py | 
+  wget -q -nv -O- https://download.calibre-ebook.com/linux-installer.py |
   python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install DiffPdf")                 
-taskMessages+=("Installing DiffPdf")           
-taskDescriptions+=("Tool to compare PDF files")   
-taskRecipes+=("installDiffPdf")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install DiffPdf")
+taskMessages+=("Installing DiffPdf")
+taskDescriptions+=("Tool to compare PDF files")
+taskRecipes+=("installDiffPdf")
+taskDefaults+=("FALSE")
 
 installDiffPdf()
 {
   installPackage diffpdf
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Steam")                 
-taskMessages+=("Installing Steam")           
-taskDescriptions+=("A game digital distribution platform developed by Valve")   
-taskRecipes+=("installSteam")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Steam")
+taskMessages+=("Installing Steam")
+taskDescriptions+=("A game digital distribution platform developed by Valve")
+taskRecipes+=("installSteam")
+taskDefaults+=("FALSE")
 
 installSteam()
 {
@@ -612,22 +612,22 @@ installSteam()
   mv libstdc++.so.6 libstdc++.so.6.bak
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install 0 A.D.")                 
-taskMessages+=("Installing 0 A.D.")           
-taskDescriptions+=("0 A.D. is a game of ancient warfare, similar to Age of Empires")   
-taskRecipes+=("install0AD")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install 0 A.D.")
+taskMessages+=("Installing 0 A.D.")
+taskDescriptions+=("0 A.D. is a game of ancient warfare, similar to Age of Empires")
+taskRecipes+=("install0AD")
+taskDefaults+=("FALSE")
 
 install0AD()
 {
   installPackage 0ad
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install ScummVM")                 
-taskMessages+=("Installing ScummVM")           
-taskDescriptions+=("Loader for Scumm games")   
-taskRecipes+=("installScummVM")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install ScummVM")
+taskMessages+=("Installing ScummVM")
+taskDescriptions+=("Loader for Scumm games")
+taskRecipes+=("installScummVM")
+taskDefaults+=("FALSE")
 
 installScummVM()
 {
@@ -645,148 +645,148 @@ installScummVM()
   installPackage "https://www.scummvm.org/frs/scummvm/1.9.0/scummvm_1.9.0-$OScodeName.1_$arch.deb"
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Wine")                 
-taskMessages+=("Installing Wine")           
-taskDescriptions+=("A tool to install Windows software on Linux")   
-taskRecipes+=("installWine")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Wine")
+taskMessages+=("Installing Wine")
+taskDescriptions+=("A tool to install Windows software on Linux")
+taskRecipes+=("installWine")
+taskDefaults+=("FALSE")
 
 installWine()
 {
   if [[ $OSarch == "x86_64" ]]; then
-    dpkg --add-architecture i386 
+    dpkg --add-architecture i386
   fi
   addRepository "ppa:wine/wine-builds"
   installPackage "--install-recommends winehq-staging"
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install PlayOnLinux")                 
-taskMessages+=("Installing PlayOnLinux")           
-taskDescriptions+=("A tool to install Windows games on Linux")   
-taskRecipes+=("installPlayOnLinux")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install PlayOnLinux")
+taskMessages+=("Installing PlayOnLinux")
+taskDescriptions+=("A tool to install Windows games on Linux")
+taskRecipes+=("installPlayOnLinux")
+taskDefaults+=("FALSE")
 
 installPlayOnLinux()
 {
   installPackage playonlinux
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Disk utility")                 
-taskMessages+=("Installing Disk utility")           
-taskDescriptions+=("A tool to manage your drives")   
-taskRecipes+=("installDiskUtility")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Disk utility")
+taskMessages+=("Installing Disk utility")
+taskDescriptions+=("A tool to manage your drives")
+taskRecipes+=("installDiskUtility")
+taskDefaults+=("FALSE")
 
 installDiskUtility()
 {
   installPackage gnome-disk-utility
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install GParted")                 
-taskMessages+=("Installing GParted")           
-taskDescriptions+=("A tool to make partitions in your hard drives")   
-taskRecipes+=("installGParted")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install GParted")
+taskMessages+=("Installing GParted")
+taskDescriptions+=("A tool to make partitions in your hard drives")
+taskRecipes+=("installGParted")
+taskDefaults+=("FALSE")
 
 installGParted()
 {
   installPackage gparted
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install MenuLibre")                 
-taskMessages+=("Installing MenuLibre")           
-taskDescriptions+=("Add or remove applications from your menu")   
-taskRecipes+=("installMenuLibre")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install MenuLibre")
+taskMessages+=("Installing MenuLibre")
+taskDescriptions+=("Add or remove applications from your menu")
+taskRecipes+=("installMenuLibre")
+taskDefaults+=("FALSE")
 
 installMenuLibre()
 {
   installPackage menulibre
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Seahorse")                 
-taskMessages+=("Installing Seahorse")           
-taskDescriptions+=("Manage your passwords")   
-taskRecipes+=("installSeahorse")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Seahorse")
+taskMessages+=("Installing Seahorse")
+taskDescriptions+=("Manage your passwords")
+taskRecipes+=("installSeahorse")
+taskDefaults+=("FALSE")
 
 installSeahorse()
 {
   installPackage seahorse
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Duplicity")                 
-taskMessages+=("Installing Duplicity")           
-taskDescriptions+=("Keep your files safe by making automatic backups")   
-taskRecipes+=("installDuplicity")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Duplicity")
+taskMessages+=("Installing Duplicity")
+taskDescriptions+=("Keep your files safe by making automatic backups")
+taskRecipes+=("installDuplicity")
+taskDefaults+=("FALSE")
 
 installDuplicity()
 {
   installPackage duplicity
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install UNetbootin")                 
-taskMessages+=("Installing UNetbootin")           
-taskDescriptions+=("Tool for creating Live USB drives")   
-taskRecipes+=("installUNetbootin")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install UNetbootin")
+taskMessages+=("Installing UNetbootin")
+taskDescriptions+=("Tool for creating Live USB drives")
+taskRecipes+=("installUNetbootin")
+taskDefaults+=("FALSE")
 
 installUNetbootin()
 {
   installPackage unetbootin
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install EncFS")                 
-taskMessages+=("Installing EncFS")           
-taskDescriptions+=("Create and manage encrypted folders to keep your files safe")   
-taskRecipes+=("installEncFS")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install EncFS")
+taskMessages+=("Installing EncFS")
+taskDescriptions+=("Create and manage encrypted folders to keep your files safe")
+taskRecipes+=("installEncFS")
+taskDefaults+=("FALSE")
 
 installEncFS()
 {
-  addRepository "ppa:gencfsm" 
+  addRepository "ppa:gencfsm"
   installPackage gnome-encfs-manager
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install FileZilla")                 
-taskMessages+=("Installing FileZilla")           
-taskDescriptions+=("Download and upload files via FTP, FTPS and SFTP")   
-taskRecipes+=("installFileZilla")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install FileZilla")
+taskMessages+=("Installing FileZilla")
+taskDescriptions+=("Download and upload files via FTP, FTPS and SFTP")
+taskRecipes+=("installFileZilla")
+taskDefaults+=("FALSE")
 
 installFileZilla()
 {
   installPackage filezilla
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install utilities bundle")                 
-taskMessages+=("Installing utilities bundle")           
-taskDescriptions+=("Java, zip, rar and exfat tools")   
-taskRecipes+=("installUtilities")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install utilities bundle")
+taskMessages+=("Installing utilities bundle")
+taskDescriptions+=("Java, zip, rar and exfat tools")
+taskRecipes+=("installUtilities")
+taskDefaults+=("FALSE")
 
 installUtilities()
 {
   installPackage icedtea-7-plugin openjdk-8-jre p7zip rar exfat-fuse exfat-utils
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Glipper")                 
-taskMessages+=("Installing Glipper")           
-taskDescriptions+=("Gnome clipboard manager")   
-taskRecipes+=("installGlipper")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Glipper")
+taskMessages+=("Installing Glipper")
+taskDescriptions+=("Gnome clipboard manager")
+taskRecipes+=("installGlipper")
+taskDefaults+=("FALSE")
 
 installGlipper()
 {
   installPackage glipper
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install developer bundle")                 
-taskMessages+=("Installing developer bundle")           
-taskDescriptions+=("Tools for developers: build-essential, cmake, git, svn, java, python, octave, autotools...")   
-taskRecipes+=("installDevBundle")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install developer bundle")
+taskMessages+=("Installing developer bundle")
+taskDescriptions+=("Tools for developers: build-essential, cmake, git, svn, java, python, octave, autotools...")
+taskRecipes+=("installDevBundle")
+taskDefaults+=("FALSE")
 
 installDevBundle()
 {
@@ -794,11 +794,11 @@ installDevBundle()
              octave gfortran git git-svn subversion kdiff3 colordiff openjdk-8-jdk autoconf autotools-dev
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Swift")                 
-taskMessages+=("Installing Swift")           
-taskDescriptions+=("A compiler and interpreter for Apple's programming language")   
-taskRecipes+=("installSwift")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Swift")
+taskMessages+=("Installing Swift")
+taskDescriptions+=("A compiler and interpreter for Apple's programming language")
+taskRecipes+=("installSwift")
+taskDefaults+=("FALSE")
 
 installSwift()
 {
@@ -824,11 +824,11 @@ installSwift()
   export PATH=/opt/swift/usr/bin:"${PATH}"
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Eclipse")                 
-taskMessages+=("Installing Eclipse")           
-taskDescriptions+=("A multilanguage IDE for developers")   
-taskRecipes+=("installEclipse")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Eclipse")
+taskMessages+=("Installing Eclipse")
+taskDescriptions+=("A multilanguage IDE for developers")
+taskRecipes+=("installEclipse")
+taskDefaults+=("FALSE")
 
 installEclipse()
 {
@@ -837,11 +837,11 @@ installEclipse()
   /tmp/eclipse-installer/eclipse-inst
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install CodeLite")                 
-taskMessages+=("Installing CodeLite")           
-taskDescriptions+=("A C/C++, PHP and JavaScript IDE for developers")   
-taskRecipes+=("installCodeLite")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install CodeLite")
+taskMessages+=("Installing CodeLite")
+taskDescriptions+=("A C/C++, PHP and JavaScript IDE for developers")
+taskRecipes+=("installCodeLite")
+taskDefaults+=("FALSE")
 
 installCodeLite()
 {
@@ -850,22 +850,22 @@ installCodeLite()
   installPackage codelite wxcrafter
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Visual Studio Code")                 
-taskMessages+=("Installing Visual Studio Code")           
-taskDescriptions+=("A source code editor developed by Microsoft")   
-taskRecipes+=("installVSCode")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Visual Studio Code")
+taskMessages+=("Installing Visual Studio Code")
+taskDescriptions+=("A source code editor developed by Microsoft")
+taskRecipes+=("installVSCode")
+taskDefaults+=("FALSE")
 
 installVSCode()
 {
   installPackage "https://az764295.vo.msecnd.net/stable/38746938a4ab94f2f57d9e1309c51fd6fb37553d/code_1.8.0-1481651903_amd64.deb"
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Atom")                 
-taskMessages+=("Installing Atom")           
-taskDescriptions+=("A hackable text editor")   
-taskRecipes+=("installAtom")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Atom")
+taskMessages+=("Installing Atom")
+taskDescriptions+=("A hackable text editor")
+taskRecipes+=("installAtom")
+taskDefaults+=("FALSE")
 
 installAtom()
 {
@@ -873,11 +873,11 @@ installAtom()
   installPackage atom
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Arduino")                 
-taskMessages+=("Installing Arduino")           
-taskDescriptions+=("The official IDE for the Arduino board")   
-taskRecipes+=("installArduino")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Arduino")
+taskMessages+=("Installing Arduino")
+taskDescriptions+=("The official IDE for the Arduino board")
+taskRecipes+=("installArduino")
+taskDefaults+=("FALSE")
 
 installArduino()
 {
@@ -892,11 +892,11 @@ installArduino()
   /opt/arduino/install.sh
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Mu")                 
-taskMessages+=("Installing Mu")           
-taskDescriptions+=("A code editor for beginner programmers")   
-taskRecipes+=("installMu")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Mu")
+taskMessages+=("Installing Mu")
+taskDescriptions+=("A code editor for beginner programmers")
+taskRecipes+=("installMu")
+taskDefaults+=("FALSE")
 
 installMu()
 {
@@ -921,22 +921,22 @@ installMu()
   echo "StartupNotify=false" >> $desktopFile
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install GitKraken")                 
-taskMessages+=("Installing GitKraken")           
-taskDescriptions+=("A graphical git client from Axosoft")   
-taskRecipes+=("installGitKraken")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install GitKraken")
+taskMessages+=("Installing GitKraken")
+taskDescriptions+=("A graphical git client from Axosoft")
+taskRecipes+=("installGitKraken")
+taskDefaults+=("FALSE")
 
 installGitKraken()
 {
   installPackage "https://release.gitkraken.com/linux/gitkraken-amd64.deb"
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install SmartGit")                 
-taskMessages+=("Installing SmartGit")           
-taskDescriptions+=("A graphical git client from Syntevo")   
-taskRecipes+=("installSmartGit")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install SmartGit")
+taskMessages+=("Installing SmartGit")
+taskDescriptions+=("A graphical git client from Syntevo")
+taskRecipes+=("installSmartGit")
+taskDefaults+=("FALSE")
 
 installSmartGit()
 {
@@ -949,22 +949,22 @@ installSmartGit()
   /opt/smartgit/bin/add-menuitem.sh
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install SysAdmin bundle")                 
-taskMessages+=("Installing SysAdmin bundle")           
-taskDescriptions+=("Tools for sysadmins: tmux, cron, screen, ncdu, htop, aptitude, apache, etckeeper, xpra and dconf-editor")   
-taskRecipes+=("installSysAdminBundle")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install SysAdmin bundle")
+taskMessages+=("Installing SysAdmin bundle")
+taskDescriptions+=("Tools for sysadmins: tmux, cron, screen, ncdu, htop, aptitude, apache, etckeeper, xpra and dconf-editor")
+taskRecipes+=("installSysAdminBundle")
+taskDefaults+=("FALSE")
 
 installSysAdminBundle()
 {
-  installPackage tmux cron screen ncdu htop aptitude apache2 etckeeper xpra dconf-editor
+  installPackage tmux cron screen ncdu htop aptitude apache2 etckeeper xpra dconf-editor exfat-fuse exfat-utils
 }
 #------------------------------------------------------------------------------
-taskNames+=("Install Jaxx")                 
-taskMessages+=("Installing Jaxx")           
-taskDescriptions+=("A blockchain wallet")   
-taskRecipes+=("installJaxx")   
-taskDefaults+=("FALSE") 
+taskNames+=("Install Jaxx")
+taskMessages+=("Installing Jaxx")
+taskDescriptions+=("A blockchain wallet")
+taskRecipes+=("installJaxx")
+taskDefaults+=("FALSE")
 
 installJaxx()
 {
@@ -988,30 +988,30 @@ installJaxx()
   echo "StartupNotify=false" >> $desktopFile
 }
 #------------------------------------------------------------------------------
-#taskNames+=("Install rEFInd")                  
-#taskMessages+=("Installing rEFInd")            
-#taskDescriptions+=("An EFI boot manager")    
-#taskRecipes+=("installrEFInd")    
-#taskDefaults+=("FALSE")  
- 
-#installrEFInd() 
-# { 
-#  addRepository "ppa:rodsmith/refind" 
-#  installPackage refind 
-#  refind-install --shim /boot/efi/EFI/ubuntu/shimx64.efi --localkeys 
-#  refind-mkdefault 
-#} 
-#------------------------------------------------------------------------------ 
+#taskNames+=("Install rEFInd")
+#taskMessages+=("Installing rEFInd")
+#taskDescriptions+=("An EFI boot manager")
+#taskRecipes+=("installrEFInd")
+#taskDefaults+=("FALSE")
+
+#installrEFInd()
+# {
+#  addRepository "ppa:rodsmith/refind"
+#  installPackage refind
+#  refind-install --shim /boot/efi/EFI/ubuntu/shimx64.efi --localkeys
+#  refind-mkdefault
+#}
+#------------------------------------------------------------------------------
 # INSTRUCTIONS
 # To add a new task, add a new section above this block copying and pasting the following 5 lines:
 
-# taskNames+=("<Task Name>")                 
-# taskMessages+=("<Task message>")           
-# taskDescriptions+=("<Task description>")   
-# taskRecipes+=("<Task recipe function>")   
-# taskDefaults+=("Task boolean value") 
+# taskNames+=("<Task Name>")
+# taskMessages+=("<Task message>")
+# taskDescriptions+=("<Task description>")
+# taskRecipes+=("<Task recipe function>")
+# taskDefaults+=("Task boolean value")
 
-# Then, uncomment them and:         
+# Then, uncomment them and:
 
 # Replace <Task Name> with the new task's name.
 # Replace <Task message> with the message that will be displayed while.
@@ -1093,7 +1093,7 @@ main()
   fi
 
   # Build task table for Zenity
-  taskTable=()  
+  taskTable=()
 
   for (( i=0; i<${#taskNames[@]}; i++ )); do
       taskTable+=("${taskDefaults[$i]}" "${taskNames[$i]}" "${taskDescriptions[$i]}")
@@ -1218,7 +1218,7 @@ main()
     errors=()
 
     # Last occurrence of NEW SESSION
-    startLine=$(tac $errorLog | grep -n -m1 "NEW SESSION" | cut -d: -f1) 
+    startLine=$(tac $errorLog | grep -n -m1 "NEW SESSION" | cut -d: -f1)
 
     while read line; do
       firstword=$(echo $line | cut -d' ' -f1)
@@ -1227,20 +1227,20 @@ main()
           errors+=("${line/RECIPE /}")
       fi
     done <<< "$(tail -n $startLine $errorLog)" # Use the error log only from startLine to the end
-    
+
     if [[ ${#errors[@]} > 0 ]]; then
 
       message="The following tasks ended with errors and could not be completed:"
 
       selected=$(zenity --list --height 500 --width 500 --title="Alfred" \
                         --text="$message" \
-                        --hide-header --column "Tasks with errors" "${errors[@]}")  
+                        --hide-header --column "Tasks with errors" "${errors[@]}")
 
       message="Please notify the following error log at https://github.com/derkomai/alfred/issues\n"
       message+="-------------------------------------------------------------"
       message+="---------------------------------------------------------\n\n"
 
-      echo -e $message"$(tail -n $startLine $errorLog)" | 
+      echo -e $message"$(tail -n $startLine $errorLog)" |
       zenity --text-info --height 700 --width 800 --title="Alfred"
     fi
   fi
