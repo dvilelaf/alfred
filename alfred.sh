@@ -1103,8 +1103,8 @@ main()
   while true; do
 
     tasks=$(zenity --list --checklist \
-      --height 500 \
-      --width 1000 \
+      --height 720 \
+      --width 1280 \
       --title="Alfred" \
       --text "Select tasks to perform:" \
       --column=Selection \
