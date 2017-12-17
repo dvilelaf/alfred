@@ -1079,10 +1079,11 @@ main()
       OSbaseCodeName="precise"
     elif [ $OScodeName == "petra" ]; then
       OSbaseCodeName="saucy"
-    elif [ $OScodeName == "quiana" ] || [ $OScodeName == "rebecca" ] || \
+    elif [ $OScodeName == "qiana" ] || [ $OScodeName == "rebecca" ] || \
          [ $OScodeName == "rafaela" ] || [ $OScodeName == "rosa" ]; then
       OSbaseCodeName="trusty"
-    elif [ $OScodeName == "sarah" ] || [ $OScodeName == "serena" ]; then
+    elif [ $OScodeName == "sarah" ] || [ $OScodeName == "serena" ] || \
+         [ $OScodeName == "sonya" ] || [ $OScodeName == "sylvia" ]; then
       OSbaseCodeName="xenial"
     fi
   fi
