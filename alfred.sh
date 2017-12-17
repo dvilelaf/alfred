@@ -198,12 +198,12 @@ taskDefaults+=("FALSE")
 installTelegram()
 {
   if [[ $OSarch == "x86_64" ]]; then
-    wget -O - https://tdesktop.com/linux > /tmp/telegram.tar.gz
+    wget -O - https://telegram.org/dl/desktop/linux > /tmp/telegram.tar.xz
   else
-    wget -O - https://tdesktop.com/linux32 > /tmp/telegram.tar.gz
+    wget -O - https://telegram.org/dl/desktop/linux32 > /tmp/telegram.tar.xz
   fi
 
-  tar -xzvf /tmp/telegram.tar.gz -C /opt
+  tar -xf /tmp/telegram.tar.xz -C /opt
 
   chmod +x /opt/Telegram/telegram
   sudo chown -R $SUDO_USER:$SUDO_USER /opt/Telegram/
