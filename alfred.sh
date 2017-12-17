@@ -988,19 +988,77 @@ installJaxx()
   echo "StartupNotify=false" >> $desktopFile
 }
 #------------------------------------------------------------------------------
-#taskNames+=("Install rEFInd")
-#taskMessages+=("Installing rEFInd")
-#taskDescriptions+=("An EFI boot manager")
-#taskRecipes+=("installrEFInd")
-#taskDefaults+=("FALSE")
+taskNames+=("Install rEFInd")
+taskMessages+=("Installing rEFInd")
+taskDescriptions+=("An EFI boot manager")
+taskRecipes+=("installrEFInd")
+taskDefaults+=("FALSE")
 
-#installrEFInd()
-# {
-#  addRepository "ppa:rodsmith/refind"
-#  installPackage refind
-#  refind-install --shim /boot/efi/EFI/ubuntu/shimx64.efi --localkeys
-#  refind-mkdefault
-#}
+installrEFInd()
+ {
+  addRepository "ppa:rodsmith/refind"
+  installPackage refind
+  refind-install --shim /boot/efi/EFI/ubuntu/shimx64.efi --localkeys
+  refind-mkdefault
+}
+#------------------------------------------------------------------------------
+taskNames+=("Install Tux Guitar")
+taskMessages+=("Installing Tux Guitar")
+taskDescriptions+=("A tablature editor")
+taskRecipes+=("installTuxGuitar")
+taskDefaults+=("FALSE")
+
+installTuxGuitar()
+{
+  apt-get -y install tuxguitar tuxguitar-alsa tuxguitar-jsa tuxguitar-oss
+}
+#------------------------------------------------------------------------------
+taskNames+=("Install Ukuu")
+taskMessages+=("Installing Ukuu")
+taskDescriptions+=("A kernel update tool")
+taskRecipes+=("installUkuu")
+taskDefaults+=("FALSE")
+
+installUkuu()
+{
+  addRepository "ppa:teejee2008/ppa"
+  apt-get -y install ukuu
+}
+#------------------------------------------------------------------------------
+taskNames+=("Install Gnome System Monitor")
+taskMessages+=("Installing Gnome System Monitor")
+taskDescriptions+=("A system resource usage monitor")
+taskRecipes+=("installSystemMonitor")
+taskDefaults+=("FALSE")
+
+installSystemMonitor()
+{
+  apt-get -y install gnome-system-monitor
+}
+#------------------------------------------------------------------------------
+taskNames+=("Install ANoise")
+taskMessages+=("Installing ANoise")
+taskDescriptions+=("An ambient music player")
+taskRecipes+=("installANoise")
+taskDefaults+=("FALSE")
+
+installANoise()
+{
+  addRepository "ppa:costales/anoise"
+  apt-get -y install anoise
+}
+#------------------------------------------------------------------------------
+taskNames+=("Install Minetest")
+taskMessages+=("Installing Minetest")
+taskDescriptions+=("A Minecraft clone")
+taskRecipes+=("installMinetest")
+taskDefaults+=("FALSE")
+
+installMinetest()
+{
+  addRepository "ppa:minetestdevs/stable"
+  apt-get -y install minetest
+}
 #------------------------------------------------------------------------------
 # INSTRUCTIONS
 # To add a new task, add a new section above this block copying and pasting the following 5 lines:
