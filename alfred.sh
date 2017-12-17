@@ -1060,6 +1060,19 @@ installMinetest()
   apt-get -y install minetest
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install Typora")
+taskMessages+=("Installing Typora")
+taskDescriptions+=("A minimalist text editor")
+taskRecipes+=("installTypora")
+taskDefaults+=("FALSE")
+
+installTypora()
+{
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
+  addRepository "deb http://typora.io linux/"
+  apt-get -y install typora
+}
+#------------------------------------------------------------------------------
 # INSTRUCTIONS
 # To add a new task, add a new section above this block copying and pasting the following 5 lines:
 
