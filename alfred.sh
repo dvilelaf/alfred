@@ -1188,11 +1188,7 @@ main()
 
     # Check for closed window / cancel button
     if [[ $? == 1 ]]; then
-      if zenity --question --title="Alfred" --text "Are you sure you want to exit?"; then
-        exit 0
-      else
-        continue
-      fi
+      exit 0
     fi
 
     # Check zero tasks selected
@@ -1366,11 +1362,7 @@ getPassword()
 
     # Check for closed window / cancel button
     if [[ $? == 1 ]]; then
-        if zenity --question --title="Alfred" --text="Are you sure you want to exit?"; then
-          return 1
-        else
-          continue
-        fi
+      return 0
     fi
 
     # Check for correct password
