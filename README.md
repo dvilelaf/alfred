@@ -4,7 +4,7 @@ common tasks automatically in Ubuntu and derivatives.
 
 
 <p align="center">
-  <img src="http://i.imgur.com/vg3T4ul.png">
+  <img src="https://imgur.com/p6zfou9">
 </p>
 
 
