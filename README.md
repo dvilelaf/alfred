@@ -3,7 +3,9 @@
 A bash script to install all your favourite applications and perform the most
 common tasks automatically in Ubuntu and derivatives.
 
-![Imgur](https://i.imgur.com/p6zfou9.png)
+<p align="center"> 
+  <img src="https://i.imgur.com/p6zfou9.png"> 
+</p> 
 
 Alfred can install the most common applications and packages for you, while you
 take a nap or walk the dog. Just tell Alfred what you want him to do for you and
