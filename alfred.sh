@@ -362,7 +362,7 @@ taskSelectedList+=("FALSE")
 
 installLeoCad()
 {
-  installPackage unzip
+  installPackage "unzip"
 
   wget -q -O /tmp/ldraw.zip http://www.ldraw.org/library/updates/complete.zip
   unzip /tmp/ldraw.zip -d /home/$SUDO_USER
