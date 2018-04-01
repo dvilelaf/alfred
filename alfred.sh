@@ -1327,7 +1327,17 @@ processPackages()
 {
   apt-get update
   apt-get -y upgrade
-  apt-get -y install packages
+
+  # Install only packages that are not installed already
+  packageList=""
+
+  for package in $packages; do
+      if ! $(testPackage $package); then
+          packageList+=" $package"
+      fi
+  done
+
+  apt-get -y install $packageList
   apt-get -y autoremove
 }
 
