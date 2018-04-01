@@ -1313,7 +1313,7 @@ installPackage()
 {
   for arg in $@; do
     if [[ "$arg" == "http"*".deb" ]]; then
-      wget -q -O /tmp/package.deb $1
+      wget -q -O /tmp/package.deb $arg
       apt-get -y install /tmp/package.deb
       rm /tmp/package.deb
     else
