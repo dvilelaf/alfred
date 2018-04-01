@@ -554,7 +554,7 @@ installWine()
   apt-key add /tmp/Release.key
   installRepo "https://dl.winehq.org/wine-builds/ubuntu/"
   apt-get update
-  installPackage "--install-recommends winehq-stable"
+  apt-get install --install-recommends winehq-stable
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install PlayOnLinux")
