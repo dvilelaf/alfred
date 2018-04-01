@@ -1136,6 +1136,9 @@ main()
     echo -e "$logHeader" >> $debugLog
   fi
 
+  chown $SUDO_USER:$SUDO_USER $errorLog
+  chown $SUDO_USER:$SUDO_USER $debugLog
+
   # Perform all tasks and show progress in a progress bar
   ntasks=$(( $(echo "$tasks" | grep -o "\," | wc -l) + 1 ))
   taskpercentage=$((100 / $ntasks))
