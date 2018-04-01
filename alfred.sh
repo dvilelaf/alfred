@@ -807,6 +807,10 @@ taskSelectedList+=("FALSE")
 installExodus()
 {
   wget -q -O /tmp/Exodus.zip https://exodusbin.azureedge.net/releases/exodus-linux-x64-1.48.0.zip
+
+  installPackage "unzip"
+  unzip /tmp/Exodus.zip -d /opt/Exodus/
+
   chown -R $SUDO_USER:$SUDO_USER /opt/Exodus/
   #FIXME: install desktop file
 }
