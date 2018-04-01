@@ -134,11 +134,12 @@ installDropbox()
     bash /tmp/elementary-dropbox/install.sh -y
   else
     if [[ $OSarch == "x86_64" ]]; then
-        wget -q -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+        wget -O /tmp/dropbox.tar.gz "https://www.dropbox.com/download?plat=lnx.x86_64"
     else
-        wget -q -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -
+        wget -O /tmp/dropbox.tar.gz "https://www.dropbox.com/download?plat=lnx.x86"
     fi
 
+    tar -xvzf /tmp/dropbox.tar.gz -C /home/$SUDO_USER
     /.dropbox-dist/dropboxd
   fi
 }
