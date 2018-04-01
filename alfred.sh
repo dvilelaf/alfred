@@ -1350,7 +1350,7 @@ addRepo()
 
 installRepo()
 {
-  if ! $(testPackage software-properties-common); then
+  if ! $(testPackage "software-properties-common"); then
     installPackage software-properties-common
   fi
 
@@ -1360,8 +1360,8 @@ installRepo()
 
 processRepos()
 {
-  if ! $(testPackage software-properties-common); then
-    installPackage software-properties-common
+  if ! $(testPackage "software-properties-common"); then
+    installPackage "software-properties-common"
   fi
 
   for repo in ${repos[@]}; do
