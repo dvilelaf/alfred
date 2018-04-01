@@ -1149,7 +1149,7 @@ main()
 
     for i in ${!taskNames[@]}; do
       if [[ $tasks == *"${taskNames[i]}"* ]]; then
-        echo "# ${taskMessages[$i]}..."
+        echo -e "# ${taskMessages[$i]}..."
 
         outputMsg=$(
                       set -e
@@ -1162,9 +1162,9 @@ main()
                    )
 
         if [[ $? -ne 0 ]]; then
-          echo "RECIPE "${taskNames[$i]}"\n" >> $errorLog
-          echo "$outputMsg" >> $errorLog
-          echo "--------------------------------------------------------------------------------------------------\n" >> $errorLog
+          echo -e "RECIPE "${taskNames[$i]}"\n" >> $errorLog
+          echo -e "$outputMsg" >> $errorLog
+          echo -e "--------------------------------------------------------------------------------------------------\n" >> $errorLog
           errors=true
         fi
 
@@ -1174,7 +1174,7 @@ main()
     done
 
     if $errors ; then
-      echo "RECIPE_ERRORS_HAPPENED\n" >> $errorLog
+      echo -e "RECIPE_ERRORS_HAPPENED\n" >> $errorLog
     fi
   ) |
   zenity --progress \
@@ -1202,7 +1202,7 @@ main()
 
     if [[ $? != 0 ]]; then
       errors=true
-      echo "REPO_ERRORS_HAPPENED\n" >> $errorLog
+      echo -e "REPO_ERRORS_HAPPENED\n" >> $errorLog
     fi
 
     # Install packages
@@ -1214,11 +1214,11 @@ main()
 
     if [[ $? != 0 ]]; then
       errors=true
-      echo "PACKAGE_ERRORS_HAPPENED\n" >> $errorLog
+      echo -e "PACKAGE_ERRORS_HAPPENED\n" >> $errorLog
     fi
 
     if $errors ; then
-      echo "SOME_ERRORS_HAPPENED\n" >> $errorLog
+      echo -e "SOME_ERRORS_HAPPENED\n" >> $errorLog
       echo "# Some tasks ended with errors"
       if $(testPackage libnotify-bin); then
         notify-send -i utilities-terminal Alfred "Some tasks ended with errors"
