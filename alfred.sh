@@ -1365,7 +1365,7 @@ processRepos()
   fi
 
   for repo in ${repos[@]}; do
-    add-apt-repository -y "$repo"
+    add-apt-repository -y $repo
   done
 }
 
