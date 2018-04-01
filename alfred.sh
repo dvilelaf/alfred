@@ -1179,6 +1179,7 @@ main()
   ) |
   zenity --progress \
          --no-cancel \
+         --auto-close \
          --title="Alfred" \
          --text="Processing all tasks" \
          --percentage=0 \
