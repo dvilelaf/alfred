@@ -1195,6 +1195,8 @@ main()
     fi
 
     # Add repos
+    echo "# Adding repositories..."
+
     if $debug; then
       processRepos &>> $debugLog
     else
@@ -1207,6 +1209,8 @@ main()
     fi
 
     # Install packages
+    echo "# Installing packages..."
+
     if $debug; then
       processPackages &>> $debugLog
     else
