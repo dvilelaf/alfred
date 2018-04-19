@@ -1510,6 +1510,29 @@ function processPackages()
 
 function getRepoList()
 {
+  # Get list of already added repos
+  readarray installedRepos <<< "$(for APT in $(find /etc/apt/ -name \*.list); do
+    grep -o "^deb http://ppa.launchpad.net/[a-z0-9\-]\+/[a-z0-9\-]\+" "$APT" | while read ENTRY ; do
+        USER=$(echo "$ENTRY" | cut -d/ -f4)
+        PPA=$(echo "$ENTRY" | cut -d/ -f5)
+        echo "ppa:$USER/$PPA"
+    done
+  done)"
+}
+
+
+function checkRepo()
+{
+  for repo in "${installedRepos[@]}"; do
+    if [[ $repo == "$1" ]]; then
+      echo true
+      return 0
+    fi
+  done
+  echo false
+}
+
+
 function addRepo()
 {
   repos+=($1)
@@ -1534,8 +1557,12 @@ function processRepos()
   fi
 
   for repo in ${repos[@]}; do
-    add-apt-repository -y $repo
+    if ! checkRepo "$repo"; then
+      add-apt-repository -y "$repo"
+    fi
   done
+
+  apt-get update
 }
 
 
