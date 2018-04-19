@@ -1549,7 +1549,7 @@ function processRepos()
   fi
 
   for repo in "${repos[@]}"; do
-    if ! checkRepo "$repo"; then
+    if ! $(checkRepo "$repo"); then
       add-apt-repository -y "$repo"
     fi
   done
