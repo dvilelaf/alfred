@@ -1361,11 +1361,12 @@ function main()
       fi
     done
 
+    # End and notify
     if $errors ; then
-      echo -e "SOME_ERRORS_HAPPENED\n" >> $errorLog
+      echo -ne "SOME_ERRORS_HAPPENED\n" >> $errorLog
       echo "# Some tasks ended with errors"
-      if $(testPackage libnotify-bin); then
-        notify-send -i utilities-terminal Alfred "Some tasks ended with errors"
+      if $(checkPackage libnotify-bin); then
+        su "$SUDO_USER" -c 'notify-send -i utilities-terminal Alfred "Some tasks ended with errors"'
       fi
     else
       echo "# All tasks completed succesfully"
