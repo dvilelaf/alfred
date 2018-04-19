@@ -93,6 +93,7 @@ taskSelectedList+=("FALSE")
 
 installChromium()
 {
+  echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
   addPackage "chromium-browser"
 }
 #------------------------------------------------------------------------------
