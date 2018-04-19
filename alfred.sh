@@ -18,6 +18,7 @@
 # INITIALIZATION ##############################################################
 debug=true
 
+updateSystem=false
 packages=""
 repos=()
 taskNames=()
@@ -27,11 +28,25 @@ taskRecipes=()
 taskPostInstallations=()
 taskSelectedList=()
 
+
 # TASK LIST ###################################################################
+#------------------------------------------------------------------------------
+taskNames+=("Update system")
+taskMessages+=("Updating system")
+taskDescriptions+=("Install the latest version of all your software")
+taskRecipes+=("updateSystem")
+taskPostInstallations+=("")
+taskSelectedList+=("FALSE")
+
+updateSystem()
+{
+  updateSystem=true
+}
 #------------------------------------------------------------------------------
 taskNames+=("Install automatic drivers")
 taskMessages+=("Processing drivers")
 taskDescriptions+=("Install drivers that are appropriate for automatic installation")
+taskPostInstallations+=("")
 taskRecipes+=("autoInstallDrivers")
 taskSelectedList+=("FALSE")
 
@@ -44,6 +59,7 @@ taskNames+=("Install Java, Flash and codecs")
 taskMessages+=("Processing Java, Flash and codecs")
 taskDescriptions+=("Install non-open-source packages like Java, Flash plugin, Unrar, and some audio and video codecs like MP3/AVI/MPEG")
 taskRecipes+=("installRestrictedExtras")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installRestrictedExtras()
@@ -55,6 +71,7 @@ taskNames+=("Install Chrome")
 taskMessages+=("Processing Chrome")
 taskDescriptions+=("The web browser from Google")
 taskRecipes+=("installChrome")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installChrome()
@@ -71,6 +88,7 @@ taskNames+=("Install Chromium")
 taskMessages+=("Processing Chromium")
 taskDescriptions+=("The open-source web browser providing the code for Google Chrome.")
 taskRecipes+=("installChromium")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installChromium()
@@ -82,6 +100,7 @@ taskNames+=("Install Firefox")
 taskMessages+=("Processing Firefox")
 taskDescriptions+=("The web browser from Mozilla")
 taskRecipes+=("installFirefox")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installFirefox()
@@ -94,6 +113,7 @@ taskNames+=("Install Opera")
 taskMessages+=("Processing Opera")
 taskDescriptions+=("Just another web browser")
 taskRecipes+=("installOpera")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installOpera()
@@ -109,6 +129,7 @@ taskNames+=("Install Transmission")
 taskMessages+=("Processing Transmission")
 taskDescriptions+=("A light bittorrent download client")
 taskRecipes+=("installTransmission")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installTransmission()
@@ -121,6 +142,7 @@ taskNames+=("Install Dropbox")
 taskMessages+=("Processing Dropbox")
 taskDescriptions+=("A cloud hosting service to store your files online")
 taskRecipes+=("installDropbox")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installDropbox()
@@ -148,6 +170,7 @@ taskNames+=("Install VirtualBox")
 taskMessages+=("Processing VirtualBox")
 taskDescriptions+=("A virtualization software to run other OSes on top of your current OS")
 taskRecipes+=("installVirtualBox")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installVirtualBox()
@@ -159,6 +182,7 @@ taskNames+=("Install Skype")
 taskMessages+=("Processing Skype")
 taskDescriptions+=("A videocall software from Microsoft")
 taskRecipes+=("installSkype")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installSkype()
@@ -170,6 +194,7 @@ taskNames+=("Install Thunderbird")
 taskMessages+=("Processing Thunderbird")
 taskDescriptions+=("A mail client from Mozilla")
 taskRecipes+=("installThunderbird")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installThunderbird()
@@ -181,6 +206,7 @@ taskNames+=("Install Telegram")
 taskMessages+=("Processing Telegram")
 taskDescriptions+=("A chat client, similar to Whatsapp, Viber, Facebook Messenger or Google Hangouts")
 taskRecipes+=("installTelegram")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installTelegram()
@@ -216,6 +242,7 @@ taskNames+=("Install Slack")
 taskMessages+=("Processing Slack")
 taskDescriptions+=("A team communication application")
 taskRecipes+=("installSlack")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installSlack()
@@ -227,6 +254,7 @@ taskNames+=("Install VLC")
 taskMessages+=("Processing VLC")
 taskDescriptions+=("The most famous multimedia player")
 taskRecipes+=("installVLC")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installVLC()
@@ -239,6 +267,7 @@ taskNames+=("Install Kazam")
 taskMessages+=("Processing Kazam")
 taskDescriptions+=("A tool to record your screen and take screenshots")
 taskRecipes+=("installKazam")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installKazam()
@@ -250,6 +279,7 @@ taskNames+=("Install Handbrake")
 taskMessages+=("Processing Handbrake")
 taskDescriptions+=("A video transcoder")
 taskRecipes+=("installHandbrake")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installHandbrake()
@@ -262,6 +292,7 @@ taskNames+=("Install Spotify")
 taskMessages+=("Processing Spotify...")
 taskDescriptions+=("One of the best music streaming apps")
 taskRecipes+=("installSpotify")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installSpotify()
@@ -279,6 +310,7 @@ taskNames+=("Install Audacity")
 taskMessages+=("Processing Audacity")
 taskDescriptions+=("Record and edit audio files")
 taskRecipes+=("installAudacity")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installAudacity()
@@ -290,6 +322,7 @@ taskNames+=("Install Soundconverter")
 taskMessages+=("Processing Soundconverter")
 taskDescriptions+=("Audio file converter")
 taskRecipes+=("installSoundconverter")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installSoundconverter()
@@ -301,6 +334,7 @@ taskNames+=("Install Mixxx")
 taskMessages+=("Processing Mixxx")
 taskDescriptions+=("A MP3 DJ mixing software")
 taskRecipes+=("installMixxx")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installMixxx()
@@ -313,6 +347,7 @@ taskNames+=("Install LMMS")
 taskMessages+=("Processing LMMS")
 taskDescriptions+=("Music production for everyone: loops, synthesizers, mixer...")
 taskRecipes+=("installLMMS")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installLMMS()
@@ -324,6 +359,7 @@ taskNames+=("Install Gimp")
 taskMessages+=("Processing Gimp")
 taskDescriptions+=("Gimp is an image editor")
 taskRecipes+=("installGimp")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installGimp()
@@ -335,6 +371,7 @@ taskNames+=("Install Inkscape")
 taskMessages+=("Processing Inkscape")
 taskDescriptions+=("Create and edit scalable vectorial images")
 taskRecipes+=("installInkscape")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installInkscape()
@@ -346,6 +383,7 @@ taskNames+=("Install Blender")
 taskMessages+=("Processing Blender")
 taskDescriptions+=("3D modelling, animation, rendering and production")
 taskRecipes+=("installBlender")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installBlender()
@@ -358,6 +396,7 @@ taskNames+=("Install LeoCad")
 taskMessages+=("Processing LeoCad")
 taskDescriptions+=("Virtual LEGO CAD software")
 taskRecipes+=("installLeoCad")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installLeoCad()
@@ -374,6 +413,7 @@ taskNames+=("Install LibreOffice suite")
 taskMessages+=("Processing LibreOffice")
 taskDescriptions+=("A complete office suite: word processor, spreadsheets, slideshows, diagrams, drawings, databases and equations")
 taskRecipes+=("installLibreOffice")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installLibreOffice()
@@ -385,6 +425,7 @@ taskNames+=("Install LibreOffice Writer")
 taskMessages+=("Processing LibreOffice Writer")
 taskDescriptions+=("Install just the LibreOffice word processor")
 taskRecipes+=("installLibreOfficeWriter")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installLibreOfficeWriter()
@@ -396,6 +437,7 @@ taskNames+=("Install LibreOffice Impress")
 taskMessages+=("Processing LibreOffice Impress")
 taskDescriptions+=("Install just the LibreOffice slide show editor")
 taskRecipes+=("installLibreOfficeImpress")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installLibreOfficeImpress()
@@ -407,6 +449,7 @@ taskNames+=("Install LibreOffice Spreadsheet")
 taskMessages+=("Processing LibreOffice Spreadsheet")
 taskDescriptions+=("Install just the LibreOffice spreadsheet editor")
 taskRecipes+=("installLibreOfficeSpreadsheet")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installLibreOfficeSpreadsheet()
@@ -418,6 +461,7 @@ taskNames+=("Install LibreOffice Draw")
 taskMessages+=("Processing LibreOffice Draw")
 taskDescriptions+=("Install just the LibreOffice drawing editor")
 taskRecipes+=("installLibreOfficeDraw")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installLibreOfficeDraw()
@@ -429,6 +473,7 @@ taskNames+=("Install LibreOffice Base")
 taskMessages+=("Processing LibreOffice Base")
 taskDescriptions+=("Install just the LibreOffice database manager")
 taskRecipes+=("installLibreOfficeBase")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installLibreOfficeBase()
@@ -440,6 +485,7 @@ taskNames+=("Install LibreOffice Math")
 taskMessages+=("Processing LibreOffice Math")
 taskDescriptions+=("Install just the LibreOffice equation editor")
 taskRecipes+=("installLibreOfficeMath")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installLibreOfficeMath()
@@ -451,6 +497,7 @@ taskNames+=("Install Evince")
 taskMessages+=("Processing Evince")
 taskDescriptions+=("A document viewer with support for PDF, Postscript, djvu, tiff, dvi, XPS and SyncTex")
 taskRecipes+=("installEvince")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installEvince()
@@ -462,6 +509,7 @@ taskNames+=("Install Master PDF Editor")
 taskMessages+=("Processing Master PDF Editor")
 taskDescriptions+=("A convenient and smart PDF editor for Linux")
 taskRecipes+=("installMasterPDF")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installMasterPDF()
@@ -477,6 +525,7 @@ taskNames+=("Install Jabref")
 taskMessages+=("Processing Jabref")
 taskDescriptions+=("A graphical editor for bibtex libraries")
 taskRecipes+=("installJabref")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installJabref()
@@ -488,6 +537,7 @@ taskNames+=("Install TexMaker")
 taskMessages+=("Processing TexMaker")
 taskDescriptions+=("A LateX development environment")
 taskRecipes+=("installTexMaker")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installTexMaker()
@@ -499,6 +549,7 @@ taskNames+=("Install DiffPdf")
 taskMessages+=("Processing DiffPdf")
 taskDescriptions+=("Tool to compare PDF files")
 taskRecipes+=("installDiffPdf")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installDiffPdf()
@@ -531,6 +582,7 @@ taskNames+=("Install 0 A.D.")
 taskMessages+=("Processing 0 A.D.")
 taskDescriptions+=("0 A.D. is a game of ancient warfare, similar to Age of Empires")
 taskRecipes+=("install0AD")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 install0AD()
@@ -542,6 +594,7 @@ taskNames+=("Install Wine")
 taskMessages+=("Processing Wine")
 taskDescriptions+=("A tool to install Windows software on Linux")
 taskRecipes+=("installWine")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installWine()
@@ -561,6 +614,7 @@ taskNames+=("Install PlayOnLinux")
 taskMessages+=("Processing PlayOnLinux")
 taskDescriptions+=("A tool to install Windows games on Linux")
 taskRecipes+=("installPlayOnLinux")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installPlayOnLinux()
@@ -572,6 +626,7 @@ taskNames+=("Install Disk utility")
 taskMessages+=("Processing Disk utility")
 taskDescriptions+=("A tool to manage your drives")
 taskRecipes+=("installDiskUtility")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installDiskUtility()
@@ -583,6 +638,7 @@ taskNames+=("Install GParted")
 taskMessages+=("Processing GParted")
 taskDescriptions+=("A tool to make partitions in your hard drives")
 taskRecipes+=("installGParted")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installGParted()
@@ -594,6 +650,7 @@ taskNames+=("Install MenuLibre")
 taskMessages+=("Processing MenuLibre")
 taskDescriptions+=("Add or remove applications from your menu")
 taskRecipes+=("installMenuLibre")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installMenuLibre()
@@ -605,6 +662,7 @@ taskNames+=("Install Seahorse")
 taskMessages+=("Processing Seahorse")
 taskDescriptions+=("Manage your passwords")
 taskRecipes+=("installSeahorse")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installSeahorse()
@@ -616,6 +674,7 @@ taskNames+=("Install Duplicity")
 taskMessages+=("Processing Duplicity")
 taskDescriptions+=("Keep your files safe by making automatic backups")
 taskRecipes+=("installDuplicity")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installDuplicity()
@@ -627,6 +686,7 @@ taskNames+=("Install UNetbootin")
 taskMessages+=("Processing UNetbootin")
 taskDescriptions+=("Tool for creating Live USB drives")
 taskRecipes+=("installUNetbootin")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installUNetbootin()
@@ -638,6 +698,7 @@ taskNames+=("Install EncFS")
 taskMessages+=("Processing EncFS")
 taskDescriptions+=("Create and manage encrypted folders to keep your files safe")
 taskRecipes+=("installEncFS")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installEncFS()
@@ -650,6 +711,7 @@ taskNames+=("Install FileZilla")
 taskMessages+=("Processing FileZilla")
 taskDescriptions+=("Download and upload files via FTP, FTPS and SFTP")
 taskRecipes+=("installFileZilla")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installFileZilla()
@@ -661,6 +723,7 @@ taskNames+=("Install utilities bundle")
 taskMessages+=("Processing utilities bundle")
 taskDescriptions+=("Java, zip, rar and exfat tools")
 taskRecipes+=("installUtilities")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installUtilities()
@@ -672,6 +735,7 @@ taskNames+=("Install Glipper")
 taskMessages+=("Processing Glipper")
 taskDescriptions+=("Gnome clipboard manager")
 taskRecipes+=("installGlipper")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installGlipper()
@@ -683,6 +747,7 @@ taskNames+=("Install developer bundle")
 taskMessages+=("Processing developer bundle")
 taskDescriptions+=("Tools for developers: build-essential, cmake, git, svn, java, python, octave, autotools...")
 taskRecipes+=("installDevBundle")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installDevBundle()
@@ -694,6 +759,7 @@ taskNames+=("Install Boost libraries")
 taskMessages+=("Processing Boost")
 taskDescriptions+=("Boost C++ libraries")
 taskRecipes+=("installBoost")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installBoost()
@@ -705,6 +771,7 @@ taskNames+=("Install CodeLite")
 taskMessages+=("Processing CodeLite")
 taskDescriptions+=("A C/C++, PHP and JavaScript IDE for developers")
 taskRecipes+=("installCodeLite")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installCodeLite()
@@ -718,6 +785,7 @@ taskNames+=("Install Visual Studio Code")
 taskMessages+=("Processing Visual Studio Code")
 taskDescriptions+=("A source code editor developed by Microsoft")
 taskRecipes+=("installVSCode")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installVSCode()
@@ -733,6 +801,7 @@ taskNames+=("Install Atom")
 taskMessages+=("Processing Atom")
 taskDescriptions+=("A hackable text editor")
 taskRecipes+=("installAtom")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installAtom()
@@ -745,6 +814,7 @@ taskNames+=("Install Arduino")
 taskMessages+=("Processing Arduino")
 taskDescriptions+=("The official IDE for the Arduino board")
 taskRecipes+=("installArduino")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installArduino()
@@ -764,6 +834,7 @@ taskNames+=("Install GitKraken")
 taskMessages+=("Processing GitKraken")
 taskDescriptions+=("A graphical git client from Axosoft")
 taskRecipes+=("installGitKraken")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installGitKraken()
@@ -780,6 +851,7 @@ taskNames+=("Install SmartGit")
 taskMessages+=("Processing SmartGit")
 taskDescriptions+=("A graphical git client from Syntevo")
 taskRecipes+=("installSmartGit")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installSmartGit()
@@ -791,6 +863,7 @@ taskNames+=("Install SysAdmin bundle")
 taskMessages+=("Processing SysAdmin bundle")
 taskDescriptions+=("Tools for sysadmins: tmux, cron, screen, ncdu, htop, aptitude, apache, etckeeper, xpra and dconf-editor")
 taskRecipes+=("installSysAdminBundle")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installSysAdminBundle()
@@ -802,6 +875,7 @@ taskNames+=("Install Exodus")
 taskMessages+=("Processing Exodus")
 taskDescriptions+=("A blockchain wallet")
 taskRecipes+=("installExodus")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installExodus()
@@ -819,6 +893,7 @@ taskNames+=("Install Delta")
 taskMessages+=("Processing Delta")
 taskDescriptions+=("A cryptocurrency portfolio tracker")
 taskRecipes+=("installDelta")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installDelta()
@@ -852,6 +927,7 @@ taskNames+=("Install Discord")
 taskMessages+=("Processing Discord")
 taskDescriptions+=("Gaming voice/chat service")
 taskRecipes+=("installDiscord")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installDiscord()
@@ -868,6 +944,7 @@ taskNames+=("Install Tux Guitar")
 taskMessages+=("Processing Tux Guitar")
 taskDescriptions+=("A tablature editor")
 taskRecipes+=("installTuxGuitar")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installTuxGuitar()
@@ -879,6 +956,7 @@ taskNames+=("Install Ukuu")
 taskMessages+=("Processing Ukuu")
 taskDescriptions+=("A kernel update tool")
 taskRecipes+=("installUkuu")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installUkuu()
@@ -891,6 +969,7 @@ taskNames+=("Install Gnome System Monitor")
 taskMessages+=("Processing Gnome System Monitor")
 taskDescriptions+=("A system resource usage monitor")
 taskRecipes+=("installSystemMonitor")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installSystemMonitor()
@@ -902,6 +981,7 @@ taskNames+=("Install ANoise")
 taskMessages+=("Processing ANoise")
 taskDescriptions+=("An ambient music player")
 taskRecipes+=("installANoise")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installANoise()
@@ -914,6 +994,7 @@ taskNames+=("Install Minetest")
 taskMessages+=("Processing Minetest")
 taskDescriptions+=("A Minecraft clone")
 taskRecipes+=("installMinetest")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installMinetest()
@@ -926,6 +1007,7 @@ taskNames+=("Install Typora")
 taskMessages+=("Processing Typora")
 taskDescriptions+=("A minimalist text editor")
 taskRecipes+=("installTypora")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installTypora()
@@ -939,6 +1021,7 @@ taskNames+=("Install Kdenlive")
 taskMessages+=("Processing Kdenlive")
 taskDescriptions+=("A video editing suite")
 taskRecipes+=("installKdenlive")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installKdenlive()
@@ -950,6 +1033,7 @@ taskNames+=("Install Openshot")
 taskMessages+=("Processing Openshot")
 taskDescriptions+=("A video editor")
 taskRecipes+=("installOpenshot")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installOpenshot()
@@ -962,6 +1046,7 @@ taskNames+=("Install Retroarch")
 taskMessages+=("Processing Retroarch")
 taskDescriptions+=("A retro games emulator frontend")
 taskRecipes+=("installRetroarch")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installRetroarch()
@@ -974,6 +1059,7 @@ taskNames+=("Install Ulauncher")
 taskMessages+=("Processing Ulauncher")
 taskDescriptions+=("Application launcher for Linux")
 taskRecipes+=("installUlauncher")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installUlauncher()
@@ -986,6 +1072,7 @@ taskNames+=("Install Wireshark")
 taskMessages+=("Processing Wireshark")
 taskDescriptions+=("A network traffic analyzer")
 taskRecipes+=("installWireshark")
+taskPostInstallations+=("")
 taskSelectedList+=("FALSE")
 
 installWireshark()
@@ -1000,6 +1087,7 @@ installWireshark()
 # taskMessages+=("<Task message>")
 # taskDescriptions+=("<Task description>")
 # taskRecipes+=("<Task recipe function>")
+# taskPostInstallations+=("<Task post-installation function>")
 # taskSelectedList+=("Task boolean value")
 
 # Then, uncomment them and:
@@ -1008,8 +1096,12 @@ installWireshark()
 # Replace <Task message> with the message that will be displayed while.
 # performing the task, i.e. "Upgrading the system" .
 # Replace <Task description> with the new task's description.
-# Replace <Task recipe function> with the function name which will contain .
+# Replace <Task recipe function> with the function name which will contain
 # the necessary commands to perform the task and write that function. Do NOT use sudo in it.
+# Replace <Task post-installation function> with the function name which will contain
+# the necessary commands to execute after installation and write that function. Do NOT use sudo in it.
+# If you don't need anything to be run after installatio, just leave the function blank
+# or use taskPostInstallations+=("")
 # Replace <Task boolean value> with TRUE of FALSE to make this task to be marked by default.
 #------------------------------------------------------------------------------
 # END OF TASK LIST ############################################################
@@ -1222,6 +1314,25 @@ main()
       echo -e "PACKAGE_ERRORS_HAPPENED\n" >> $errorLog
     fi
 
+    # Run post-installation tasks
+    echo "# Running post-installation tasks..."
+
+    for i in "${!taskNames[@]}"; do
+      if [[ $tasks == *"${taskNames[i]}"* ]]; then
+
+        if $debug; then
+          ${taskPostInstallations[$i]} &>> $debugLog
+        else
+          ${taskPostInstallations[$i]} 2>&1
+        fi
+
+        if [[ $? -ne 0 ]]; then
+          errors=true
+        fi
+
+      fi
+    done
+
     if $errors ; then
       echo -e "SOME_ERRORS_HAPPENED\n" >> $errorLog
       echo "# Some tasks ended with errors"
@@ -1323,10 +1434,11 @@ installPackage()
 }
 
 
-processPackages()
+function processPackages()
 {
-  apt-get update
-  apt-get -y upgrade
+  if $updateSystem; then
+    apt-get -y upgrade
+  fi
 
   # Install only packages that are not installed already
   packageList=""
