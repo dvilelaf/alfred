@@ -1179,8 +1179,8 @@ function main()
   # Get system info
   OSarch=$(uname -m)
   OSname=$(lsb_release -si)
-  OSversion=$(lsb_release -sr)
-  OScodeName=$(lsb_release -sc)
+  #OSversion=$(lsb_release -sr)
+  #OScodeName=$(lsb_release -sc)
   OSbaseCodeName=$(lsb_release -scu)
   lang=$(locale | grep LANGUAGE | cut -d= -f2 | cut -d_ -f1)
 
