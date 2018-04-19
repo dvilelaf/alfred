@@ -933,7 +933,7 @@ taskPostInstallations+=("postrEFInd")
 taskSelectedList+=("FALSE")
 
 installrEFInd()
- {
+{
   addRepo "ppa:rodsmith/refind"
   addPackage "refind"
 }
