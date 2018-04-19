@@ -1285,60 +1285,30 @@ function main()
   chown $SUDO_USER:$SUDO_USER $errorLog
   chown $SUDO_USER:$SUDO_USER $debugLog
 
-  # Perform all tasks and show progress in a progress bar
-  ntasks=$(( $(echo "$tasks" | grep -o "\," | wc -l) + 1 ))
-  taskpercentage=$((100 / $ntasks))
-
+  # Perform all tasks
   (
-    progress=0
     errors=false
 
     for i in ${!taskNames[@]}; do
       if [[ $tasks == *"${taskNames[i]}"* ]]; then
-        echo -e "# ${taskMessages[$i]}..."
 
-        outputMsg=$(
-                      set -e
+        echo -e "# Processing recipes...[${taskMessages[i]}]"
 
-                      if $debug; then
-                        ${taskRecipes[$i]} &>> $debugLog
-                      else
-                        ${taskRecipes[$i]} 2>&1
-                      fi
-                   )
+        echo -e "--------------------------------------------------------------------------------------------------\n" >> $errorLog
+        echo -e "RECIPE ${taskNames[$i]}\n" >> $errorLog
+
+        if $debug; then
+          ${taskRecipes[$i]} &>> $debugLog
+        else
+          ${taskRecipes[$i]} 2>&1
+        fi
 
         if [[ $? -ne 0 ]]; then
-          echo -e "RECIPE "${taskNames[$i]}"\n" >> $errorLog
-          echo -e "$outputMsg" >> $errorLog
-          echo -e "--------------------------------------------------------------------------------------------------\n" >> $errorLog
           errors=true
         fi
 
-        progress=$(( $progress + $taskpercentage ))
-        echo $progress
       fi
     done
-
-    if $errors ; then
-      echo -e "RECIPE_ERRORS_HAPPENED\n" >> $errorLog
-    fi
-  ) |
-  zenity --progress \
-         --no-cancel \
-         --auto-close \
-         --title="Alfred" \
-         --text="Processing all tasks" \
-         --percentage=0 \
-         --height 100 \
-         --width 500
-
-  # Add repos and install packages
-  (
-    errors=false
-
-    if [[ $(tail -1 $errorLog) == "RECIPE_ERRORS_HAPPENED" ]]; then
-      errors=true
-    fi
 
     # Add repos
     echo "# Adding repositories..."
@@ -1395,26 +1365,19 @@ function main()
       fi
     else
       echo "# All tasks completed succesfully"
-      if $(testPackage libnotify-bin); then
-        notify-send -i utilities-terminal Alfred "All tasks completed succesfully"
+      if $(checkPackage libnotify-bin); then
+        su "$SUDO_USER" -c 'notify-send -i utilities-terminal Alfred "All tasks completed succesfully"'
       fi
     fi
-
   ) |
   zenity --progress \
-         --no-cancel \
          --pulsate \
-         --title "Alfred"
-         --text "Installing packages" \
+         --no-cancel \
+         --title="Alfred" \
+         --text="Processing all tasks" \
+         --percentage=0 \
          --height 100 \
          --width 500
-
-  # Notify errors
-  if [[ $? != 0 ]]; then
-    zenity --error --title="Alfred"\
-           --text="An unexpected error occurred. Some tasks may not have been performed."
-    exit 1
-  fi
 
   # Show error list from the error log
   errors=false
@@ -1436,13 +1399,13 @@ function main()
       fi
     done <<< "$(tail -n $startLine $errorLog)" # Use the error log only from startLine to the end
 
-    if [[ ${#errorList[@]} > 0 ]]; then
+    if [[ ${#errorList[@]} -gt 0 ]]; then
 
       message="The following tasks ended with errors and could not be completed:"
 
-      selected=$(zenity --list --height 500 --width 500 --title="Alfred" \
-                        --text="$message" \
-                        --hide-header --column "Tasks with errors" "${errorList[@]}")
+      zenity --list --height 500 --width 500 --title="Alfred" \
+             --text="$message" \
+             --hide-header --column "Tasks with errors" "${errorList[@]}"
 
       message="Please notify the following error log at https://github.com/derkomai/alfred/issues\n"
       message+="-------------------------------------------------------------"
