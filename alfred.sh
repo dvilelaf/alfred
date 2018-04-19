@@ -1415,8 +1415,9 @@ function main()
       message+="-------------------------------------------------------------"
       message+="---------------------------------------------------------\n\n"
 
-      echo -e $message"$(tail -n $startLine $errorLog)" |
-      zenity --text-info --height 700 --width 800 --title="Alfred"
+      echo -e "$message$(tail -n "$startLine" "$errorLog")" |
+      zenity --text-info --height 700 --width 800 --title="Alfred" 
+      
     fi
   fi
 }
