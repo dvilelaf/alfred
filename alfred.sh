@@ -1111,6 +1111,8 @@ taskSelectedList+=("FALSE")
 
 installWireshark()
 {
+  echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections
+  DEBIAN_FRONTEND=noninteractive
   addPackage "wireshark"
 }
 #------------------------------------------------------------------------------
