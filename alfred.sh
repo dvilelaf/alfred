@@ -119,11 +119,16 @@ taskSelectedList+=("FALSE")
 
 installOpera()
 {
+  echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
+
   if [[ $OSarch == "x86_64" ]]; then
-    installPackage "https://download1.operacdn.com/pub/opera/desktop/52.0.2871.40/linux/opera-stable_52.0.2871.40_amd64.deb"
+    wget -O /tmp/opera.deb "https://download1.operacdn.com/pub/opera/desktop/52.0.2871.40/linux/opera-stable_52.0.2871.40_amd64.deb"
   else
-    installPackage "https://download1.operacdn.com/pub/opera/desktop/52.0.2871.40/linux/opera-stable_52.0.2871.40_i386.deb"
+    wget -O /tmp/opera.deb "https://download1.operacdn.com/pub/opera/desktop/52.0.2871.40/linux/opera-stable_52.0.2871.40_i386.deb"
   fi
+  
+  DEBIAN_FRONTEND=noninteractive dpkg -i /tmp/opera.deb # Needs dpkg and variable set to avoid prompt
+  rm /tmp/opera.deb
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Transmission")
