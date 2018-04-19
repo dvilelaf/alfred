@@ -1089,6 +1089,19 @@ installUlauncher()
   addPackage "ulauncher"
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install Jumpapp")
+taskMessages+=("Processing Jumpapp")
+taskDescriptions+=("Application switcher for Linux")
+taskRecipes+=("installJumpapp")
+taskPostInstallations+=("")
+taskSelectedList+=("FALSE")
+
+installJumpapp()
+{
+  addRepo "ppa:mkropat/ppa"
+  addPackage "jumpapp"
+}
+#------------------------------------------------------------------------------
 taskNames+=("Install Wireshark")
 taskMessages+=("Processing Wireshark")
 taskDescriptions+=("A network traffic analyzer")
