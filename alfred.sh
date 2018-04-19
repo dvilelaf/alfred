@@ -1458,7 +1458,20 @@ function main()
 
 function packageIsInstalled()
 {
-  dpkg-query -l $1 &> /dev/null
+  LANG=C
+  apt-cache policy "$1" | grep "Installed: (none)" &> /dev/null
+
+  if [[ $? == 0 ]]; then
+    echo false
+  else
+    echo true
+  fi
+}
+
+
+function packageExists()
+{
+  dpkg -l "$1" &> /dev/null
 
   if [[ $? == 0 ]]; then
     echo true
@@ -1469,6 +1482,16 @@ function packageIsInstalled()
 
 
 function checkPackage()
+{
+    if $(packageExists $1) && $(packageIsInstalled "$1"); then
+        echo true
+    else
+        echo false
+    fi
+}
+
+
+function addPackage()
 {
   packages+=" $1"
 }
