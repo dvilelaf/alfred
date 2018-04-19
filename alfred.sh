@@ -1146,6 +1146,24 @@ installWireshark()
 # Main function
 function main()
 {
+  # Check that the recipe arrays are well formed
+
+  if [[ ${#taskNames[@]} -ne ${#taskMessages[@]} ]] ||
+     [[ ${#taskMessages[@]} -ne ${#taskDescriptions[@]} ]] || 
+     [[ ${#taskDescriptions[@]} -ne ${#taskRecipes[@]} ]] || 
+     [[ ${#taskRecipes[@]} -ne ${#taskPostInstallations[@]} ]] ||
+     [[ ${#taskPostInstallations[@]} -ne ${#taskSelectedList[@]} ]] ; then
+
+    if ! checkPackage zenity; then
+      echo "There is an error in the some recipe. Array lengths do not match. Please check your recipes."
+    else
+      zenity --error --title="Alfred" --text="There is an error in the some recipe. Array lengths do not match. Please check your recipes."
+    fi
+
+    exit 1
+  fi
+
+
   # Test that this is Ubuntu or an Ubuntu derivative
   grep -Fxq "ID_LIKE=ubuntu" /etc/os-release
 
