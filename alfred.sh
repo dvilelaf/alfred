@@ -1168,7 +1168,7 @@ function main()
   grep -Fxq "ID_LIKE=ubuntu" /etc/os-release
 
   if [[ $? -ne 0 ]]; then
-    if ! $(testPackage zenity); then
+    if ! $(checkPackage zenity); then
       echo "This is not an Ubuntu or Ubuntu derivative distro. You can't run Alfred in this system."
     else
       zenity --error --title="Alfred" --text="This is not an Ubuntu or Ubuntu derivative distro. You can't run Alfred in this system."
@@ -1189,7 +1189,7 @@ function main()
   lock=$(fuser /var/lib/dpkg/lock)
 
   if [ ! -z "$lock" ]; then
-    if ! $(testPackage zenity); then
+    if ! $(checkPackage zenity); then
       echo "Another program is installing or updating packages. Please wait until this process finishes and then launch Alfred again."
     else
       zenity --error --title="Alfred" --text="Another program is installing or updating packages. Please wait until this process finishes and then launch Alfred again."
@@ -1202,7 +1202,7 @@ function main()
 
 
   # Check if Zenity package is installed
-  if ! $(testPackage zenity); then
+  if ! $(checkPackage zenity); then
     installPackage "zenity"
   fi
 
@@ -1510,14 +1510,16 @@ function processPackages()
 
 function getRepoList()
 {
+function addRepo()
+{
   repos+=($1)
 }
 
 
 function installRepo()
 {
-  if ! $(testPackage "software-properties-common"); then
-    installPackage software-properties-common
+  if ! $(checkPackage "software-properties-common"); then
+    installPackage "software-properties-common"
   fi
 
   add-apt-repository -y $1
@@ -1526,7 +1528,8 @@ function installRepo()
 
 function processRepos()
 {
-  if ! $(testPackage "software-properties-common"); then
+  # Ensure ppa adding capability
+  if ! $(checkPackage "software-properties-common"); then
     installPackage "software-properties-common"
   fi
 
