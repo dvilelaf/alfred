@@ -1200,6 +1200,10 @@ function main()
   # Repair installation interruptions
   dpkg --configure -a
 
+  # Get list of already added repos
+  installedRepos=()
+  getRepoList
+
 
   # Check if Zenity package is installed
   if ! $(checkPackage zenity); then
