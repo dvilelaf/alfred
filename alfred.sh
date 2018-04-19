@@ -398,6 +398,19 @@ installBlender()
   addPackage "blender"
 }
 #------------------------------------------------------------------------------
+taskNames+=("Install Freecad")
+taskMessages+=("Processing Freecad")
+taskDescriptions+=("An open-source parametric 3D modeler")
+taskRecipes+=("installFreecad")
+taskPostInstallations+=("")
+taskSelectedList+=("FALSE")
+
+installFreecad()
+{
+  addRepo "ppa:freecad-maintainers/freecad-stable"
+  addPackage "freecad"
+}
+#------------------------------------------------------------------------------
 taskNames+=("Install LeoCad")
 taskMessages+=("Processing LeoCad")
 taskDescriptions+=("Virtual LEGO CAD software")
