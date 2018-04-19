@@ -1144,7 +1144,7 @@ installWireshark()
 #------------------------------------------------------------------------------
 
 # Main function
-main()
+function main()
 {
   # Test that this is Ubuntu or an Ubuntu derivative
   grep -Fxq "ID_LIKE=ubuntu" /etc/os-release
@@ -1438,7 +1438,7 @@ main()
 # End of main function
 
 
-testPackage()
+function packageIsInstalled()
 {
   dpkg-query -l $1 &> /dev/null
 
@@ -1450,13 +1450,13 @@ testPackage()
 }
 
 
-addPackage()
+function checkPackage()
 {
   packages+=" $1"
 }
 
 
-installPackage()
+function installPackage()
 {
   for arg in $@; do
     if [[ "$arg" == "http"*".deb" ]]; then
@@ -1490,13 +1490,13 @@ function processPackages()
 }
 
 
-addRepo()
+function getRepoList()
 {
   repos+=($1)
 }
 
 
-installRepo()
+function installRepo()
 {
   if ! $(testPackage "software-properties-common"); then
     installPackage software-properties-common
@@ -1506,7 +1506,7 @@ installRepo()
 }
 
 
-processRepos()
+function processRepos()
 {
   if ! $(testPackage "software-properties-common"); then
     installPackage "software-properties-common"
@@ -1518,7 +1518,7 @@ processRepos()
 }
 
 
-getPassword()
+function getPassword()
 {
   sudo -k
 
