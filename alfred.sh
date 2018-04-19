@@ -169,7 +169,7 @@ installDropbox()
         wget -O /tmp/dropbox.tar.gz "https://www.dropbox.com/download?plat=lnx.x86"
     fi
 
-    tar -xvzf /tmp/dropbox.tar.gz -C /home/$SUDO_USER
+    tar -xvzf /tmp/dropbox.tar.gz -C /home/"$SUDO_USER"
     /.dropbox-dist/dropboxd
   fi
 }
@@ -228,22 +228,22 @@ installTelegram()
   tar -xf /tmp/telegram.tar.xz -C /opt
 
   chmod +x /opt/Telegram/Telegram
-  chown -R $SUDO_USER:$SUDO_USER /opt/Telegram/
+  chown -R "$SUDO_USER:$SUDO_USER" /opt/Telegram/
 
   wget -q -o /opt/Telegram/icon.png https://desktop.telegram.org/img/td_logo.png
 
   desktopFile="/home/$SUDO_USER/.local/share/applications/telegram.desktop"
 
-  echo "[Desktop Entry]" > $desktopFile
-  echo "Name=Telegram" >> $desktopFile
-  echo "GenericName=Chat" >> $desktopFile
-  echo "Comment=Chat with yours friends" >> $desktopFile
-  echo "Exec=/opt/Telegram/Telegram" >> $desktopFile
-  echo "Terminal=false" >> $desktopFile
-  echo "Type=Application" >> $desktopFile
-  echo "Icon=/opt/Telegram/icon.png" >> $desktopFile
-  echo "Categories=Network;Chat;" >> $desktopFile
-  echo "StartupNotify=false" >> $desktopFile
+  echo "[Desktop Entry]" > "$desktopFile"
+  echo "Name=Telegram" >> "$desktopFile"
+  echo "GenericName=Chat" >> "$desktopFile"
+  echo "Comment=Chat with yours friends" >> "$desktopFile"
+  echo "Exec=/opt/Telegram/Telegram" >> "$desktopFile"
+  echo "Terminal=false" >> "$desktopFile"
+  echo "Type=Application" >> "$desktopFile"
+  echo "Icon=/opt/Telegram/icon.png" >> "$desktopFile"
+  echo "Categories=Network;Chat;" >> "$desktopFile"
+  echo "StartupNotify=false" >> "$desktopFile"
 }
 #------------------------------------------------------------------------------
 taskNames+=("Install Slack")
@@ -425,7 +425,7 @@ installLeoCad()
   installPackage "unzip"
 
   wget -q -O /tmp/ldraw.zip http://www.ldraw.org/library/updates/complete.zip
-  unzip /tmp/ldraw.zip -d /home/$SUDO_USER
+  unzip /tmp/ldraw.zip -d /home/"$SUDO_USER"
 
   addPackage "leocad"
 }
@@ -593,9 +593,9 @@ installSteam()
 
 postSteam()
 {
-  cd $HOME/.steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu
+  cd "$HOME"/.steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu
   mv libstdc++.so.6 libstdc++.so.6.bak
-  cd $HOME/.steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu
+  cd "$HOME"/.steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu
   mv libstdc++.so.6 libstdc++.so.6.bak
 }
 #------------------------------------------------------------------------------
@@ -906,7 +906,7 @@ installExodus()
   installPackage "unzip"
   unzip /tmp/Exodus.zip -d /opt/Exodus/
 
-  chown -R $SUDO_USER:$SUDO_USER /opt/Exodus/
+  chown -R "$SUDO_USER":"$SUDO_USER" /opt/Exodus/
   #FIXME: install desktop file
 }
 #------------------------------------------------------------------------------
@@ -919,8 +919,8 @@ taskSelectedList+=("FALSE")
 
 installDelta()
 {
-  wget -q -O /home/$SUDO_USER/Delta.AppImage https://static-assets.getdelta.io/desktop_app/Delta-0.9.2-x86_64.AppImage
-  chmod +x /home/$SUDO_USER/Delta.AppImage
+  wget -q -O /home/"$SUDO_USER"/Delta.AppImage https://static-assets.getdelta.io/desktop_app/Delta-0.9.2-x86_64.AppImage
+  chmod +x /home/"$SUDO_USER"/Delta.AppImage
   #FIXME: message the user to execute it
   #bash --rcfile <(echo '. ~/.bashrc; some_command')
 }
@@ -1248,7 +1248,7 @@ function main()
     fi
 
     # Save selected tasks
-    for i in ${!taskNames[@]}; do
+    for i in "${!taskNames[@]}"; do
       if [[ $tasks == *"${taskNames[i]}"* ]]; then
         taskSelectedList[$i]="TRUE"
       else
@@ -1282,14 +1282,14 @@ function main()
     echo -e "$logHeader" >> $debugLog
   fi
 
-  chown $SUDO_USER:$SUDO_USER $errorLog
-  chown $SUDO_USER:$SUDO_USER $debugLog
+  chown "$SUDO_USER":"$SUDO_USER" $errorLog
+  chown "$SUDO_USER":"$SUDO_USER" $debugLog
 
   # Perform all tasks
   (
     errors=false
 
-    for i in ${!taskNames[@]}; do
+    for i in "${!taskNames[@]}"; do
       if [[ $tasks == *"${taskNames[i]}"* ]]; then
 
         echo -e "# Processing recipes...[${taskMessages[i]}]"
@@ -1392,12 +1392,12 @@ function main()
     startLine=$(tac $errorLog | grep -n -m1 "NEW SESSION" | cut -d: -f1)
 
     while read line; do
-      firstword=$(echo $line | cut -d' ' -f1)
+      firstword=$(echo "$line" | cut -d' ' -f1)
 
       if [[ "$firstword" == "RECIPE" ]]; then # If line starts with RECIPE
           errorList+=("${line/RECIPE /}")
       fi
-    done <<< "$(tail -n $startLine $errorLog)" # Use the error log only from startLine to the end
+    done <<< "$(tail -n "$startLine" "$errorLog")" # Use the error log only from startLine to the end
 
     if [[ ${#errorList[@]} -gt 0 ]]; then
 
@@ -1462,13 +1462,13 @@ function addPackage()
 
 function installPackage()
 {
-  for arg in $@; do
+  for arg in "$@"; do
     if [[ "$arg" == "http"*".deb" ]]; then
-      wget -q -O /tmp/package.deb $arg
+      wget -q -O /tmp/package.deb "$arg"
       apt-get -y install /tmp/package.deb
       rm /tmp/package.deb
     else
-      apt-get -y install $arg
+      apt-get -y install "$arg"
     fi
   done
 }
@@ -1484,7 +1484,7 @@ function processPackages()
   packageList=""
 
   for package in $packages; do
-      if ! $(testPackage $package); then
+      if ! $(checkPackage "$package"); then
           packageList+=" $package"
       fi
   done
@@ -1531,7 +1531,7 @@ function installRepo()
     installPackage "software-properties-common"
   fi
 
-  add-apt-repository -y $1
+  add-apt-repository -y "$1"
 }
 
 
@@ -1542,7 +1542,7 @@ function processRepos()
     installPackage "software-properties-common"
   fi
 
-  for repo in ${repos[@]}; do
+  for repo in "${repos[@]}"; do
     if ! checkRepo "$repo"; then
       add-apt-repository -y "$repo"
     fi
@@ -1565,10 +1565,10 @@ function getPassword()
     fi
 
     # Check for correct password
-    myid=$(echo $password | sudo -S id -u)
+    myid=$(echo "$password" | sudo -S id -u)
 
     if [[ $? == 0 ]] && [[ $myid == 0 ]]; then
-      echo $password
+      echo "$password"
       return 0
     else
         zenity --info --title="Alfred" --text="Wrong password, try again"
@@ -1586,7 +1586,7 @@ else
     password=$(getPassword)
 
     if [[ $? == 0 ]]; then
-      echo $password | sudo -S "$0"
+      echo "$password" | sudo -S "$0"
     else
       exit 0
     fi
