@@ -80,7 +80,7 @@ installChrome()
       installPackage "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
   else
       >&2 echo "Your system is not supported by Google Chrome"
-      return -1
+      return 1
   fi
 }
 #------------------------------------------------------------------------------
@@ -849,7 +849,7 @@ installGitKraken()
     installPackage "https://release.gitkraken.com/linux/gitkraken-amd64.deb"
   else
     >&2 echo "Your system is not supported by Gitkraken"
-    return -1
+    return 1
   fi
 }
 #------------------------------------------------------------------------------
@@ -942,7 +942,7 @@ installDiscord()
     installPackage "https://dl.discordapp.net/apps/linux/0.0.4/discord-0.0.4.deb"
   else
     >&2 echo "Your system is not supported by Gitkraken"
-    return -1
+    return 1
   fi
 }
 #------------------------------------------------------------------------------
