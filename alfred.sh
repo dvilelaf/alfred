@@ -1173,7 +1173,7 @@ function main()
     else
       zenity --error --title="Alfred" --text="This is not an Ubuntu or Ubuntu derivative distro. You can't run Alfred in this system."
     fi
-    exit 0
+    exit 1
   fi
 
   # Get system info
