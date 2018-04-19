@@ -1548,7 +1548,7 @@ function getPassword()
 
     # Check for closed window / cancel button
     if [[ $? == 1 ]]; then
-      return -1
+      return 1
     fi
 
     # Check for correct password
