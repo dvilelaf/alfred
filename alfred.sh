@@ -1296,7 +1296,7 @@ function main()
     for i in "${!taskNames[@]}"; do
       if [[ $tasks == *"${taskNames[i]}"* ]]; then
 
-        echo -e "# Processing recipes...[${taskMessages[i]}]"
+        echo -e "# Processing recipes... [${taskMessages[i]}]"
 
         echo -e "--------------------------------------------------------------------------------------------------\n" >> $errorLog
         echo -e "RECIPE ${taskNames[$i]}\n" >> $errorLog
