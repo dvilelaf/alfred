@@ -151,7 +151,7 @@ class Zenity:
                                    stdout=subprocess.PIPE, 
                                    stderr=subprocess.PIPE)
 
-        def update(percent=0, message=''):
+        def update(message='', percent=0):
 
             process.stdin.write((str(percent) + '\n').encode())
             process.stdin.flush()
@@ -448,94 +448,115 @@ class Alfred:
         # Create progress bar
         updateBar = Zenity.progressBar(pulsating=True, 
                                        noCancel=True, 
-                                       title='Alfred', 
+                                       title='Alfred',
                                        text='Processing tasks')
 
-        # Ensure software-properties-common is installed
-        if len(ppas) > 0 and not checkPackage('software-properties-common'):
-            self.checkAndLogCmd(runCmd(['apt', 'install', 'software-properties-common']))
+        try:
 
-        # Ensure snapd is installed
-        if (len(snaps) > 0 or len(snapsWithOptions) > 0) and not checkPackage('snapd'):
-            self.checkAndLogCmd(runCmd(['apt', 'install', 'snapd']))
+            # Ensure software-properties-common is installed
+            if len(ppas) > 0 and not checkPackage('software-properties-common'):
+                self.checkAndLogCmd(runCmd(['apt', 'install', 'software-properties-common']))
 
-        # Ensure libnotify-bin is installed
-        if not checkPackage('libnotify-bin'):
-            self.checkAndLogCmd(runCmd(['apt', 'install', 'libnotify-bin']))
+            # Ensure snapd is installed
+            if (len(snaps) > 0 or len(snapsWithOptions) > 0) and not checkPackage('snapd'):
+                self.checkAndLogCmd(runCmd(['apt', 'install', 'snapd']))
 
-        # Process ppas
-        updateBar(0, 'Processing PPAs')
-        for ppa in ppas:
-            self.checkAndLogCmd(runCmd(['add-apt-repository', '-y', ppa]))
+            # Ensure libnotify-bin is installed
+            if not checkPackage('libnotify-bin'):
+                self.checkAndLogCmd(runCmd(['apt', 'install', 'libnotify-bin']))
 
-        # Update
-        updateBar(0, 'Updating package list')
-        self.checkAndLogCmd(runCmd(['apt', 'update']))
+            # Process ppas
+            if len(ppas) > 0:
+                updateBar('Processing PPAs')
+                for ppa in ppas:
+                    self.checkAndLogCmd(runCmd(['add-apt-repository', '-y', ppa]))
 
-        # Process packages
-        if len(packages) > 0:
-            updateBar(0, 'Installing packages')
-            self.checkAndLogCmd(runCmd(['apt', 'install', '-y'].extend(packages)))
+            # Update
+            if len(packages) > 0 or len(ppas) > 0:
+                updateBar('Updating package list')
+                self.checkAndLogCmd(runCmd(['apt', 'update']))
 
-        # Process snaps
-        updateBar(0, 'Installing snaps')
-        if len(snaps) > 0:
-            self.checkAndLogCmd(runCmd(['snap', 'install'].extend(snaps)))
+            # Process packages
+            if len(packages) > 0:
+                updateBar('Installing packages')
+                cmd = ['apt', 'install', '-y']
+                cmd.extend(packages)
+                self.checkAndLogCmd(runCmd(cmd))
 
-        # Process snaps with options
-        for snap in snapsWithOptions:
-            self.checkAndLogCmd(runCmd(['snap', 'install'].extend(snap)))
+            # Process snaps
+            if len(snaps) > 0:
+                updateBar('Installing snaps')
+                cmd = ['snap', 'install']
+                cmd.extend(snaps)
+                self.checkAndLogCmd(runCmd(cmd))
 
-        # Process debs
-        updateBar(0, 'Processing debs')
-        for deb in debs:
-            self.checkAndLogCmd(runCmd(['wget', '-q', '-O', '/tmp/package.deb', deb]))
-            self.checkAndLogCmd(runCmd(['apt', 'install', '-y', '/tmp/package.deb']))
+            # Process snaps with options
+            for snap in snapsWithOptions:
+                cmd = ['snap', 'install']
+                cmd.extend(snap)
+                self.checkAndLogCmd(runCmd(cmd))
 
-        # Process generics
-        updateBar(0, 'Processing generics')
-        for cmds in generics:
-            self.checkAndLogCmd(runCmd(cmds))
+            # Process debs
+            if len(debs) > 0:
+                updateBar('Processing debs')
+                for deb in debs:
+                    self.checkAndLogCmd(runCmd(['wget', '-q', '-O', '/tmp/package.deb', deb]))
+                    self.checkAndLogCmd(runCmd(['apt', 'install', '-y', '/tmp/package.deb']))
 
-        # Run post-installation tasks
-        updateBar(0, 'Processing PPAs')
-        for i in self.taskList:
-            if 'post' in self.recipes[i]:
-                self.checkAndLogCmd(runCmd(self.recipes[i]['post']))
+            # Process generics
+            if len(generics) > 0:
+                updateBar('Processing generics')
+                for cmds in generics:
+                    self.checkAndLogCmd(runCmd(cmds))
 
-        # Autoremove
-        self.checkAndLogCmd(runCmd(['apt', 'autoremove', '-y']))
+            # Run post-installation tasks
+            updateBar('Processing post-installation tasks')
+            for i in self.taskList:
+                if 'post' in self.recipes[i]:
+                    self.checkAndLogCmd(runCmd(self.recipes[i]['post']))
 
-        # Check errors and notify
-        if len(self.errors) == 0:
-            message = 'All tasks completed succesfully'
-        else:
-            message = 'Some tasks ended with errors'
+            # Autoremove
+            self.checkAndLogCmd(runCmd(['apt', 'autoremove', '-y']))
 
-        notify(message)
-        updateBar(message)
+            # Check errors and notify
+            if len(self.errors) == 0:
+                message = 'All tasks completed succesfully'
+            else:
+                message = 'Some tasks ended with errors'
 
-        if len(self.errors) > 0:
-            Zenity.list('The following tasks ended with errors and could not be completed:', self.errors)
-            Zenity.textInfo('Please notify the following error log at https://github.com/derkomai/alfred/issues\n\n' + self.log)
+            notify(message)
+            updateBar(message)
 
-        # Write log and change permissions
-        with open(self.logFile, 'a') as f:
-            f.write(self.log)
+            if len(self.errors) > 0:
+                Zenity.list('The following tasks ended with errors and could not be completed:', self.errors)
+                Zenity.textInfo('Please notify the following error log at https://github.com/derkomai/alfred/issues\n\n' + self.log)
 
-            sudoUser = os.environ['SUDO_USER']
-            runCmd(['chown', '{}:{}'.format(sudoUser, sudoUser), self.logFile])
+        finally:
+
+            # Write log and change ownership
+            with open(self.logFile, 'a') as f:
+                f.write(self.log)
+
+                sudoUser = os.environ['SUDO_USER']
+                runCmd(['chown', '{}:{}'.format(sudoUser, sudoUser), self.logFile])
+
 
 
     def checkAndLogCmd(self, cmd):
-        
-        if not cmd.succeeded:
-            log = 100 * '-' + '\n' 
-            log += '<ERRORED COMMAND>: ' + cmd.cmd + '\n'
-            log += '<STDOUT>:\n' + cmd.stdout + '\n\n'
-            log += '<STDERR>:\n' + cmd.stderr
-            self.log += log
+
+        log = 100 * '-' + '\n' 
+
+        if cmd.succeeded:
+            log += '<COMMAND (SUCCESS)>: ' + cmd.cmd + '\n'
+        else:
+            log += '<COMMAND (ERROR)>: ' + cmd.cmd + '\n'
             self.errors.append(cmd.cmd)
+
+        log += '<STDOUT>:\n' + cmd.stdout + '\n'
+        log += '<STDERR>:\n' + cmd.stderr
+        self.log += log
+        
+
 
 
 
