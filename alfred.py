@@ -141,7 +141,7 @@ class Zenity:
             args.append('--no-cancel')
 
         args.append('--title={}'.format(title))
-        args.append('--text="{}"'.format(text))
+        args.append('--text={}'.format(text))
         args.append('--percentage={}'.format(percentage))
         args.append('--height={}'.format(height))
         args.append('--width={}'.format(width))
