@@ -103,7 +103,7 @@ class Zenity:
 
         while True:
 
-            getPasswordCmd = runCmd(['zenity', '--password', '--title="Alfred"'])
+            getPasswordCmd = runCmd(['zenity', '--password', '--title=Alfred'])
 
             if getPasswordCmd.succeeded:
 
@@ -119,8 +119,8 @@ class Zenity:
                     runCmd(['zenity', 
                             '--info', 
                             '--width=200', 
-                            '--title="Alfred"', 
-                            '--text="Wrong password, try again"'])
+                            '--title=Alfred', 
+                            '--text=Wrong password, try again'])
 
             else:
 
@@ -130,7 +130,7 @@ class Zenity:
     @staticmethod
     def progressBar(pulsating=False, noCancel=False, title='', text='', percentage=0, height=100, width=500):
 
-        args = ['zenity', '--progress', '--auto-close']
+        args = ['zenity', '--progress']
 
         if pulsating:
             args.append('--pulsate')
@@ -138,7 +138,7 @@ class Zenity:
         if noCancel:
             args.append('--no-cancel')
 
-        args.append('--title="{}"'.format(title))
+        args.append('--title={}'.format(title))
         args.append('--text="{}"'.format(text))
         args.append('--percentage={}'.format(percentage))
         args.append('--height={}'.format(height))
@@ -259,7 +259,7 @@ class Alfred:
         # Check distro
         supportedDistro = False
 
-        with open("/etc/os-release",'r') as f:
+        with open('/etc/os-release','r') as f:
             lines = f.readlines()
 
             for line in lines:
@@ -296,7 +296,7 @@ class Alfred:
         lock = runCmd(['fuser', '/var/lib/dpkg/lock'])
 
         if lock.stdout != '':
-            message = "Another program is installing or updating packages. Please wait until this process finishes and then launch Alfred again."
+            message = 'Another program is installing or updating packages. Please wait until this process finishes and then launch Alfred again.'
 
             if zenity:
                 Zenity.error(message)
@@ -309,7 +309,7 @@ class Alfred:
         ping = runCmd(['ping', '-c', '1', 'google.com'])
 
         if not ping.succeeded:
-            message = "There is no connection to the Internet. Please connect and then launch Alfred again."
+            message = 'There is no connection to the Internet. Please connect and then launch Alfred again.'
 
             if zenity:
                 Zenity.error(message)
@@ -331,7 +331,7 @@ class Alfred:
             with open('recipes.json','r') as f:
                 self.recipes = json.load(f)
         else:
-            url = "https://raw.githubusercontent.com/derkomai/alfred/master/recipes.json"
+            url = 'https://raw.githubusercontent.com/derkomai/alfred/master/recipes.json'
             jsonData = urllib.request.urlopen(url).read().decode('utf-8')
             self.recipes = json.loads(jsonData)
 
