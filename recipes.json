@@ -1,0 +1,402 @@
+[
+    {
+        "name": "System update",
+        "description": "Install the latest version of all your software",
+        "selected": false,
+        "type": "generic",
+        "recipe": ["apt", "-y", "upgrade"]
+    },
+    {
+        "name": "Automatic drivers",
+        "description": "Install drivers that are appropriate for automatic installation",
+        "selected": false,
+        "type": "generic",
+        "recipe": ["ubuntu-drivers", "autoinstall"]
+    },
+    {
+        "name": "Java, Flash and codecs",
+        "description": "Install non-open-source packages like Java, Flash plugin, Unrar, and some audio and video codecs like MP3/AVI/MPEG",
+        "selected": false,
+        "type": "package",
+        "recipe": "ubuntu-restricted-extras"
+    },
+    {
+        "name": "Google Chrome",
+        "description": "The web browser from Google",
+        "selected": false,
+        "type": "deb",
+        "recipe": ["https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"]
+    },
+    {
+        "name": "Chromium",
+        "description": "The open-source web browser providing the code for Google Chrome",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["chromium"]
+    },
+    {
+        "name": "Firefox",
+        "description": "The web browser from Mozilla",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["firefox"]
+    },
+    {
+        "name": "Opera",
+        "description": "Just another web browser",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["opera"]
+    },
+    {
+        "name": "Transmission",
+        "description": "A light bittorrent download client",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:transmissionbt/ppa", "transmission-gtk"]
+    },
+    {
+        "name": "Dropbox",
+        "description": "A cloud hosting service to store your files online",
+        "selected": false,
+        "type": "deb",
+        "recipe": ["https://linux.dropbox.com/packages/ubuntu/dropbox_2019.01.31_amd64.deb"]
+    },
+    {
+        "name": "VirtualBox",
+        "description": "A virtualization software to run other OSes on top of your current OS",
+        "selected": false,
+        "type": "package",
+        "recipe": ["virtualbox"]
+    },
+    {
+        "name": "Skype",
+        "description": "A videocall software from Microsoft",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["skype"]
+    },
+    {
+        "name": "Thunderbird",
+        "description": "A mail client from Mozilla",
+        "selected": false,
+        "type": "package",
+        "recipe": ["thunderbird"]
+    },
+    {
+        "name": "Mailspring",
+        "description": "A beautiful mail client",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["mailspring"]
+    },
+    {
+        "name": "Telegram",
+        "description": "A messenger application",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["telegram"]
+    },
+    {
+        "name": "Slack",
+        "description": "A team communication application",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["slack", "--classic"]
+    },
+    {
+        "name": "VLC",
+        "description": "The most famous multimedia player",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["vlc"]
+    },
+    {
+        "name": "Kazam",
+        "description": "A tool to record your screen and take screenshots",
+        "selected": false,
+        "type": "package",
+        "recipe": ["kazam"]
+    },
+    {
+        "name": "Handbrake",
+        "description": "A video transcoder",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:stebbins/handbrake-releases", "handbrake-gtk", "handbrake-cli"]
+    },
+    {
+        "name": "Spotify",
+        "description": "One of the best music streaming apps",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["spotify"]
+    },
+    {
+        "name": "Audacity",
+        "description": "Record and edit audio files",
+        "selected": false,
+        "type": "package",
+        "recipe": ["audacity"]
+    },
+    {
+        "name": "Soundconverter",
+        "description": "Audio file converter",
+        "selected": false,
+        "type": "package",
+        "recipe": ["soundconverter"]
+    },
+    {
+        "name": "Mixxx",
+        "description": "A MP3 DJ mixing software",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:mixxx/mixxx", "mixxx"]
+    },
+    {
+        "name": "LMMS",
+        "description": "Music production for everyone: loops, synthesizers, mixer...",
+        "selected": false,
+        "type": "package",
+        "recipe": ["lmms"]
+    },
+    {
+        "name": "Gimp",
+        "description": "An image editor",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["gimp"]
+    },
+    {
+        "name": "Inkscape",
+        "description": "Create and edit scalable vectorial images",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["inkscape"]
+    },
+    {
+        "name": "Blender",
+        "description": "3D modelling, animation, rendering and production",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["blender", "--classic"]
+    },
+    {
+        "name": "Freecad",
+        "description": "An open-source parametric 3D modeler",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:freecad-maintainers/freecad-stable", "freecad"]
+    },
+    {
+        "name": "LibreOffice",
+        "description": "A complete office suite: word processor, spreadsheets, slideshows, drawings and more",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["libreoffice"]
+    },
+    {
+        "name": "Evince",
+        "description": "A document viewer with support for PDF and more",
+        "selected": false,
+        "type": "package",
+        "recipe": ["evince"]
+    },
+    {
+        "name": "TexStudio",
+        "description": "An integrated writing environment for creating LaTeX documents",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:sunderme/texstudio", "texstudio"]
+    },
+    {
+        "name": "Diffpdf",
+        "description": "A tool to compare PDF files",
+        "selected": false,
+        "type": "package",
+        "recipe": ["diffpdf"]
+    },
+    {
+        "name": "Steam",
+        "description": "A videogame platform",
+        "selected": false,
+        "type": "deb",
+        "recipe": ["http://repo.steampowered.com/steam/archive/precise/steam_latest.deb"]
+    },
+    {
+        "name": "0 A.D.",
+        "description": "A game of ancient warfare, similar to Age of Empires",
+        "selected": false,
+        "type": "package",
+        "recipe": ["0ad"]
+    },
+    {
+        "name": "PlayOnLinux",
+        "description": "A tool to install Windows games on Linux",
+        "selected": false,
+        "type": "package",
+        "recipe": ["playonlinux"]
+    },
+    {
+        "name": "Disk utility",
+        "description": "A tool to manage your drives",
+        "selected": false,
+        "type": "package",
+        "recipe": ["gnome-disk-utility"]
+    },
+    {
+        "name": "GParted",
+        "description": "A tool to make partitions in your hard drives",
+        "selected": false,
+        "type": "package",
+        "recipe": ["gparted"]
+    },
+    {
+        "name": "MenuLibre",
+        "description": "Add or remove applications from your menu",
+        "selected": false,
+        "type": "package",
+        "recipe": ["menulibre"]
+    },
+    {
+        "name": "Seahorse",
+        "description": "Manage your passwords",
+        "selected": false,
+        "type": "package",
+        "recipe": ["seahorse"]
+    },
+    {
+        "name": "EncFS manager",
+        "description": "Create and manage encrypted folders to keep your files safe",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:gencfsm", "gnome-encfs-manager"]
+    },
+    {
+        "name": "FileZilla",
+        "description": "Download and upload files via FTP, FTPS and SFTP",
+        "selected": false,
+        "type": "package",
+        "recipe": ["filezilla"]
+    },
+    {
+        "name": "Utilities bundle",
+        "description": "Java, zip, rar and exfat tools",
+        "selected": false,
+        "type": "package",
+        "recipe": ["icedtea-8-plugin", "openjdk-8-jre", "p7zip", "rar", "exfat-fuse", "exfat-utils"]
+    },
+    {
+        "name": "Developer bundle",
+        "description": "Tools for developers: build-essential, cmake, git, svn, java, python, octave, autotools...",
+        "selected": false,
+        "type": "package",
+        "recipe": ["build-essential", "cmake", "cmake-gui", "cmake-curses-gui", "python3", "octave", "gfortran", "git", "git-svn", "subversion", "kdiff3", "colordiff", "openjdk-8-jdk", "autoconf", "autotools-dev", "cppcheck"]
+    },
+    {
+        "name": "Visual Studio Code",
+        "description": "A source code editor developed by Microsoft",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["vscode", "--classic"]
+    },
+    {
+        "name": "Atom",
+        "description": "A hackable text editor",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:webupd8team/atom", "atom"]
+    },
+    {
+        "name": "Android Studio",
+        "description": "The IDE for Android",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["android-studio", "--classic"]
+    },
+    {
+        "name": "GitKraken",
+        "description": "A graphical git client from Axosoft",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["gitkraken"]
+    },
+    {
+        "name": "rEFInd",
+        "description": "An EFI boot manager",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:rodsmith/refind", "refind"],
+        "post": ["refind-install"]
+    },
+    {
+        "name": "Discord",
+        "description": "A gaming voice/chat service",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["discord"]
+    },
+    {
+        "name": "Tux Guitar",
+        "description": "A tablature editor",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["tuxguitar-vs"]
+    },
+    {
+        "name": "Ukuu",
+        "description": "A kernel update tool",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:teejee2008/ppa", "ukuu"]
+    },
+    {
+        "name": "Gnome System Monitor",
+        "description": "A system resource usage monitor",
+        "selected": false,
+        "type": "package",
+        "recipe": ["gnome-system-monitor"]
+    },
+    {
+        "name": "ANoise",
+        "description": "An ambient music player",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:costales/anoise", "anoise"]
+    },
+    {
+        "name": "Minetest",
+        "description": "A Minecraft clone",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:minetestdevs/stable", "minetest"]
+    },
+    {
+        "name": "Openshot",
+        "description": "A video editor",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:openshot.developers/ppa", "openshot-qt"]
+    },
+    {
+        "name": "Retroarch",
+        "description": "A retro games emulator frontend",
+        "selected": false,
+        "type": "snap",
+        "recipe": ["retroarch"]
+    },
+    {
+        "name": "Ulauncher",
+        "description": "Application launcher for Linux",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:agornostal/ulauncher", "ulauncher"]
+    },
+    {
+        "name": "Jumpapp",
+        "description": "Application switcher for Linux",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:mkropat/ppa", "jumpapp"]
+    }
+]
