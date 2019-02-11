@@ -521,7 +521,7 @@ class Alfred:
         with open(self.logFile, 'a') as f:
             f.write(self.log)
 
-            sudoUser = runCmd(['echo', '$SUDO_USER']).stdout
+            sudoUser = os.environ['SUDO_USER']
             runCmd(['chown', '{}:{}'.format(sudoUser, sudoUser), self.logFile])
 
 
