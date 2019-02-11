@@ -280,8 +280,6 @@ class Alfred:
         # Check architecture
         arch = runCmd(['uname', '-m'])
 
-        print(arch.stdout)
-
         if arch.stdout != 'x86_64\n':
             message = "This is not a 64-bit system. You can't run Alfred on this system."
 
