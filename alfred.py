@@ -251,8 +251,8 @@ class Alfred:
         self.logFile = '/tmp/Alfred.log'
         self.log = 100 * '=' + '\n'
         self.log += 'NEW SESSION ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n'
-        self.log += runCmd(['lsb_release', '-d']).stdout + '\n'
-        self.log += runCmd(['uname', '-a']).stdout + '\n'
+        self.log += runCmd(['lsb_release', '-d']).stdout
+        self.log += runCmd(['uname', '-a']).stdout
         self.errors = []
 
         # Check Zenity package
