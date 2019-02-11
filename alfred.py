@@ -60,9 +60,11 @@ class runCmd:
             self.succeeded = True
 
 
-def checkPackage(name):
+def checkPackage(package):
 
-    if runCmd(['dpkg', '-s', name]).succeeded:
+    cmd = runCmd(['dpkg', '-s', package])
+
+    if cmd.succeeded and 'Status: install ok installed' in cmd.stdout:
         return True
     else:
         return False
