@@ -428,7 +428,7 @@ class Alfred:
 
             elif self.recipes[i]['type'] == 'deb':
 
-                debs.append(self.recipes[i]['recipe'])
+                debs.append(self.recipes[i]['recipe'][0])
 
             elif self.recipes[i]['type'] == 'generic':
 
