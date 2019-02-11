@@ -95,7 +95,7 @@
         "description": "A messenger application",
         "selected": false,
         "type": "snap",
-        "recipe": ["telegram"]
+        "recipe": ["telegram-desktop"]
     },
     {
         "name": "Slack",
