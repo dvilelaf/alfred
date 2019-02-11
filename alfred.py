@@ -473,7 +473,6 @@ class Alfred:
         # Process packages
         if len(packages) > 0:
             updateBar(0, 'Installing packages')
-            print(packages)
             self.checkAndLogCmd(runCmd(['apt', 'install', '-y'].extend(packages)))
 
         # Process snaps
