@@ -471,12 +471,15 @@ class Alfred:
         self.checkAndLogCmd(runCmd(['apt', 'update']))
 
         # Process packages
-        updateBar(0, 'Installing packages')
-        self.checkAndLogCmd(runCmd(['apt', 'install', '-y'].extend(packages)))
+        if len(packages) > 0:
+            updateBar(0, 'Installing packages')
+            print(packages)
+            self.checkAndLogCmd(runCmd(['apt', 'install', '-y'].extend(packages)))
 
         # Process snaps
         updateBar(0, 'Installing snaps')
-        self.checkAndLogCmd(runCmd(['snap', 'install'].extend(snaps)))
+        if len(snaps) > 0:
+            self.checkAndLogCmd(runCmd(['snap', 'install'].extend(snaps)))
 
         # Process snaps with options
         for snap in snapsWithOptions:
