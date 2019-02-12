@@ -529,7 +529,7 @@ class Alfred:
             if len(self.errors) == 0:
                 message = "All tasks completed succesfully.\n\nIf you can't find some of the installed apps, reboot your computer."
             else:
-                message = 'Some tasks ended with errors'
+                message = 'Some tasks ended with errors.'
 
             notify(message)
             updateBar(message)
