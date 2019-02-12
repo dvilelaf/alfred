@@ -280,7 +280,7 @@ class Alfred:
             sys.exit()
 
         # Check architecture
-        arch = runCmd(['uname', '-m'])
+        arch = self.checkAndLogCmd(runCmd(['uname', '-m']))
 
         if arch.stdout != 'x86_64\n':
             message = "This is not a 64-bit system. You can't run Alfred on this system."
@@ -293,7 +293,7 @@ class Alfred:
             sys.exit()
 
         # Check /var/lib/dpkg/lock to ensure we can install packages
-        lock = runCmd(['fuser', '/var/lib/dpkg/lock'])
+        lock = self.checkAndLogCmd(runCmd(['fuser', '/var/lib/dpkg/lock']))
 
         if lock.stdout != '':
             message = 'Another program is installing or updating packages. Please wait until this process finishes and then launch Alfred again.'
@@ -306,7 +306,7 @@ class Alfred:
             sys.exit()
 
         # Check connectivity
-        ping = runCmd(['ping', '-c', '1', 'google.com'])
+        ping = self.checkAndLogCmd(runCmd(['ping', '-c', '1', 'google.com']))
 
         if not ping.succeeded:
             message = 'There is no connection to the Internet. Please connect and then launch Alfred again.'
@@ -317,14 +317,14 @@ class Alfred:
                 print(message)
 
         # Repair installation interruptions
-        runCmd(['dpkg', '--configure', '-a'])
+        self.checkAndLogCmd(runCmd(['dpkg', '--configure', '-a']))
 
         # Get repositories
         self.repoList = getRepoList()
 
         # Install Zenity if needed
         if not zenity:
-            runCmd(['apt', 'install', 'zenity'])
+            self.checkAndLogCmd(runCmd(['apt', 'install', 'zenity']))
 
         # Load recipes
         if localRecipes:
@@ -555,6 +555,8 @@ class Alfred:
         log += '<STDOUT>:\n' + cmd.stdout + '\n'
         log += '<STDERR>:\n' + cmd.stderr
         self.log += log
+
+        return cmd
         
 
 
