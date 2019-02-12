@@ -296,7 +296,7 @@ class Alfred:
             sys.exit()
 
         # Check /var/lib/dpkg/lock to ensure we can install packages
-        lock = self.checkAndLogCmd(runCmd(['fuser', '/var/lib/dpkg/lock']))
+        lock = runCmd(['fuser', '/var/lib/dpkg/lock'])
 
         if lock.stdout != '':
             message = 'Another program is installing or updating packages. Please wait until this process finishes and then launch Alfred again.'
