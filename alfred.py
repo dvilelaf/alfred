@@ -506,10 +506,12 @@ class Alfred:
                 self.checkAndLogCmd(runCmd(cmd))
 
             # Process snaps with options
-            for snap in snapsWithOptions:
-                cmd = ['snap', 'install']
-                cmd.extend(snap)
-                self.checkAndLogCmd(runCmd(cmd))
+            if len(snapsWithOptions) > 0:
+                updateBar('Installing snaps')
+                for snap in snapsWithOptions:
+                    cmd = ['snap', 'install']
+                    cmd.extend(snap)
+                    self.checkAndLogCmd(runCmd(cmd))
 
             # Process debs
             if len(debs) > 0:
