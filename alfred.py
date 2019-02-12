@@ -234,15 +234,18 @@ class Zenity:
     @staticmethod
     def list(message, elements):
 
-        runCmd(['zenity',
+        cmd = ['zenity',
                 '--list',
                 '--height=500',
                 '--width=500',
                 '--title=Alfred',
                 '--text={}'.format(message),
                 '--hide-header', 
-                '--column', 'Tasks with errors',
-                elements])
+                '--column', 'Tasks with errors']
+
+        cmd.extend(elements)
+        runCmd(cmd)
+
 
 class Alfred:
 
