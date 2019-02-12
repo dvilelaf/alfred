@@ -1,10 +1,10 @@
 [
     {
-        "name": "System update",
+        "name": "Update packages",
         "description": "Install the latest version of all your software",
         "selected": false,
         "type": "generic",
-        "recipe": ["apt", "-y", "upgrade"]
+        "recipe": ["apt", "upgrade", "-y"]
     },
     {
         "name": "Automatic drivers",
