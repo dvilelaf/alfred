@@ -54,6 +54,15 @@ class runCmd:
             self.stdout = e.stdout.decode("utf-8")
             self.stderr = e.stderr.decode("utf-8")
 
+        except Exception as e:
+
+            self.succeeded = False
+            self.stdout = ''
+            if hasattr(e, 'message'):
+                self.stderr = e.message
+            else:
+                self.stderr = str(e)
+
         else:
 
             self.returncode = 0
