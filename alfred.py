@@ -327,7 +327,7 @@ class Alfred:
 
         # Install Zenity if needed
         if not zenity:
-            self.checkAndLogCmd(runCmd(['apt', 'install', 'zenity']))
+            self.checkAndLogCmd(runCmd(['apt', 'install', '-y', 'zenity']))
 
         # Load recipes
         if localRecipes:
@@ -459,17 +459,17 @@ class Alfred:
             # Ensure software-properties-common is installed
             if len(ppas) > 0 and not checkPackage('software-properties-common'):
                 updateBar('Installing software-properties-common')
-                self.checkAndLogCmd(runCmd(['apt', 'install', 'software-properties-common']))
+                self.checkAndLogCmd(runCmd(['apt', 'install', '-y', 'software-properties-common']))
 
             # Ensure snapd is installed
             if (len(snaps) > 0 or len(snapsWithOptions) > 0) and not checkPackage('snapd'):
                 updateBar('Installing snapd')
-                self.checkAndLogCmd(runCmd(['apt', 'install', 'snapd']))
+                self.checkAndLogCmd(runCmd(['apt', 'install', '-y', 'snapd']))
 
             # Ensure libnotify-bin is installed
             if not checkPackage('libnotify-bin'):
                 updateBar('Installing libnotify-bin')
-                self.checkAndLogCmd(runCmd(['apt', 'install', 'libnotify-bin']))
+                self.checkAndLogCmd(runCmd(['apt', 'install', '-y', 'libnotify-bin']))
 
             # Process ppas
             if len(ppas) > 0:
