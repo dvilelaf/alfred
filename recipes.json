@@ -18,7 +18,7 @@
         "description": "Install non-open-source packages like Java, Flash plugin, Unrar, and some audio and video codecs like MP3/AVI/MPEG",
         "selected": false,
         "type": "package",
-        "recipe": "ubuntu-restricted-extras"
+        "recipe": ["ubuntu-restricted-extras"]
     },
     {
         "name": "Google Chrome",
