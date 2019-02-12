@@ -453,7 +453,7 @@ class Alfred:
                 ppas.pop(i)
 
         # Skip already installed packages
-        for i in range(len(packages)):
+        for i in reversed(range(len(packages))):
             if checkPackage(packages[i]):
                 packages.pop(i)
 
