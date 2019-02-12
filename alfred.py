@@ -536,7 +536,7 @@ class Alfred:
 
             # Check errors and notify
             if len(self.errors) == 0:
-                message = "All tasks completed succesfully.\n\nIf you can't find some of the installed apps, reboot your computer."
+                message = "All tasks completed succesfully. If you can't find some of the installed apps, reboot your computer."
             else:
                 message = 'Some tasks ended with errors.'
 
@@ -545,7 +545,7 @@ class Alfred:
 
             if len(self.errors) > 0:
                 Zenity.list('The following tasks ended with errors and could not be completed:', self.errors)
-                Zenity.textInfo('Please notify the following error log at https://github.com/derkomai/alfred/issues\n\n' + self.log)
+                Zenity.textInfo('Ooops, some errors happened (sorry about that).\n\nTo help us improve Alfred, please copy the following error log and open a new issue with it at https://github.com/derkomai/alfred/issues\n\n' + self.log)
 
         finally:
 
@@ -574,8 +574,6 @@ class Alfred:
 
         return cmd
         
-
-
 
 
 if __name__ == '__main__':
