@@ -455,14 +455,17 @@ class Alfred:
 
             # Ensure software-properties-common is installed
             if len(ppas) > 0 and not checkPackage('software-properties-common'):
+                updateBar('Installing software-properties-common')
                 self.checkAndLogCmd(runCmd(['apt', 'install', 'software-properties-common']))
 
             # Ensure snapd is installed
             if (len(snaps) > 0 or len(snapsWithOptions) > 0) and not checkPackage('snapd'):
+                updateBar('Installing snapd')
                 self.checkAndLogCmd(runCmd(['apt', 'install', 'snapd']))
 
             # Ensure libnotify-bin is installed
             if not checkPackage('libnotify-bin'):
+                updateBar('Installing libnotify-bin')
                 self.checkAndLogCmd(runCmd(['apt', 'install', 'libnotify-bin']))
 
             # Process ppas
@@ -516,11 +519,12 @@ class Alfred:
                     self.checkAndLogCmd(runCmd(self.recipes[i]['post']))
 
             # Autoremove
+            updateBar('Removing no longer needed packages')
             self.checkAndLogCmd(runCmd(['apt', 'autoremove', '-y']))
 
             # Check errors and notify
             if len(self.errors) == 0:
-                message = 'All tasks completed succesfully'
+                message = "All tasks completed succesfully.\n\nIf you can't find some of the installed apps, reboot your computer."
             else:
                 message = 'Some tasks ended with errors'
 
