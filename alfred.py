@@ -70,12 +70,14 @@ def runCmd(cmdArgs, stdin=None, piped=False):
 
     except subprocess.CalledProcessError as e:
 
+        cmd.succeeded = False
         cmd.returncode = e.returncode
         cmd.stdout = e.stdout.decode("utf-8")
         cmd.stderr = e.stderr.decode("utf-8")
 
     except Exception as e:
 
+        cmd.succeeded = False
         cmd.stdout = ''
         if hasattr(e, 'message'):
             cmd.stderr = e.message
