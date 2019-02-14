@@ -37,11 +37,12 @@ def runCmd(cmdArgs, stdin=None, piped=False):
 
     if piped:
 
-        if len(cmdArgs) > 1:
+        if len(cmdArgs) > 2:
             return runCmd(cmdArgs[-1], stdin=runCmd(cmdArgs[:-1], piped=True).stdout)
 
-        else:
-            cmdArgs = cmdArgs[0]
+        elif len(cmdArgs) == 2:
+            return runCmd(cmdArgs[1], stdin=runCmd(cmdArgs[0], piped=False).stdout)
+
 
     cmd = Cmd(cmdArgs, stdin)
 
