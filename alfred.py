@@ -8,65 +8,83 @@ import json
 import re
 from datetime import datetime
 
+class Cmd:
 
-class runCmd:
+    def __init__(self, cmdArgs, stdin=None):
 
-    def __init__(self, cmd, stdin=None):
-
-        self.stdin = None
+        self.cmd = ' '.join(cmdArgs)
+        self.cmdArgs = cmdArgs
+        self.stdin = stdin
         self.stdout = None
         self.stderr = None
-        self.cmd = ' '.join(cmd)
+        self.returncode = None
+        self.succeeded = None
 
         if stdin and type(stdin) is str:
-            stdin = str.encode(stdin)
+            self.stdin = str.encode(stdin)
 
-        try:
 
-            if stdin:
+def runCmd(cmdArgs, stdin=None, piped=False):
 
-                self.stdin = stdin
+    if len(cmdArgs) == 1 and '|' in cmdArgs[0]:
 
-                result = subprocess.run(cmd,
-                                        input=stdin,
-                                        stdout=subprocess.PIPE,
-                                        stderr=subprocess.PIPE,
-                                        #capture_output=True,
-                                        check=True)
+        args = [ i.strip().split(' ') for i in cmdArgs[0].split('|') ]
+        return runCmd(args, piped=True)
 
-            else:
+    if piped:
 
-                self.stdin = None
+        if len(cmdArgs) > 1:
+            return runCmd(cmdArgs[-1], stdin=runCmd(cmdArgs[:-1], piped=True).stdout)
 
-                result = subprocess.run(cmd,
-                                        stdout=subprocess.PIPE,
-                                        stderr=subprocess.PIPE,
-                                        #capture_output=True,
-                                        check=True)
+        else:
+            cmdArgs = cmdArgs[0]
 
-            self.stdout = result.stdout.decode("utf-8") #.replace('\n', '')
-            self.stderr = result.stderr.decode("utf-8") #.replace('\n', '')
+    cmd = Cmd(cmdArgs, stdin)
 
-        except subprocess.CalledProcessError as e:
+    try:
 
-            self.returncode = e.returncode
-            self.succeeded = False
-            self.stdout = e.stdout.decode("utf-8")
-            self.stderr = e.stderr.decode("utf-8")
+        if cmd.stdin:
 
-        except Exception as e:
-
-            self.succeeded = False
-            self.stdout = ''
-            if hasattr(e, 'message'):
-                self.stderr = e.message
-            else:
-                self.stderr = str(e)
+            result = subprocess.run(cmd.cmdArgs,
+                                    input=cmd.stdin,
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE,
+                                    #capture_output=True, # python 3.7
+                                    check=True)
 
         else:
 
-            self.returncode = 0
-            self.succeeded = True
+            result = subprocess.run(cmd.cmdArgs,
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE,
+                                    #capture_output=True, # python 3.7
+                                    check=True)
+
+        cmd.stdout = result.stdout.decode("utf-8")
+        cmd.stderr = result.stderr.decode("utf-8")
+
+    except subprocess.CalledProcessError as e:
+
+        cmd.returncode = e.returncode
+        cmd.stdout = e.stdout.decode("utf-8")
+        cmd.stderr = e.stderr.decode("utf-8")
+
+    except Exception as e:
+
+        cmd.stdout = ''
+        if hasattr(e, 'message'):
+            cmd.stderr = e.message
+        else:
+            cmd.stderr = str(e)
+
+    else:
+
+        cmd.returncode = 0
+        cmd.succeeded = True
+
+    finally:
+
+        return cmd
 
 
 def checkPackage(package):
