@@ -299,7 +299,8 @@
         "description": "A source code editor developed by Microsoft",
         "selected": false,
         "type": "snap",
-        "recipe": ["vscode", "--classic"]
+        "recipe": ["vscode", "--classic"],
+        "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"]
     },
     {
         "name": "Atom",
