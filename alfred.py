@@ -467,10 +467,10 @@ class Alfred:
                 generics.append(self.recipes[i]['recipe'])
 
             if 'preInstall' in self.recipes[i]:
-                preInstall.extend(self.recipes[i]['preInstall'])
+                preInstall.append(self.recipes[i]['preInstall'])
 
             if 'postInstall' in self.recipes[i]:
-                postInstall.extend(self.recipes[i]['postInstall'])
+                postInstall.append(self.recipes[i]['postInstall'])
 
 
         # Skip already installed ppas
