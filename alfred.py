@@ -420,6 +420,8 @@ class Alfred:
         snapsWithOptions = []
         debs = []
         generics = []
+        preInstall = []
+        postInstall = []
 
         for i in self.taskList:
 
@@ -445,6 +447,12 @@ class Alfred:
             elif self.recipes[i]['type'] == 'generic':
 
                 generics.append(self.recipes[i]['recipe'])
+
+            if 'preInstall' in self.recipes[i]:
+                preInstall.extend(self.recipes[i]['preInstall'])
+
+            if 'postInstall' in self.recipes[i]:
+                postInstall.extend(self.recipes[i]['postInstall'])
 
 
         # Skip already installed ppas
@@ -479,6 +487,12 @@ class Alfred:
             if not checkPackage('libnotify-bin'):
                 updateBar('Installing libnotify-bin')
                 self.checkAndLogCmd(runCmd(['apt', 'install', '-y', 'libnotify-bin']))
+
+            # Run pre-installation tasks
+            if len(preInstall) > 0:
+                updateBar('Processing pre-installation tasks')
+                for i in preInstall:
+                    self.checkAndLogCmd(runCmd(i))
 
             # Process ppas
             if len(ppas) > 0:
@@ -527,10 +541,10 @@ class Alfred:
                     self.checkAndLogCmd(runCmd(cmds))
 
             # Run post-installation tasks
-            updateBar('Processing post-installation tasks')
-            for i in self.taskList:
-                if 'post' in self.recipes[i]:
-                    self.checkAndLogCmd(runCmd(self.recipes[i]['post']))
+            if len(postInstall) > 0:
+                updateBar('Processing post-installation tasks')
+                for i in postInstall:
+                    self.checkAndLogCmd(runCmd(i))
 
             # Autoremove
             updateBar('Removing no longer needed packages')

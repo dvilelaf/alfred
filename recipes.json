@@ -328,7 +328,7 @@
         "selected": false,
         "type": "ppa",
         "recipe": ["ppa:rodsmith/refind", "refind"],
-        "post": ["refind-install"]
+        "postInstall": ["refind-install"]
     },
     {
         "name": "Discord",
