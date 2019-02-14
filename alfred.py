@@ -21,7 +21,11 @@ class Cmd:
         self.succeeded = None
 
         if stdin and type(stdin) is str:
-            self.stdin = str.encode(stdin)
+
+            if stdin[-1] == '\n':
+                self.stdin = str.encode(stdin[:-1])
+            else:
+                self.stdin = str.encode(stdin)
 
 
 def runCmd(cmdArgs, stdin=None, piped=False):
