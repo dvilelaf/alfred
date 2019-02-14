@@ -144,7 +144,7 @@ class Zenity:
             if getPasswordCmd.succeeded:
 
                 checkPasswordCmd = runCmd(['sudo', '-S', 'id', '-u'],
-                                          stdin=getPasswordCmd.stdout)
+                                          stdin=getPasswordCmd.stdout + '\n')
 
                 if checkPasswordCmd.succeeded and checkPasswordCmd.stdout.replace('\n', '') == '0':
 
