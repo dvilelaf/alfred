@@ -239,6 +239,13 @@
         "recipe": ["playonlinux"]
     },
     {
+        "name": "GameHub",
+        "description": "An unified library for all your games",
+        "selected": false,
+        "type": "ppa",
+        "recipe": ["ppa:tkashkin/gamehub", "com.github.tkashkin.gamehub"]
+    },
+    {
         "name": "Disk utility",
         "description": "A tool to manage your drives",
         "selected": false,
