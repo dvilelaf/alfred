@@ -122,9 +122,13 @@ def getRepoList():
 
     return repoList
 
+
 def notify(message):
 
-    runCmd(['notify-send', '-i', 'utilities-terminal', 'Alfred', message])
+    userID = runCmd(['id', '-u', os.environ['SUDO_USER']]).stdout.replace('\n', '')
+
+    runCmd(['sudo', '-u', os.environ['SUDO_USER'], 'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{}/bus'.format(userID), 
+            'notify-send', '-i', 'utilities-terminal', 'Alfred', message])
 
 
 class Zenity:
