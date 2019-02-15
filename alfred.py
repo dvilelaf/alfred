@@ -622,6 +622,12 @@ class Alfred:
 
 
 if __name__ == '__main__':
+
+    # Check Python version
+    if sys.version_info[0] < 3:
+
+        print('You have invoked Alfred with Python 2. Alfred must be run with Python 3.')
+        sys.exit()
     
     if os.geteuid() == 0:
 
