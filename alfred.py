@@ -221,7 +221,7 @@ class Zenity:
                 '--list',
                 '--checklist',
                 '--height=720',
-                '--width=1280',
+                '--width=1000',
                 '--title=Alfred',
                 '--text=Select tasks to perform:',
                 '--column=Selection',
