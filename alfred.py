@@ -519,38 +519,38 @@ class Alfred:
 
             # Run pre-installation tasks
             if len(preInstall) > 0:
-                updateBar('Processing pre-installation tasks')
+                updateBar('Processing pre-installation tasks (please be patient)')
                 for i in preInstall:
                     self.checkAndLogCmd(runCmd(i))
 
             # Process ppas
             if len(ppas) > 0:
-                updateBar('Processing PPAs')
+                updateBar('Processing PPAs (please be patient)')
                 for ppa in ppas:
                     self.checkAndLogCmd(runCmd(['add-apt-repository', '-y', ppa]))
 
             # Update
             if len(packages) > 0 or len(ppas) > 0:
-                updateBar('Updating package list')
+                updateBar('Updating package list (please be patient)')
                 self.checkAndLogCmd(runCmd(['apt', 'update']))
 
             # Process packages
             if len(packages) > 0:
-                updateBar('Installing packages')
+                updateBar('Installing packages (please be patient)')
                 cmd = ['apt', 'install', '-y']
                 cmd.extend(packages)
                 self.checkAndLogCmd(runCmd(cmd))
 
             # Process snaps
             if len(snaps) > 0:
-                updateBar('Installing snaps')
+                updateBar('Installing snaps (please be patient)')
                 cmd = ['snap', 'install']
                 cmd.extend(snaps)
                 self.checkAndLogCmd(runCmd(cmd))
 
             # Process snaps with options
             if len(snapsWithOptions) > 0:
-                updateBar('Installing snaps')
+                updateBar('Installing snaps (please be patient)')
                 for snap in snapsWithOptions:
                     cmd = ['snap', 'install']
                     cmd.extend(snap)
@@ -558,20 +558,20 @@ class Alfred:
 
             # Process debs
             if len(debs) > 0:
-                updateBar('Processing debs')
+                updateBar('Processing debs (please be patient)')
                 for deb in debs:
                     self.checkAndLogCmd(runCmd(['wget', '-q', '-O', '/tmp/package.deb', deb]))
                     self.checkAndLogCmd(runCmd(['apt', 'install', '-y', '/tmp/package.deb']))
 
             # Process generics
             if len(generics) > 0:
-                updateBar('Processing generics')
+                updateBar('Processing generics (please be patient)')
                 for cmds in generics:
                     self.checkAndLogCmd(runCmd(cmds))
 
             # Run post-installation tasks
             if len(postInstall) > 0:
-                updateBar('Processing post-installation tasks')
+                updateBar('Processing post-installation tasks (please be patient)')
                 for i in postInstall:
                     self.checkAndLogCmd(runCmd(i))
 
