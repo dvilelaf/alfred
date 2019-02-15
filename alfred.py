@@ -50,22 +50,43 @@ def runCmd(cmdArgs, stdin=None, piped=False):
 
         if cmd.stdin:
 
-            result = subprocess.run(cmd.cmdArgs,
-                                    input=cmd.stdin,
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE,
-                                    #capture_output=True, # python 3.7
-                                    timeout=180,
-                                    check=True)
+            if sys.version_info[1] < 7: # Add capture_output for Python version 3.7 or greater
+
+                result = subprocess.run(cmd.cmdArgs,
+                                        input=cmd.stdin,
+                                        stdout=subprocess.PIPE,
+                                        stderr=subprocess.PIPE,
+                                        timeout=180,
+                                        check=True)
+
+            else:
+
+                result = subprocess.run(cmd.cmdArgs,
+                                        input=cmd.stdin,
+                                        stdout=subprocess.PIPE,
+                                        stderr=subprocess.PIPE,
+                                        capture_output=True, # python >= 3.7
+                                        timeout=180,
+                                        check=True)
 
         else:
 
-            result = subprocess.run(cmd.cmdArgs,
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE,
-                                    #capture_output=True, # python 3.7
-                                    timeout=180,
-                                    check=True)
+            if sys.version_info[1] < 7:
+
+                result = subprocess.run(cmd.cmdArgs,
+                                        stdout=subprocess.PIPE,
+                                        stderr=subprocess.PIPE,
+                                        timeout=180,
+                                        check=True)
+
+            else:
+
+                result = subprocess.run(cmd.cmdArgs,
+                                        stdout=subprocess.PIPE,
+                                        stderr=subprocess.PIPE,
+                                        capture_output=True, # python >= 3.7
+                                        timeout=180,
+                                        check=True)
 
         cmd.stdout = result.stdout.decode("utf-8")
         cmd.stderr = result.stderr.decode("utf-8")
