@@ -336,7 +336,7 @@
         "selected": false,
         "type": "ppa",
         "recipe": ["ppa:rodsmith/refind", "refind"],
-        "preInstall": ["echo refind refind/install_to_esp boolean false | sudo debconf-set-selections"],
+        "preInstall": ["echo refind refind/install_to_esp boolean true | sudo debconf-set-selections"],
         "postInstall": ["refind-install"]
     },
     {
