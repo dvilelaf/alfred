@@ -19,7 +19,7 @@
         "selected": false,
         "type": "package",
         "recipe": ["ubuntu-restricted-extras"],
-        "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"]
+        "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections"]
     },
     {
         "name": "Google Chrome",
@@ -307,7 +307,7 @@
         "selected": false,
         "type": "snap",
         "recipe": ["vscode", "--classic"],
-        "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"]
+        "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections"]
     },
     {
         "name": "Atom",
