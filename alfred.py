@@ -66,7 +66,7 @@ def runCmd(cmdArgs, stdin=None, piped=False):
                                         input=cmd.stdin,
                                         stdout=subprocess.PIPE,
                                         stderr=subprocess.PIPE,
-                                        timeout=180,
+                                        timeout=300,
                                         check=True)
 
             else:
@@ -76,7 +76,7 @@ def runCmd(cmdArgs, stdin=None, piped=False):
                                         stdout=subprocess.PIPE,
                                         stderr=subprocess.PIPE,
                                         capture_output=True, # python >= 3.7
-                                        timeout=180,
+                                        timeout=300,
                                         check=True)
 
         else:
@@ -86,7 +86,7 @@ def runCmd(cmdArgs, stdin=None, piped=False):
                 result = subprocess.run(cmd.cmdArgs,
                                         stdout=subprocess.PIPE,
                                         stderr=subprocess.PIPE,
-                                        timeout=180,
+                                        timeout=300,
                                         check=True)
 
             else:
@@ -95,18 +95,23 @@ def runCmd(cmdArgs, stdin=None, piped=False):
                                         stdout=subprocess.PIPE,
                                         stderr=subprocess.PIPE,
                                         capture_output=True, # python >= 3.7
-                                        timeout=180,
+                                        timeout=300,
                                         check=True)
 
         cmd.stdout = result.stdout.decode("utf-8")
         cmd.stderr = result.stderr.decode("utf-8")
 
-    except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+    except subprocess.CalledProcessError as e:
 
         cmd.succeeded = False
         cmd.returncode = e.returncode
         cmd.stdout = e.stdout.decode("utf-8")
         cmd.stderr = e.stderr.decode("utf-8")
+
+    except subprocess.TimeoutExpired as e:
+
+        cmd.succeeded = False
+        cmd.stdout = 'COMMAND TIMEOUT ({}s)'.format(e.timeout)
 
     except Exception as e:
 
