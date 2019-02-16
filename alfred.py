@@ -610,9 +610,10 @@ class Alfred:
             # Process snaps
             if len(snaps) > 0:
                 updateBar('Installing snaps (please be patient)')
-                cmd = ['snap', 'install']
-                cmd.extend(snaps)
-                self.runAndLogCmd(cmd)
+                for snap in snaps: # Install one by one to avoid hanging
+                    cmd = ['snap', 'install']
+                    cmd.append(snap)
+                    self.runAndLogCmd(cmd)
 
             # Process snaps with options
             if len(snapsWithOptions) > 0:
