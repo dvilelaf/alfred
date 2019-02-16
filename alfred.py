@@ -170,6 +170,26 @@ def notify(message):
             'notify-send', '-i', 'utilities-terminal', 'Alfred', message])
 
 
+def waitForDpkgLock():
+
+    tries = 0
+
+    while True:
+
+        dpkgLock = runCmd(['fuser', '/var/lib/dpkg/lock'])
+        aptLock = runCmd(['fuser', '/var/lib/apt/lists/lock'])
+        
+        if dpkgLock.stdout != '' or aptLock.stdout !='':
+            time.sleep(3)
+            tries += 1
+
+        else:
+            return True
+
+        if tries > 10:
+            return False
+
+
 class Zenity:
 
     def __init__(self):
@@ -551,20 +571,17 @@ class Alfred:
             # Ensure software-properties-common is installed
             if len(ppas) > 0 and not checkPackage('software-properties-common'):
                 updateBar('Installing software-properties-common')
-                self.runAndLogCmd(['apt', 'install', '-y', 'software-properties-common'])
-                time.sleep(1) # Wait for /var/lock to be released
+                self.runAndLogCmd(['apt', 'install', '-y', 'software-properties-common'], checkLock=True)
 
             # Ensure snapd is installed
             if (len(snaps) > 0 or len(snapsWithOptions) > 0) and not checkPackage('snapd'):
                 updateBar('Installing snapd')
-                self.runAndLogCmd(['apt', 'install', '-y', 'snapd'])
-                time.sleep(1) # Wait for /var/lock to be released
+                self.runAndLogCmd(['apt', 'install', '-y', 'snapd'], checkLock=True)
 
             # Ensure libnotify-bin is installed
             if not checkPackage('libnotify-bin'):
                 updateBar('Installing libnotify-bin')
-                self.runAndLogCmd(r['apt', 'install', '-y', 'libnotify-bin'])
-                time.sleep(1) # Wait for /var/lock to be released
+                self.runAndLogCmd(r['apt', 'install', '-y', 'libnotify-bin'], checkLock=True)
 
             # Run pre-installation tasks
             if len(preInstall) > 0:
@@ -576,22 +593,19 @@ class Alfred:
             if len(ppas) > 0:
                 updateBar('Processing PPAs (please be patient)')
                 for ppa in ppas:
-                    self.runAndLogCmd(['add-apt-repository', '-y', ppa])
-                    time.sleep(1) # Wait for /var/lock to be released
+                    self.runAndLogCmd(['add-apt-repository', '-y', ppa], checkLock=True)
 
             # Update
             if len(packages) > 0 or len(ppas) > 0:
                 updateBar('Updating package list (please be patient)')
-                self.runAndLogCmd(['apt', 'update'])
-                time.sleep(1) # Wait for /var/lock to be released
+                self.runAndLogCmd(['apt', 'update'], checkLock=True)
 
             # Process packages
             if len(packages) > 0:
                 updateBar('Installing packages (please be patient)')
                 cmd = ['apt', 'install', '-y']
                 cmd.extend(packages)
-                self.runAndLogCmd(cmd)
-                time.sleep(1) # Wait for /var/lock to be released
+                self.runAndLogCmd(cmd, checkLock=True)
 
             # Process snaps
             if len(snaps) > 0:
@@ -613,15 +627,13 @@ class Alfred:
                 updateBar('Processing debs (please be patient)')
                 for deb in debs:
                     self.runAndLogCmd(['wget', '-q', '-O', '/tmp/package.deb', deb])
-                    self.runAndLogCmd(['apt', 'install', '-y', '/tmp/package.deb'])
-                    time.sleep(1) # Wait for /var/lock to be released
+                    self.runAndLogCmd(['apt', 'install', '-y', '/tmp/package.deb'], checkLock=True)
 
             # Process generics
             if len(generics) > 0:
                 updateBar('Processing generics (please be patient)')
                 for cmds in generics:
-                    self.runAndLogCmd(cmds)
-                    time.sleep(1) # Wait for /var/lock to be released
+                    self.runAndLogCmd(cmds, checkLock=True)
 
             # Run post-installation tasks
             if len(postInstall) > 0:
@@ -631,8 +643,7 @@ class Alfred:
 
             # Autoremove
             updateBar('Removing no longer needed packages')
-            self.runAndLogCmd(['apt', 'autoremove', '-y'])
-            time.sleep(1) # Wait for /var/lock to be released
+            self.runAndLogCmd(['apt', 'autoremove', '-y'], checkLock=True)
 
             # Check errors and notify
             if len(self.errors) == 0:
@@ -666,7 +677,17 @@ class Alfred:
 
 
 
-    def runAndLogCmd(self, cmdArgs):
+    def runAndLogCmd(self, cmdArgs, checkLock=False):
+
+        if checkLock:
+
+            if not waitForDpkgLock(): # Wait for /var/lib/dpkg/lock to be released
+
+                with open(self.logFile, 'a') as f:
+                    f.write(100 * '-' + '\n')
+                    f.write('LOCKED /var/lib/dpkg/lock or /var/lib/apt/lists/lock\n')
+                    Zenity.error('Another program is installing or updating packages. Please wait until this process finishes and then launch Alfred again.')
+                    sys.exit()
 
         with open(self.logFile, 'a') as f:
 
