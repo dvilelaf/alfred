@@ -300,7 +300,7 @@
         "description": "Tools for developers: build-essential, cmake, git, svn, java, python, octave, autotools...",
         "selected": false,
         "type": "package",
-        "recipe": ["build-essential", "cmake", "cmake-gui", "cmake-curses-gui", "python3", "octave", "gfortran", "git", "git-svn", "subversion", "kdiff3", "colordiff", "openjdk-8-jdk", "autoconf", "autotools-dev", "cppcheck"]
+        "recipe": ["build-essential", "cmake", "cmake-gui", "cmake-curses-gui", "python3", "python3-pip", "octave", "gfortran", "git", "git-svn", "subversion", "kdiff3", "colordiff", "openjdk-8-jdk", "autoconf", "autotools-dev", "cppcheck"]
     },
     {
         "name": "Visual Studio Code",
