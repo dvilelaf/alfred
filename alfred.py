@@ -588,60 +588,61 @@ class Alfred:
 
             # Run pre-installation tasks
             if len(preInstall) > 0:
-                updateBar('Processing pre-installation tasks (please be patient)')
+                updateBar('Processing pre-installation tasks')
                 for i in preInstall:
                     self.runAndLogCmd(i)
 
             # Process ppas
             if len(ppas) > 0:
-                updateBar('Processing PPAs (please be patient)')
                 for ppa in ppas:
+                    updateBar('Adding {}'.format(ppa))
                     self.runAndLogCmd(['add-apt-repository', '-y', ppa], checkLock=True)
 
             # Update
             if len(packages) > 0 or len(ppas) > 0:
-                updateBar('Updating package list (please be patient)')
+                updateBar('Updating package list')
                 self.runAndLogCmd(['apt', 'update'], checkLock=True)
 
             # Process packages
             if len(packages) > 0:
-                updateBar('Installing packages (please be patient)')
-                cmd = ['apt', 'install', '-y']
-                cmd.extend(packages)
-                self.runAndLogCmd(cmd, checkLock=True)
+                for package in packages:
+                    updateBar('Installing {}'.format(package))
+                    cmd = ['apt', 'install', '-y']
+                    cmd.append(package)
+                    self.runAndLogCmd(cmd, checkLock=True)
 
             # Process snaps
             if len(snaps) > 0:
-                updateBar('Installing snaps (please be patient)')
                 for snap in snaps: # Install one by one to avoid hanging
+                    updateBar('Installing {}'.format(snap))
                     cmd = ['snap', 'install']
                     cmd.append(snap)
                     self.runAndLogCmd(cmd)
 
             # Process snaps with options
             if len(snapsWithOptions) > 0:
-                updateBar('Installing snaps (please be patient)')
                 for snap in snapsWithOptions:
+                    updateBar('Installing {}'.format(snap[0]))
                     cmd = ['snap', 'install']
                     cmd.extend(snap)
                     self.runAndLogCmd(cmd)
 
             # Process debs
             if len(debs) > 0:
-                updateBar('Processing debs (please be patient)')
                 for deb in debs:
+                    updateBar('Installing {}'.format(deb))
                     self.runAndLogCmd(['wget', '-q', '-O', '/tmp/package.deb', deb])
                     self.runAndLogCmd(['apt', 'install', '-y', '/tmp/package.deb'], checkLock=True)
 
             # Process generics
             if len(generics) > 0:
-                updateBar('Processing generics (please be patient)')
                 for cmds in generics:
+                    updateBar('Running {}'.format(' '.join(cmds)))
                     self.runAndLogCmd(cmds, checkLock=True)
 
             # Run post-installation tasks
             if len(postInstall) > 0:
-                updateBar('Processing post-installation tasks (please be patient)')
+                updateBar('Processing post-installation tasks')
                 for i in postInstall:
                     self.runAndLogCmd(i)
 
