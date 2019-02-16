@@ -669,15 +669,16 @@ class Alfred:
                             break
 
                 Zenity.list('The following tasks ended with errors and could not be completed:', self.errors)
+                
                 if len(log) < 120000:
                     Zenity.textInfo('Ooops, some errors happened (sorry about that).\n\nTo help us improve Alfred, ' +
                                     'please copy the following error log and open a new issue with it at ' +
                                     'https://github.com/derkomai/alfred/issues\n\n' + log)
                 else:
-                    Zenity.textInfo('Ooops, some errors happened (sorry about that).\n\nTo help us improve Alfred,' +
-                                    'please copy the full error log contents at {} and open a new issue with them at ' +
+                    Zenity.textInfo('Ooops, some errors happened (sorry about that).\n\nTo help us improve Alfred, ' +
+                                    'please copy the full error log contents at {} and open a new issue with them at '.format(self.logFile) +
                                     'https://github.com/derkomai/alfred/issues\n\nThe log output is too big to be shown here, ' +
-                                    'only a fraction is presented.\n\n'.format(self.logFile))
+                                    'only a fraction is presented.\n\n' + log[:120000])
         finally:
 
             # Change log ownership
