@@ -1,6 +1,6 @@
 # Alfred
 
-A bash script to install all your favourite applications and perform the most
+A script to install all your favourite applications and perform the most
 common tasks automatically in Ubuntu and derivatives.
 
 <p align="center"> 
@@ -14,7 +14,15 @@ users like me, specially for those times when you have just installed the system
 
 ![Imgur](http://i.imgur.com/YMDG3B2.png)
 
-## Usage
+## Python script usage
+
+1. Open a terminal, paste the line below and then press enter. You will have to type your password.
+    ```bash
+    wget https://raw.githubusercontent.com/derkomai/alfred/master/alfred.py && python3 alfred.py
+
+    ```
+
+## Bash script usage (now obsolete and discontinued)
 
 ### The graphical, beginner-friendly way
 
@@ -49,7 +57,7 @@ If you find Alfred useful and it has saved you some time or trouble, you can sup
 
 - *Litecoin address:* MVXhiKnsMTiZYWfzdQ9BdJT8wDpSNrBme1
 
-- *Ripple address:* rKYkrKq8vcCYkHWQT9DJSH4FbhqJ7zsSbm
+- *XRP address:* rFeeJw6rsoeSmu9BAL12gHSaMwtvFQgif
 
 - *Stellar address:* GBON6KJYAQMRYTMEOSZQI22MOGZK7FWKDLAIWXRLZSG2XEZ6RG73PUGT
 
