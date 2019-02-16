@@ -648,9 +648,9 @@ class Alfred:
         with open(self.logFile, 'a') as f:
 
             if cmd.succeeded:
-                f.write('<RESULT>: SUCCESS>\n')
+                f.write('<RESULT>: SUCCESS\n')
             else:
-                f.write('<RESULT>: ERROR>\n')
+                f.write('<RESULT>: ERROR\n')
                 self.errors.append(cmd.cmd)
 
             f.write('<STDOUT>:\n' + cmd.stdout + '\n')
