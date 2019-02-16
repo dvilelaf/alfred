@@ -669,7 +669,7 @@ class Alfred:
                 self.errors.append(cmd.cmd)
 
             f.write('<STDOUT>:\n' + cmd.stdout + '\n')
-            f.write('<STDERR>:\n' + cmd.stderr)
+            f.write('<STDERR>:\n' + cmd.stderr + '\n')
 
         return cmd
         
