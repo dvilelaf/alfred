@@ -133,6 +133,12 @@
         "recipe": ["ppa:mixxx/mixxx", "mixxx"]
     },
     {
+        "name": "LMMS",
+        "description": "Music production for everyone: loops, synthesizers, mixer...",
+        "type": "package",
+        "recipe": ["lmms"]
+    },
+    {
         "name": "Gimp",
         "description": "An image editor",
         "type": "snap",
@@ -167,6 +173,12 @@
         "description": "A document viewer with support for PDF and more",
         "type": "package",
         "recipe": ["evince"]
+    },
+    {
+        "name": "TexStudio",
+        "description": "An integrated writing environment for creating LaTeX documents",
+        "type": "ppa",
+        "recipe": ["ppa:sunderme/texstudio", "texstudio"]
     },
     {
         "name": "Diffpdf",
@@ -245,7 +257,7 @@
         "name": "Developer bundle",
         "description": "Tools for developers: build-essential, cmake, git, svn, java, python, octave, autotools...",
         "type": "package",
-        "recipe": ["build-essential", "cmake", "cmake-gui", "cmake-curses-gui", "python3", "python3-pip", "octave", "git", "subversion", "kdiff3", "colordiff", "openjdk-8-jdk", "autoconf", "autotools-dev", "cppcheck"]
+        "recipe": ["build-essential", "cmake", "cmake-gui", "cmake-curses-gui", "python3", "python3-pip", "octave", "gfortran", "git", "git-svn", "subversion", "kdiff3", "colordiff", "openjdk-8-jdk", "autoconf", "autotools-dev", "cppcheck"]
     },
     {
         "name": "Visual Studio Code",
