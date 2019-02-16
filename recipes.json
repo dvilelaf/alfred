@@ -151,6 +151,12 @@
         "recipe": ["blender", "--classic"]
     },
     {
+        "name": "Freecad",
+        "description": "An open-source parametric 3D modeler",
+        "type": "ppa",
+        "recipe": ["ppa:freecad-maintainers/freecad-stable", "freecad"]
+    },
+    {
         "name": "LibreOffice",
         "description": "A complete office suite: word processor, spreadsheets, slideshows, drawings and more",
         "type": "snap",
