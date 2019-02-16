@@ -281,7 +281,7 @@
         "recipe": ["discord"]
     },
     {
-        "name": "Tux Guitar",
+        "name": "TuxGuitar",
         "description": "A tablature editor",
         "type": "snap",
         "recipe": ["tuxguitar-vs"]
