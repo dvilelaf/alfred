@@ -1,12 +1,22 @@
 #!/usr/bin/python3
 
 import sys
-import os
-import subprocess
-import urllib.request
-import json
-import re
-from datetime import datetime
+
+# Check Python version
+if sys.version_info[0] < 3:
+
+    print('You have invoked Alfred with Python 2. Alfred must be run with Python 3.')
+    sys.exit()
+
+else:
+
+    import os
+    import subprocess
+    import urllib.request
+    import json
+    import re
+    from datetime import datetime
+
 
 class Cmd:
 
@@ -661,12 +671,6 @@ class Alfred:
 
 
 if __name__ == '__main__':
-
-    # Check Python version
-    if sys.version_info[0] < 3:
-
-        print('You have invoked Alfred with Python 2. Alfred must be run with Python 3.')
-        sys.exit()
     
     if os.geteuid() == 0:
 
