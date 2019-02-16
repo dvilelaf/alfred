@@ -278,7 +278,8 @@
         "description": "Create and manage encrypted folders to keep your files safe",
         "selected": false,
         "type": "ppa",
-        "recipe": ["ppa:gencfsm", "gnome-encfs-manager"]
+        "recipe": ["ppa:gencfsm", "gnome-encfs-manager"],
+        "preInstall": ["echo encfs encfs/security-information boolean true | sudo debconf-set-selections"]
     },
     {
         "name": "FileZilla",
