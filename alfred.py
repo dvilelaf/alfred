@@ -328,7 +328,7 @@ class Alfred:
 
     def __init__(self, localRecipes=False):
 
-        self.logFile = '/tmp/Alfred.log'
+        self.logFile = 'Alfred.log'
 
         with open(self.logFile, 'a') as f:
             f.write(100 * '=' + '\n')
