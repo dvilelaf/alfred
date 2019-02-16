@@ -16,6 +16,7 @@ else:
     import json
     import re
     from datetime import datetime
+    import time
 
 
 class Cmd:
@@ -547,16 +548,19 @@ class Alfred:
             if len(ppas) > 0 and not checkPackage('software-properties-common'):
                 updateBar('Installing software-properties-common')
                 self.runAndLogCmd(['apt', 'install', '-y', 'software-properties-common'])
+                time.sleep(1) # Wait for /var/lock to be released
 
             # Ensure snapd is installed
             if (len(snaps) > 0 or len(snapsWithOptions) > 0) and not checkPackage('snapd'):
                 updateBar('Installing snapd')
                 self.runAndLogCmd(['apt', 'install', '-y', 'snapd'])
+                time.sleep(1) # Wait for /var/lock to be released
 
             # Ensure libnotify-bin is installed
             if not checkPackage('libnotify-bin'):
                 updateBar('Installing libnotify-bin')
                 self.runAndLogCmd(r['apt', 'install', '-y', 'libnotify-bin'])
+                time.sleep(1) # Wait for /var/lock to be released
 
             # Run pre-installation tasks
             if len(preInstall) > 0:
@@ -569,11 +573,13 @@ class Alfred:
                 updateBar('Processing PPAs (please be patient)')
                 for ppa in ppas:
                     self.runAndLogCmd(['add-apt-repository', '-y', ppa])
+                    time.sleep(1) # Wait for /var/lock to be released
 
             # Update
             if len(packages) > 0 or len(ppas) > 0:
                 updateBar('Updating package list (please be patient)')
                 self.runAndLogCmd(['apt', 'update'])
+                time.sleep(1) # Wait for /var/lock to be released
 
             # Process packages
             if len(packages) > 0:
@@ -581,6 +587,7 @@ class Alfred:
                 cmd = ['apt', 'install', '-y']
                 cmd.extend(packages)
                 self.runAndLogCmd(cmd)
+                time.sleep(1) # Wait for /var/lock to be released
 
             # Process snaps
             if len(snaps) > 0:
@@ -603,12 +610,14 @@ class Alfred:
                 for deb in debs:
                     self.runAndLogCmd(['wget', '-q', '-O', '/tmp/package.deb', deb])
                     self.runAndLogCmd(['apt', 'install', '-y', '/tmp/package.deb'])
+                    time.sleep(1) # Wait for /var/lock to be released
 
             # Process generics
             if len(generics) > 0:
                 updateBar('Processing generics (please be patient)')
                 for cmds in generics:
                     self.runAndLogCmd(cmds)
+                    time.sleep(1) # Wait for /var/lock to be released
 
             # Run post-installation tasks
             if len(postInstall) > 0:
@@ -619,6 +628,7 @@ class Alfred:
             # Autoremove
             updateBar('Removing no longer needed packages')
             self.runAndLogCmd(['apt', 'autoremove', '-y'])
+            time.sleep(1) # Wait for /var/lock to be released
 
             # Check errors and notify
             if len(self.errors) == 0:
