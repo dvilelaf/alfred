@@ -418,6 +418,10 @@ class Alfred:
             jsonData = urllib.request.urlopen(url).read().decode('utf-8')
             self.recipes = json.loads(jsonData)
 
+        # Set recipe selections to false
+        for i in range(len(self.recipes)):
+            self.recipes[i]['selected'] = False
+
     
     def show(self):
 
