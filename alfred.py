@@ -526,7 +526,7 @@ class Alfred:
 
 
         # Skip already installed ppas
-        for i in range(len(ppas)):
+        for i in reversed(range(len(ppas))):
             if ppas[i] in self.repoList:
                 ppas.pop(i)
 
