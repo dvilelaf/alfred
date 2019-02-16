@@ -313,10 +313,13 @@ class Alfred:
     def __init__(self, localRecipes=False):
 
         self.logFile = '/tmp/Alfred.log'
-        self.log = 100 * '=' + '\n'
-        self.log += 'NEW SESSION ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n'
-        self.log += runCmd(['lsb_release', '-d']).stdout
-        self.log += runCmd(['uname', '-a']).stdout
+
+        with open(self.logFile, 'a') as f:
+            f.write(100 * '=' + '\n')
+            f.write('NEW SESSION ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n')
+            f.write(runCmd(['lsb_release', '-d']).stdout)
+            f.write(runCmd(['uname', '-a']).stdout)
+
         self.errors = []
 
         # Check Zenity package
@@ -344,7 +347,7 @@ class Alfred:
             sys.exit()
 
         # Check architecture
-        arch = self.checkAndLogCmd(runCmd(['uname', '-m']))
+        arch = self.runAndLogCmd(['uname', '-m'])
 
         if arch.stdout != 'x86_64\n':
             message = "This is not a 64-bit system. You can't run Alfred on this system."
@@ -370,7 +373,7 @@ class Alfred:
             sys.exit()
 
         # Check connectivity
-        ping = self.checkAndLogCmd(runCmd(['ping', '-c', '1', 'google.com']))
+        ping = self.runAndLogCmd(['ping', '-c', '1', 'google.com'])
 
         if not ping.succeeded:
             message = 'There is no connection to the Internet. Please connect and then launch Alfred again.'
@@ -381,14 +384,14 @@ class Alfred:
                 print(message)
 
         # Repair installation interruptions
-        self.checkAndLogCmd(runCmd(['dpkg', '--configure', '-a']))
+        self.runAndLogCmd(['dpkg', '--configure', '-a'])
 
         # Get repositories
         self.repoList = getRepoList()
 
         # Install Zenity if needed
         if not zenity:
-            self.checkAndLogCmd(runCmd(['apt', 'install', '-y', 'zenity']))
+            self.runAndLogCmd(['apt', 'install', '-y', 'zenity'])
 
         # Load recipes
         if localRecipes:
@@ -528,48 +531,48 @@ class Alfred:
             # Ensure software-properties-common is installed
             if len(ppas) > 0 and not checkPackage('software-properties-common'):
                 updateBar('Installing software-properties-common')
-                self.checkAndLogCmd(runCmd(['apt', 'install', '-y', 'software-properties-common']))
+                self.runAndLogCmd(['apt', 'install', '-y', 'software-properties-common'])
 
             # Ensure snapd is installed
             if (len(snaps) > 0 or len(snapsWithOptions) > 0) and not checkPackage('snapd'):
                 updateBar('Installing snapd')
-                self.checkAndLogCmd(runCmd(['apt', 'install', '-y', 'snapd']))
+                self.runAndLogCmd(['apt', 'install', '-y', 'snapd'])
 
             # Ensure libnotify-bin is installed
             if not checkPackage('libnotify-bin'):
                 updateBar('Installing libnotify-bin')
-                self.checkAndLogCmd(runCmd(['apt', 'install', '-y', 'libnotify-bin']))
+                self.runAndLogCmd(r['apt', 'install', '-y', 'libnotify-bin'])
 
             # Run pre-installation tasks
             if len(preInstall) > 0:
                 updateBar('Processing pre-installation tasks (please be patient)')
                 for i in preInstall:
-                    self.checkAndLogCmd(runCmd(i))
+                    self.runAndLogCmd(i)
 
             # Process ppas
             if len(ppas) > 0:
                 updateBar('Processing PPAs (please be patient)')
                 for ppa in ppas:
-                    self.checkAndLogCmd(runCmd(['add-apt-repository', '-y', ppa]))
+                    self.runAndLogCmd(['add-apt-repository', '-y', ppa])
 
             # Update
             if len(packages) > 0 or len(ppas) > 0:
                 updateBar('Updating package list (please be patient)')
-                self.checkAndLogCmd(runCmd(['apt', 'update']))
+                self.runAndLogCmd(['apt', 'update'])
 
             # Process packages
             if len(packages) > 0:
                 updateBar('Installing packages (please be patient)')
                 cmd = ['apt', 'install', '-y']
                 cmd.extend(packages)
-                self.checkAndLogCmd(runCmd(cmd))
+                self.runAndLogCmd(cmd)
 
             # Process snaps
             if len(snaps) > 0:
                 updateBar('Installing snaps (please be patient)')
                 cmd = ['snap', 'install']
                 cmd.extend(snaps)
-                self.checkAndLogCmd(runCmd(cmd))
+                self.runAndLogCmd(cmd)
 
             # Process snaps with options
             if len(snapsWithOptions) > 0:
@@ -577,30 +580,30 @@ class Alfred:
                 for snap in snapsWithOptions:
                     cmd = ['snap', 'install']
                     cmd.extend(snap)
-                    self.checkAndLogCmd(runCmd(cmd))
+                    self.runAndLogCmd(cmd)
 
             # Process debs
             if len(debs) > 0:
                 updateBar('Processing debs (please be patient)')
                 for deb in debs:
-                    self.checkAndLogCmd(runCmd(['wget', '-q', '-O', '/tmp/package.deb', deb]))
-                    self.checkAndLogCmd(runCmd(['apt', 'install', '-y', '/tmp/package.deb']))
+                    self.runAndLogCmd(['wget', '-q', '-O', '/tmp/package.deb', deb])
+                    self.runAndLogCmd(['apt', 'install', '-y', '/tmp/package.deb'])
 
             # Process generics
             if len(generics) > 0:
                 updateBar('Processing generics (please be patient)')
                 for cmds in generics:
-                    self.checkAndLogCmd(runCmd(cmds))
+                    self.runAndLogCmd(cmds)
 
             # Run post-installation tasks
             if len(postInstall) > 0:
                 updateBar('Processing post-installation tasks (please be patient)')
                 for i in postInstall:
-                    self.checkAndLogCmd(runCmd(i))
+                    self.runAndLogCmd(i)
 
             # Autoremove
             updateBar('Removing no longer needed packages')
-            self.checkAndLogCmd(runCmd(['apt', 'autoremove', '-y']))
+            self.runAndLogCmd(['apt', 'autoremove', '-y'])
 
             # Check errors and notify
             if len(self.errors) == 0:
@@ -612,33 +615,46 @@ class Alfred:
             updateBar(message)
 
             if len(self.errors) > 0:
+
+                log = ''
+
+                with open(self.logFile, 'r') as f:
+                    lines = f.readlines()
+
+                    for i in reversed(range(len(lines))):
+                        if lines[i].startswith('NEW SESSION'):
+                            log = ''.join(lines[i:])
+                            break
+
                 Zenity.list('The following tasks ended with errors and could not be completed:', self.errors)
-                Zenity.textInfo('Ooops, some errors happened (sorry about that).\n\nTo help us improve Alfred, please copy the following error log and open a new issue with it at https://github.com/derkomai/alfred/issues\n\n' + self.log)
+                Zenity.textInfo('Ooops, some errors happened (sorry about that).\n\nTo help us improve Alfred, please copy the following error log and open a new issue with it at https://github.com/derkomai/alfred/issues\n\n' + log)
 
         finally:
 
-            # Write log and change ownership
-            with open(self.logFile, 'a') as f:
-                f.write(self.log)
-
-                sudoUser = os.environ['SUDO_USER']
-                runCmd(['chown', '{}:{}'.format(sudoUser, sudoUser), self.logFile])
+            # Change log ownership
+            runCmd(['chown', '{}:{}'.format(os.environ['SUDO_USER'], os.environ['SUDO_USER']), self.logFile])
 
 
 
-    def checkAndLogCmd(self, cmd):
+    def runAndLogCmd(self, cmdArgs):
 
-        log = 100 * '-' + '\n' 
+        with open(self.logFile, 'a') as f:
 
-        if cmd.succeeded:
-            log += '<COMMAND (SUCCESS)>: ' + cmd.cmd + '\n'
-        else:
-            log += '<COMMAND (ERROR)>: ' + cmd.cmd + '\n'
-            self.errors.append(cmd.cmd)
+            f.write(100 * '-' + '\n')
+            f.write('<COMMAND>: ' + ' '.join(cmdArgs) + '\n')
 
-        log += '<STDOUT>:\n' + cmd.stdout + '\n'
-        log += '<STDERR>:\n' + cmd.stderr
-        self.log += log
+        cmd = runCmd(cmdArgs)
+
+        with open(self.logFile, 'a') as f:
+
+            if cmd.succeeded:
+                f.write('<RESULT>: SUCCESS>\n')
+            else:
+                f.write('<RESULT>: ERROR>\n')
+                self.errors.append(cmd.cmd)
+
+            f.write('<STDOUT>:\n' + cmd.stdout + '\n')
+            f.write('<STDERR>:\n' + cmd.stderr)
 
         return cmd
         
