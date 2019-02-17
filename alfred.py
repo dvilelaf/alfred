@@ -359,7 +359,7 @@ class Alfred:
         self.errors = []
 
         # Set language
-        runCmd(['LANG=C',])
+        runCmd(['export','LC_ALL=C'])
 
         # Check Zenity package
         zenity = checkPackage('zenity')
