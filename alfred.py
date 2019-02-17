@@ -746,4 +746,12 @@ if __name__ == '__main__':
 
     else:
 
-        runCmd(['sudo', 'python3', sys.argv[0]], stdin=Zenity.password())
+        # Check Zenity and run as superuser
+        if checkPackage('zenity'):
+            runCmd(['sudo', 'python3', sys.argv[0]], stdin=Zenity.password())
+        
+        else:
+            import getpass
+            password = getpass.getpass("Password: ")
+            runCmd(['sudo', 'python3', sys.argv[0]], stdin=password)
+            
