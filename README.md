@@ -1,7 +1,7 @@
 # Alfred
 
 A script to install all your favourite applications and perform the most
-common tasks automatically in Ubuntu and derivatives.
+common tasks automatically in Debian, Ubuntu and their derivative distros.
 
 <p align="center"> 
   <img src="https://i.imgur.com/p6zfou9.png"> 
