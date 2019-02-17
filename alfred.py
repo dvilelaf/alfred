@@ -738,6 +738,7 @@ class Alfred:
 
 if __name__ == '__main__':
     
+    # Check root privileges
     if os.geteuid() == 0:
 
         alfred = Alfred()
@@ -748,10 +749,15 @@ if __name__ == '__main__':
 
         # Check Zenity and run as superuser
         if checkPackage('zenity'):
+
             runCmd(['sudo', 'python3', sys.argv[0]], stdin=Zenity.password())
         
         else:
+
             import getpass
             password = getpass.getpass("Password: ")
-            runCmd(['sudo', 'python3', sys.argv[0]], stdin=password)
-            
+            subprocess.run(['echo "{}" | sudo -kS python3 {}'.format(password, sys.argv[0])],
+                           shell=True,
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE,
+                           check=True)
