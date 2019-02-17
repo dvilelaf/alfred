@@ -202,7 +202,7 @@ class Zenity:
 
         while True:
 
-            getPasswordCmd = runCmd(['zenity', '--password', '--title=Alfred'])
+            getPasswordCmd = runCmd(['zenity', '--password', '--title=Alfred', '--window-icon=alfred.png'])
 
             if getPasswordCmd.succeeded:
 
@@ -242,6 +242,7 @@ class Zenity:
         args.append('--percentage={}'.format(percentage))
         args.append('--height={}'.format(height))
         args.append('--width={}'.format(width))
+        args.append('--window-icon=alfred.png')
 
         process = subprocess.Popen(args, 
                                    stdin=subprocess.PIPE, 
@@ -270,6 +271,7 @@ class Zenity:
                 '--title=Alfred', 
                 '--height=100',
                 '--width=500',
+                '--window-icon=alfred.png',
                 '--text={}'.format(message)])
 
 
@@ -282,6 +284,7 @@ class Zenity:
                 '--height=720',
                 '--width=1000',
                 '--title=Alfred',
+                '--window-icon=alfred.png',
                 '--text=Select tasks to perform:',
                 '--column=Selection',
                 '--column=Task',
@@ -297,7 +300,8 @@ class Zenity:
 
         runCmd(['zenity', 
                 '--info', 
-                '--title=Alfred', 
+                '--title=Alfred',
+                '--window-icon=alfred.png',
                 '--height=100',
                 '--width=200',
                 '--text={}'.format(message)])
@@ -308,7 +312,8 @@ class Zenity:
 
         question = runCmd(['zenity', 
                            '--question', 
-                           '--title=Alfred', 
+                           '--title=Alfred',
+                           '--window-icon=alfred.png',
                            '--height={}'.format(height),
                            '--width={}'.format(width),
                            '--text={}'.format(message)])
@@ -324,7 +329,8 @@ class Zenity:
                 '--text-info',
                 '--height=700',
                 '--width=800',
-                '--title=Alfred'],
+                '--title=Alfred',
+                '--window-icon=alfred.png'],
                 stdin=data)
 
     
@@ -336,6 +342,7 @@ class Zenity:
                 '--height=500',
                 '--width=500',
                 '--title=Alfred',
+                '--window-icon=alfred.png',
                 '--text={}'.format(message),
                 '--hide-header', 
                 '--column', 'Tasks with errors']
@@ -363,6 +370,11 @@ class Alfred:
 
         # Check Zenity package
         zenity = checkPackage('zenity')
+
+        # Get icon
+        if not os.path.isfile('alfred.png'):
+            runCmd(['wget', 'https://raw.githubusercontent.com/derkomai/alfred/master/alfred.png'])
+            runCmd(['chown', '{}:{}'.format(os.environ['SUDO_USER'], os.environ['SUDO_USER']), 'alfred.png'])
 
         # Check distro
         supportedDistro = False
