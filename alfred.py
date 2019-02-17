@@ -596,7 +596,7 @@ class Alfred:
             # Ensure libnotify-bin is installed
             if not checkPackage('libnotify-bin'):
                 updateBar('Installing libnotify-bin')
-                self.runAndLogCmd(r['apt', 'install', '-y', 'libnotify-bin'], checkLock=True)
+                self.runAndLogCmd(['apt', 'install', '-y', 'libnotify-bin'], checkLock=True)
 
             # Run pre-installation tasks
             if len(preInstall) > 0:
