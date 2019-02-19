@@ -383,7 +383,7 @@ class Alfred:
             lines = f.readlines()
 
             for line in lines:
-                if line == 'ID_LIKE=ubuntu\n' or line == 'ID_LIKE=debian\n':
+                if line == 'ID_LIKE=ubuntu\n' or line == 'ID_LIKE=debian\n' or line == 'ID=debian\n':
                     supportedDistro = True
                     break
 
