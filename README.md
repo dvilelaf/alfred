@@ -16,6 +16,17 @@ users like me, specially for those times when you have just installed the system
 
 ## Python script usage
 
+### Option A: install with pip3
+
+1. In a terminal:.
+    ```bash
+    pip3 install alfred-installer
+    alfred-installer
+
+    ```
+
+### Option B: download the script with wget
+
 1. Open a terminal, paste the line below and then press enter. You will have to type your password.
     ```bash
     wget https://raw.githubusercontent.com/derkomai/alfred/master/alfred.py && python3 alfred.py
@@ -24,7 +35,7 @@ users like me, specially for those times when you have just installed the system
 
 ## Bash script usage (now obsolete and discontinued)
 
-### The graphical, beginner-friendly way
+### Option A: the graphical, beginner-friendly way
 
 1. Download Alfred in [this link](https://raw.githubusercontent.com/derkomai/alfred/master/alfred.sh): right click on the link, select *save link as* and click OK, ensuring that the file name is just *alfred.sh* without any other extensions.
 2. Open your downloads folder. You should see a file named *alfred.sh*.
@@ -35,7 +46,7 @@ users like me, specially for those times when you have just installed the system
 7. You will be asked for your password. Type it and click OK.
 8. Select the tasks you want to perform and click OK. Wait for them to complete. That's it.
 
-### The easy command line way
+### Option B: the easy command line way
 
 1. Open a terminal, paste the line below and then press enter. You will have to type your password.
     ```bash
