@@ -351,5 +351,11 @@
         "description": "Application switcher for Linux",
         "type": "ppa",
         "recipe": ["ppa:mkropat/ppa", "jumpapp"]
+    },
+    {
+        "name": "Google Play Music Desktop Player",
+        "description": "A non-official Google Play Music client",
+        "type": "deb",
+        "recipe": ["google-play-music-desktop-player_4.6.1_amd64.deb"]
     }
 ]
