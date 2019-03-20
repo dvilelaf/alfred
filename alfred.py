@@ -733,10 +733,10 @@ class Alfred:
             f.write('<STDERR>:\n' + cmd.stderr + '\n')
 
         return cmd
-        
 
 
-if __name__ == '__main__':
+
+def main():
     
     # Check root privileges
     if os.geteuid() == 0:
@@ -761,3 +761,9 @@ if __name__ == '__main__':
                            stdout=subprocess.PIPE,
                            stderr=subprocess.PIPE,
                            check=True)
+
+
+
+if __name__ == '__main__':
+
+    main()
