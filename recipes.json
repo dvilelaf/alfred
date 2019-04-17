@@ -263,7 +263,7 @@
         "name": "Visual Studio Code",
         "description": "A source code editor developed by Microsoft",
         "type": "snap",
-        "recipe": ["vscode", "--classic"],
+        "recipe": ["code", "--classic"],
         "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections"]
     },
     {
