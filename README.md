@@ -35,20 +35,6 @@ users like me, specially for those times when you have just installed the system
 
 ## Donation
 
-If you find Alfred useful and it has saved you some time or trouble, you can support it by making a small donation through Paypal or cryptocurrencies.
+If you find Alfred useful and it has saved you some time or trouble, you can support it by making a small donation through Paypal.
 
 - *Paypal:* [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.me/dvilela)
-
-- *Bitcoin address:* 3F888TKJvWvkRmGVDyeCFAoBbFnLoYsrYP
-
-- *Bitcoin Cash address:* 1LfY7Mjh3z11ek1A2exKm3JdXw8VheNHdU
-
-- *Ethereum/ERC20 address:* 0x0Ddc94917100387909cb6141c2e7e453bd31D3f7
-
-- *Litecoin address:* MVXhiKnsMTiZYWfzdQ9BdJT8wDpSNrBme1
-
-- *XRP address:* rFeeJw6rsoeSmu9BAL12gHSaMwtvFQgif
-
-- *Stellar address:* GBON6KJYAQMRYTMEOSZQI22MOGZK7FWKDLAIWXRLZSG2XEZ6RG73PUGT
-
-- *Neo address:* AGehUh61V2mjmhwsk3sGus5hEVYQZxexZa
