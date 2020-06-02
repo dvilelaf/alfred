@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import sys
 
@@ -142,7 +142,7 @@ def checkPackage(package):
     else:
         return False
 
-    
+
 def getRepoList():
 
     repoList = []
@@ -166,7 +166,7 @@ def notify(message):
 
     userID = runCmd(['id', '-u', os.environ['SUDO_USER']]).stdout.replace('\n', '')
 
-    runCmd(['sudo', '-u', os.environ['SUDO_USER'], 'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{}/bus'.format(userID), 
+    runCmd(['sudo', '-u', os.environ['SUDO_USER'], 'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{}/bus'.format(userID),
             'notify-send', '-i', 'utilities-terminal', 'Alfred', message])
 
 
@@ -178,7 +178,7 @@ def waitForDpkgLock():
 
         dpkgLock = runCmd(['fuser', '/var/lib/dpkg/lock'])
         aptLock = runCmd(['fuser', '/var/lib/apt/lists/lock'])
-        
+
         if dpkgLock.stdout != '' or aptLock.stdout !='':
             time.sleep(3)
             tries += 1
@@ -215,10 +215,10 @@ class Zenity:
 
                 else:
 
-                    runCmd(['zenity', 
-                            '--info', 
-                            '--width=200', 
-                            '--title=Alfred', 
+                    runCmd(['zenity',
+                            '--info',
+                            '--width=200',
+                            '--title=Alfred',
                             '--text=Wrong password, try again'])
 
             else:
@@ -244,9 +244,9 @@ class Zenity:
         args.append('--width={}'.format(width))
         args.append('--window-icon=alfred.png')
 
-        process = subprocess.Popen(args, 
-                                   stdin=subprocess.PIPE, 
-                                   stdout=subprocess.PIPE, 
+        process = subprocess.Popen(args,
+                                   stdin=subprocess.PIPE,
+                                   stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE)
 
         def update(message='', percent=0):
@@ -266,9 +266,9 @@ class Zenity:
     @staticmethod
     def error(message):
 
-        runCmd(['zenity', 
-                '--error', 
-                '--title=Alfred', 
+        runCmd(['zenity',
+                '--error',
+                '--title=Alfred',
                 '--height=100',
                 '--width=500',
                 '--window-icon=alfred.png',
@@ -298,8 +298,8 @@ class Zenity:
     @staticmethod
     def info(message):
 
-        runCmd(['zenity', 
-                '--info', 
+        runCmd(['zenity',
+                '--info',
                 '--title=Alfred',
                 '--window-icon=alfred.png',
                 '--height=100',
@@ -310,8 +310,8 @@ class Zenity:
     @staticmethod
     def question(message, height=100, width=200):
 
-        question = runCmd(['zenity', 
-                           '--question', 
+        question = runCmd(['zenity',
+                           '--question',
                            '--title=Alfred',
                            '--window-icon=alfred.png',
                            '--height={}'.format(height),
@@ -320,7 +320,7 @@ class Zenity:
 
         return question.succeeded
 
-    
+
     @staticmethod
     def textInfo(message):
 
@@ -333,7 +333,7 @@ class Zenity:
                 '--window-icon=alfred.png'],
                 stdin=data)
 
-    
+
     @staticmethod
     def list(message, elements):
 
@@ -344,7 +344,7 @@ class Zenity:
                 '--title=Alfred',
                 '--window-icon=alfred.png',
                 '--text={}'.format(message),
-                '--hide-header', 
+                '--hide-header',
                 '--column', 'Tasks with errors']
 
         cmd.extend(elements)
@@ -457,14 +457,14 @@ class Alfred:
         for i in range(len(self.recipes)):
             self.recipes[i]['selected'] = False
 
-    
+
     def show(self):
 
         while True:
 
             # Build table
             tableData = []
-        
+
             for recipe in self.recipes:
 
                 if recipe['selected']:
@@ -475,7 +475,7 @@ class Alfred:
                 tableData.append(select)
                 tableData.append(recipe['name'])
                 tableData.append(recipe['description'])
-            
+
 
             table = Zenity.table(tableData)
 
@@ -513,7 +513,7 @@ class Alfred:
 
         # Get confirmation
         message = 'The selected tasks will be performed now. '
-        message += "You won't be able to cancel this operation once started.\n\n"       
+        message += "You won't be able to cancel this operation once started.\n\n"
         message += 'Are you sure you want to continue?'
 
         while True:
@@ -576,8 +576,8 @@ class Alfred:
                 packages.pop(i)
 
         # Create progress bar
-        updateBar = Zenity.progressBar(pulsating=True, 
-                                       noCancel=True, 
+        updateBar = Zenity.progressBar(pulsating=True,
+                                       noCancel=True,
                                        title='Alfred',
                                        text='Processing tasks')
 
@@ -685,7 +685,7 @@ class Alfred:
                             break
 
                 Zenity.list('The following tasks ended with errors and could not be completed:', self.errors)
-                
+
                 if len(log) < 120000:
                     Zenity.textInfo('Ooops, some errors happened (sorry about that).\n\nTo help us improve Alfred, ' +
                                     'please copy the following error log and open a new issue with it at ' +
@@ -737,7 +737,7 @@ class Alfred:
 
 
 def main():
-    
+
     # Check root privileges
     if os.geteuid() == 0:
 
@@ -751,7 +751,7 @@ def main():
         if checkPackage('zenity'):
 
             runCmd(['sudo', 'python3', sys.argv[0]], stdin=Zenity.password())
-        
+
         else:
 
             import getpass
