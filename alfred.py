@@ -8,15 +8,13 @@ if sys.version_info[0] < 3:
     print('You have invoked Alfred with Python 2. Alfred must be run with Python 3.')
     sys.exit()
 
-else:
-
-    import os
-    import subprocess
-    import urllib.request
-    import json
-    import re
-    from datetime import datetime
-    import time
+import os
+import subprocess
+import urllib.request
+import json
+import re
+from datetime import datetime
+import time
 
 
 class Cmd:
