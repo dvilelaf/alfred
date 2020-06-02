@@ -1,0 +1,165 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+
+    "definitions": {
+
+        "stringArray": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "string"
+            }
+        },
+
+        "generic": {
+            "type": "object",
+            "required": ["type", "recipe"],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "generic"
+                },
+                "recipe": {
+                    "$ref": "#/definitions/stringArray"
+                }
+            }
+        },
+
+        "package": {
+            "type": "object",
+            "required": ["type", "packageName"],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "package"
+                },
+                "packageName": {
+                    "type": "string"
+                },
+                "preInstall": {
+                    "$ref": "#/definitions/stringArray"
+                },
+                "postInstall": {
+                    "$ref": "#/definitions/stringArray"
+                }
+            }
+        },
+
+        "deb": {
+            "type": "object",
+            "required": ["type", "link"],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "deb"
+                },
+                "link": {
+                    "type": "string",
+                    "pattern": "^http*.*$"
+                },
+                "preInstall": {
+                    "$ref": "#/definitions/stringArray"
+                },
+                "postInstall": {
+                    "$ref": "#/definitions/stringArray"
+                }
+            }
+        },
+
+        "ppa": {
+            "type": "object",
+            "required": ["type", "packageName", "ppa"],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "ppa"
+                },
+                "packageName": {
+                    "type": "string"
+                },
+                "ppa": {
+                    "type": "string"
+                },
+                "preInstall": {
+                    "$ref": "#/definitions/stringArray"
+                },
+                "postInstall": {
+                    "$ref": "#/definitions/stringArray"
+                }
+            }
+        },
+
+        "snap": {
+            "type": "object",
+            "required": ["type", "packageName"],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "snap"
+                },
+                "packageName": {
+                    "type": "string"
+                },
+                "options": {
+                    "$ref": "#/definitions/stringArray"
+                }
+            }
+        },
+
+        "flatpak": {
+            "type": "object",
+            "required": ["type", "packageName"],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "flatpak"
+                },
+                "packageName": {
+                    "type": "string"
+                }
+            }
+        },
+
+        "appimage": {
+            "type": "object",
+            "required": ["type", "packageName"],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "appimage"
+                },
+                "packageName": {
+                    "type": "string"
+                }
+            }
+        }
+
+    },
+
+
+    "type": "array",
+    "minItems": 1,
+    "items": {
+        "type": "object",
+        "required": ["name", "description", "recipes"],
+        "properties": {
+            "name": {"type": "string"},
+            "description": {"type": "string"},
+            "recipes": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/generic"},
+                        {"$ref": "#/definitions/package"},
+                        {"$ref": "#/definitions/deb"},
+                        {"$ref": "#/definitions/snap"},
+                        {"$ref": "#/definitions/flatpak"},
+                        {"$ref": "#/definitions/appimage"},
+                        {"$ref": "#/definitions/ppa"}
+                    ]
+                }
+            }
+        }
+    }
+}
