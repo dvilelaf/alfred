@@ -1,26 +1,27 @@
-[
-    {
-        "name": "Update packages",
+{
+    "Update packages": {
         "description": "Install the latest version of all your software",
         "recipes": [
             {
                 "type": "generic",
                 "recipe": ["apt", "upgrade", "-y"]
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Automatic drivers",
+    "Automatic drivers": {
         "description": "Install drivers that are appropriate for automatic installation",
         "recipes": [
             {
                 "type": "generic",
                 "recipe": ["ubuntu-drivers", "autoinstall"]
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Java, Flash and codecs",
+    "Restricted extras": {
         "description": "Install non-open-source packages like Java, Flash plugin, Unrar, and some audio and video codecs like MP3/AVI/MPEG",
         "recipes": [
             {
@@ -28,50 +29,55 @@
                 "packageName": "ubuntu-restricted-extras",
                 "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections"]
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Google Chrome",
+    "Google Chrome": {
         "description": "The web browser from Google",
         "recipes": [
             {
                 "type": "deb",
                 "link": "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Chromium",
+    "Chromium": {
         "description": "The open-source web browser providing the code for Google Chrome",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "chromium"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Firefox",
+    "Firefox": {
         "description": "The web browser from Mozilla",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "firefox"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Opera",
+    "Opera": {
         "description": "Just another web browser",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "opera"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Transmission",
+    "Transmission": {
         "description": "A light bittorrent download client",
         "recipes": [
             {
@@ -79,100 +85,110 @@
                 "packageName": "transmission-gtk",
                 "ppa": "ppa:transmissionbt/ppa"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Dropbox",
+    "Dropbox": {
         "description": "A cloud hosting service to store your files online",
         "recipes": [
             {
                 "type": "deb",
                 "link": "https://linux.dropbox.com/packages/ubuntu/dropbox_2019.01.31_amd64.deb"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "VirtualBox",
+    "VirtualBox": {
         "description": "A virtualization software to run other OSes on top of your current OS",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "virtualbox"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Skype",
+    "Skype": {
         "description": "A videocall software from Microsoft",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "skype"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Thunderbird",
+    "Thunderbird": {
         "description": "A mail client from Mozilla",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "thunderbird"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Mailspring",
+    "Mailspring": {
         "description": "A beautiful mail client",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "mailspring"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Telegram",
+    "Telegram": {
         "description": "A messenger application",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "telegram-desktop"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Slack",
+    "Slack": {
         "description": "A team communication application",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "slack"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "VLC",
+    "VLC": {
         "description": "The most famous multimedia player",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "vlc"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Kazam",
+    "Kazam": {
         "description": "A tool to record your screen and take screenshots",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "kazam"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Handbrake",
+    "Handbrake": {
         "description": "A video transcoder",
         "recipes": [
             {
@@ -180,40 +196,44 @@
                 "packageName": "handbrake-gtk",
                 "ppa": "ppa:stebbins/handbrake-releases"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Spotify",
+    "Spotify": {
         "description": "One of the best music streaming apps",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "spotify"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Audacity",
+    "Audacity": {
         "description": "Record and edit audio files",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "audacity"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Soundconverter",
+    "Soundconverter": {
         "description": "Audio file converter",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "soundconverter"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Mixxx",
+    "Mixxx": {
         "description": "A MP3 DJ mixing software",
         "recipes": [
             {
@@ -221,50 +241,55 @@
                 "packageName": "mixxx",
                 "ppa": "ppa:mixxx/mixxx"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "LMMS",
+    "LMMS": {
         "description": "Music production for everyone: loops, synthesizers, mixer...",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "lmms"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Gimp",
+    "Gimp": {
         "description": "An image editor",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "gimp"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Inkscape",
+    "Inkscape": {
         "description": "Create and edit scalable vectorial images",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "inkscape"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Blender",
+    "Blender": {
         "description": "3D modelling, animation, rendering and production",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "blender"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Freecad",
+    "Freecad": {
         "description": "An open-source parametric 3D modeler",
         "recipes": [
             {
@@ -272,30 +297,33 @@
                 "packageName": "freecad",
                 "ppa": "ppa:freecad-maintainers/freecad-stable"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "LibreOffice",
+    "LibreOffice": {
         "description": "A complete office suite: word processor, spreadsheets, slideshows, drawings and more",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "libreoffice"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Evince",
+    "Evince": {
         "description": "A document viewer with support for PDF and more",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "evince"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "TexStudio",
+    "TexStudio": {
         "description": "An integrated writing environment for creating LaTeX documents",
         "recipes": [
             {
@@ -303,50 +331,55 @@
                 "packageName": "texstudio",
                 "ppa": "ppa:sunderme/texstudio"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Diffpdf",
+    "Diffpdf": {
         "description": "A tool to compare PDF files",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "diffpdf"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Steam",
+    "Steam": {
         "description": "A videogame platform",
         "recipes": [
             {
                 "type": "deb",
                 "link": "http://repo.steampowered.com/steam/archive/precise/steam_latest.deb"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "0 A.D.",
+    "0 A.D.": {
         "description": "A game of ancient warfare, similar to Age of Empires",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "0ad"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "PlayOnLinux",
+    "PlayOnLinux": {
         "description": "A tool to install Windows games on Linux",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "playonlinux"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "GameHub",
+    "GameHub": {
         "description": "An unified library for all your games",
         "recipes": [
             {
@@ -354,50 +387,55 @@
                 "packageName": "com.github.tkashkin.gamehub",
                 "ppa": "ppa:tkashkin/gamehub"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Disk utility",
+    "Disk utility": {
         "description": "A tool to manage your drives",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "gnome-disk-utility"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "GParted",
+    "GParted": {
         "description": "A tool to make partitions in your hard drives",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "gparted"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "MenuLibre",
+    "MenuLibre": {
         "description": "Add or remove applications from your menu",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "menulibre"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Seahorse",
+    "Seahorse": {
         "description": "Manage your passwords",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "seahorse"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "EncFS manager",
+    "EncFS manager": {
         "description": "Create and manage encrypted folders to keep your files safe",
         "recipes": [
             {
@@ -406,40 +444,44 @@
                 "ppa": "ppa:gencfsm",
                 "preInstall": ["echo encfs encfs/security-information boolean true | sudo debconf-set-selections"]
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "FileZilla",
+    "FileZilla": {
         "description": "Download and upload files via FTP, FTPS and SFTP",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "filezilla"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Utilities bundle",
+    "Utilities bundle": {
         "description": "Java, zip, rar and exfat tools",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "icedtea-8-plugin"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Developer bundle",
+    "Developer bundle": {
         "description": "Tools for developers: build-essential, cmake, git, svn, java, python, octave, autotools...",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "build-essential"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Visual Studio Code",
+    "Visual Studio Code": {
         "description": "A source code editor developed by Microsoft",
         "recipes": [
             {
@@ -447,10 +489,11 @@
                 "packageName": "code",
                 "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections"]
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Atom",
+    "Atom": {
         "description": "A hackable text editor",
         "recipes": [
             {
@@ -458,30 +501,33 @@
                 "packageName": "atom",
                 "ppa": "ppa:webupd8team/atom"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Android Studio",
+    "Android Studio": {
         "description": "The IDE for Android",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "android-studio"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "GitKraken",
+    "GitKraken": {
         "description": "A graphical git client from Axosoft",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "gitkraken"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "rEFInd",
+    "rEFInd": {
         "description": "An EFI boot manager",
         "recipes": [
             {
@@ -491,30 +537,33 @@
                 "preInstall": ["echo refind refind/install_to_esp boolean true | sudo debconf-set-selections"],
                 "postInstall": ["refind-install"]
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Discord",
+    "Discord": {
         "description": "A gaming voice/chat service",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "discord"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "TuxGuitar",
+    "TuxGuitar": {
         "description": "A tablature editor",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "tuxguitar-vs"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Ukuu",
+    "Ukuu": {
         "description": "A kernel update tool",
         "recipes": [
             {
@@ -522,20 +571,22 @@
                 "packageName": "ukuu",
                 "ppa": "ppa:teejee2008/ppa"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Gnome System Monitor",
+    "Gnome System Monitor": {
         "description": "A system resource usage monitor",
         "recipes": [
             {
                 "type": "package",
                 "packageName": "gnome-system-monitor"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "ANoise",
+    "ANoise": {
         "description": "An ambient music player",
         "recipes": [
             {
@@ -543,10 +594,11 @@
                 "packageName": "anoise",
                 "ppa": "ppa:costales/anoise"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Minetest",
+    "Minetest": {
         "description": "A Minecraft clone",
         "recipes": [
             {
@@ -554,10 +606,11 @@
                 "packageName": "minetest",
                 "ppa": "ppa:minetestdevs/stable"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Openshot",
+    "Openshot": {
         "description": "A video editor",
         "recipes": [
             {
@@ -565,20 +618,22 @@
                 "packageName": "openshot-qt",
                 "ppa": "ppa:openshot.developers/ppa"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Retroarch",
+    "Retroarch": {
         "description": "A retro games emulator frontend",
         "recipes": [
             {
                 "type": "snap",
                 "packageName": "retroarch"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Ulauncher",
+    "Ulauncher": {
         "description": "Application launcher for Linux",
         "recipes": [
             {
@@ -586,10 +641,11 @@
                 "packageName": "ulauncher",
                 "ppa": "ppa:agornostal/ulauncher"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     },
-    {
-        "name": "Jumpapp",
+    "Jumpapp": {
         "description": "Application switcher for Linux",
         "recipes": [
             {
@@ -597,6 +653,8 @@
                 "packageName": "jumpapp",
                 "ppa": "ppa:mkropat/ppa"
             }
-        ]
+        ],
+        "category": "generic",
+        "requiresConnection": true
     }
-]
+}

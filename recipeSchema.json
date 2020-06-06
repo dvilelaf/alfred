@@ -3,11 +3,16 @@
 
     "definitions": {
 
+        "nonEmptyString": {
+            "type": "string",
+            "minLength": 1
+        },
+
         "stringArray": {
             "type": "array",
             "minItems": 1,
             "items": {
-                "type": "string"
+                "$ref": "#/definitions/nonEmptyString"
             }
         },
 
@@ -16,7 +21,6 @@
             "required": ["type", "recipe"],
             "properties": {
                 "type": {
-                    "type": "string",
                     "const": "generic"
                 },
                 "recipe": {
@@ -30,11 +34,10 @@
             "required": ["type", "packageName"],
             "properties": {
                 "type": {
-                    "type": "string",
                     "const": "package"
                 },
                 "packageName": {
-                    "type": "string"
+                    "$ref": "#/definitions/nonEmptyString"
                 },
                 "preInstall": {
                     "$ref": "#/definitions/stringArray"
@@ -50,11 +53,9 @@
             "required": ["type", "link"],
             "properties": {
                 "type": {
-                    "type": "string",
                     "const": "deb"
                 },
                 "link": {
-                    "type": "string",
                     "pattern": "^http*.*$"
                 },
                 "preInstall": {
@@ -71,14 +72,13 @@
             "required": ["type", "packageName", "ppa"],
             "properties": {
                 "type": {
-                    "type": "string",
                     "const": "ppa"
                 },
                 "packageName": {
-                    "type": "string"
+                    "$ref": "#/definitions/nonEmptyString"
                 },
                 "ppa": {
-                    "type": "string"
+                    "$ref": "#/definitions/nonEmptyString"
                 },
                 "preInstall": {
                     "$ref": "#/definitions/stringArray"
@@ -94,11 +94,10 @@
             "required": ["type", "packageName"],
             "properties": {
                 "type": {
-                    "type": "string",
                     "const": "snap"
                 },
                 "packageName": {
-                    "type": "string"
+                    "$ref": "#/definitions/nonEmptyString"
                 },
                 "options": {
                     "$ref": "#/definitions/stringArray"
@@ -111,11 +110,10 @@
             "required": ["type", "packageName"],
             "properties": {
                 "type": {
-                    "type": "string",
                     "const": "flatpak"
                 },
                 "packageName": {
-                    "type": "string"
+                    "$ref": "#/definitions/nonEmptyString"
                 }
             }
         },
@@ -125,41 +123,44 @@
             "required": ["type", "packageName"],
             "properties": {
                 "type": {
-                    "type": "string",
                     "const": "appimage"
                 },
                 "packageName": {
-                    "type": "string"
+                    "$ref": "#/definitions/nonEmptyString"
                 }
             }
-        }
+        },
 
+
+        "task": {
+            "type": "object",
+            "required": ["description", "recipes", "category", "requiresConnection"],
+            "properties": {
+                "description": {"$ref": "#/definitions/nonEmptyString"},
+                "recipes": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "oneOf": [
+                            {"$ref": "#/definitions/generic"},
+                            {"$ref": "#/definitions/package"},
+                            {"$ref": "#/definitions/deb"},
+                            {"$ref": "#/definitions/snap"},
+                            {"$ref": "#/definitions/flatpak"},
+                            {"$ref": "#/definitions/appimage"},
+                            {"$ref": "#/definitions/ppa"}
+                        ]
+                    }
+                },
+                "category": {"$ref": "#/definitions/nonEmptyString"},
+                "requiresConnection": {"type": "boolean"}
+            }
+        }
     },
 
-
-    "type": "array",
-    "minItems": 1,
-    "items": {
-        "type": "object",
-        "required": ["name", "description", "recipes"],
-        "properties": {
-            "name": {"type": "string"},
-            "description": {"type": "string"},
-            "recipes": {
-                "type": "array",
-                "minItems": 1,
-                "items": {
-                    "oneOf": [
-                        {"$ref": "#/definitions/generic"},
-                        {"$ref": "#/definitions/package"},
-                        {"$ref": "#/definitions/deb"},
-                        {"$ref": "#/definitions/snap"},
-                        {"$ref": "#/definitions/flatpak"},
-                        {"$ref": "#/definitions/appimage"},
-                        {"$ref": "#/definitions/ppa"}
-                    ]
-                }
-            }
-        }
+    "type": "object",
+    "minProperties": 1,
+    "patternProperties": {
+        ".*" : {"$ref": "#/definitions/task"}
     }
 }
