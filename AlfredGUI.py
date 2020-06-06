@@ -50,29 +50,29 @@ class TaskListWidget(QWidget):
 
         if taskType == 'generic':
             self.runLabel = QLabel('Run')
-            self.runLabel.setFixedSize(100, 15)
+            self.runLabel.setFixedSize(30, 15)
+            self.runLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
             self.headerLayout.addWidget(self.runLabel)
 
             self.nameLabel = QLabel('Name')
-            self.nameLabel.setFixedSize(300, 15)
+            self.nameLabel.setFixedSize(100, 15)
+            self.nameLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
             self.headerLayout.addWidget(self.nameLabel)
 
             self.descriptionLabel = QLabel('Description')
             self.descriptionLabel.setFixedSize(500, 15)
+            self.descriptionLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
             self.headerLayout.addWidget(self.descriptionLabel)
 
-        elif taskType == 'installable':
+        else:
             self.headerLayout.addWidget(QLabel('Name'))
             self.headerLayout.addWidget(QLabel('Description'))
-            self.headerLayout.addWidget(QLabel('Package'))
+            self.headerLayout.addWidget(QLabel('Repo'))
             self.headerLayout.addWidget(QLabel('PPA'))
             self.headerLayout.addWidget(QLabel('Deb'))
             self.headerLayout.addWidget(QLabel('Flatpak'))
             self.headerLayout.addWidget(QLabel('AppImage'))
             self.headerLayout.addWidget(QLabel('Snap'))
-
-        else:
-            raise ValueError(f"TaskListWidget: unknown taskType {taskType}")
 
         self.header.setLayout(self.headerLayout)
 

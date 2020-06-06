@@ -41,7 +41,7 @@
                 "link": "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "Chromium": {
@@ -52,7 +52,7 @@
                 "packageName": "chromium"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "Firefox": {
@@ -63,7 +63,7 @@
                 "packageName": "firefox"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "Opera": {
@@ -74,7 +74,7 @@
                 "packageName": "opera"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "Transmission": {
@@ -86,7 +86,7 @@
                 "ppa": "ppa:transmissionbt/ppa"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "Dropbox": {
@@ -97,7 +97,7 @@
                 "link": "https://linux.dropbox.com/packages/ubuntu/dropbox_2019.01.31_amd64.deb"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "VirtualBox": {
@@ -108,7 +108,7 @@
                 "packageName": "virtualbox"
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     },
     "Skype": {
@@ -119,7 +119,7 @@
                 "packageName": "skype"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "Thunderbird": {
@@ -130,7 +130,7 @@
                 "packageName": "thunderbird"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "Mailspring": {
@@ -141,7 +141,7 @@
                 "packageName": "mailspring"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "Telegram": {
@@ -152,7 +152,7 @@
                 "packageName": "telegram-desktop"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "Slack": {
@@ -163,7 +163,7 @@
                 "packageName": "slack"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "VLC": {
@@ -174,7 +174,7 @@
                 "packageName": "vlc"
             }
         ],
-        "category": "generic",
+        "category": "audio and video",
         "requiresConnection": true
     },
     "Kazam": {
@@ -185,7 +185,7 @@
                 "packageName": "kazam"
             }
         ],
-        "category": "generic",
+        "category": "audio and video",
         "requiresConnection": true
     },
     "Handbrake": {
@@ -197,7 +197,7 @@
                 "ppa": "ppa:stebbins/handbrake-releases"
             }
         ],
-        "category": "generic",
+        "category": "audio and video",
         "requiresConnection": true
     },
     "Spotify": {
@@ -208,7 +208,7 @@
                 "packageName": "spotify"
             }
         ],
-        "category": "generic",
+        "category": "audio and video",
         "requiresConnection": true
     },
     "Audacity": {
@@ -219,7 +219,7 @@
                 "packageName": "audacity"
             }
         ],
-        "category": "generic",
+        "category": "audio and video",
         "requiresConnection": true
     },
     "Soundconverter": {
@@ -230,7 +230,7 @@
                 "packageName": "soundconverter"
             }
         ],
-        "category": "generic",
+        "category": "audio and video",
         "requiresConnection": true
     },
     "Mixxx": {
@@ -242,7 +242,7 @@
                 "ppa": "ppa:mixxx/mixxx"
             }
         ],
-        "category": "generic",
+        "category": "audio and video",
         "requiresConnection": true
     },
     "LMMS": {
@@ -253,7 +253,7 @@
                 "packageName": "lmms"
             }
         ],
-        "category": "generic",
+        "category": "audio and video",
         "requiresConnection": true
     },
     "Gimp": {
@@ -264,7 +264,7 @@
                 "packageName": "gimp"
             }
         ],
-        "category": "generic",
+        "category": "graphics",
         "requiresConnection": true
     },
     "Inkscape": {
@@ -275,7 +275,7 @@
                 "packageName": "inkscape"
             }
         ],
-        "category": "generic",
+        "category": "graphics",
         "requiresConnection": true
     },
     "Blender": {
@@ -286,7 +286,7 @@
                 "packageName": "blender"
             }
         ],
-        "category": "generic",
+        "category": "graphics",
         "requiresConnection": true
     },
     "Freecad": {
@@ -298,7 +298,7 @@
                 "ppa": "ppa:freecad-maintainers/freecad-stable"
             }
         ],
-        "category": "generic",
+        "category": "graphics",
         "requiresConnection": true
     },
     "LibreOffice": {
@@ -309,7 +309,7 @@
                 "packageName": "libreoffice"
             }
         ],
-        "category": "generic",
+        "category": "office",
         "requiresConnection": true
     },
     "Evince": {
@@ -320,7 +320,7 @@
                 "packageName": "evince"
             }
         ],
-        "category": "generic",
+        "category": "office",
         "requiresConnection": true
     },
     "TexStudio": {
@@ -332,7 +332,7 @@
                 "ppa": "ppa:sunderme/texstudio"
             }
         ],
-        "category": "generic",
+        "category": "office",
         "requiresConnection": true
     },
     "Diffpdf": {
@@ -343,7 +343,7 @@
                 "packageName": "diffpdf"
             }
         ],
-        "category": "generic",
+        "category": "office",
         "requiresConnection": true
     },
     "Steam": {
@@ -354,7 +354,7 @@
                 "link": "http://repo.steampowered.com/steam/archive/precise/steam_latest.deb"
             }
         ],
-        "category": "generic",
+        "category": "games",
         "requiresConnection": true
     },
     "0 A.D.": {
@@ -365,7 +365,7 @@
                 "packageName": "0ad"
             }
         ],
-        "category": "generic",
+        "category": "games",
         "requiresConnection": true
     },
     "PlayOnLinux": {
@@ -376,7 +376,7 @@
                 "packageName": "playonlinux"
             }
         ],
-        "category": "generic",
+        "category": "games",
         "requiresConnection": true
     },
     "GameHub": {
@@ -388,7 +388,7 @@
                 "ppa": "ppa:tkashkin/gamehub"
             }
         ],
-        "category": "generic",
+        "category": "games",
         "requiresConnection": true
     },
     "Disk utility": {
@@ -399,7 +399,7 @@
                 "packageName": "gnome-disk-utility"
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     },
     "GParted": {
@@ -410,7 +410,7 @@
                 "packageName": "gparted"
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     },
     "MenuLibre": {
@@ -421,7 +421,7 @@
                 "packageName": "menulibre"
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     },
     "Seahorse": {
@@ -432,7 +432,7 @@
                 "packageName": "seahorse"
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     },
     "EncFS manager": {
@@ -445,7 +445,7 @@
                 "preInstall": ["echo encfs encfs/security-information boolean true | sudo debconf-set-selections"]
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     },
     "FileZilla": {
@@ -456,7 +456,7 @@
                 "packageName": "filezilla"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "Utilities bundle": {
@@ -467,7 +467,7 @@
                 "packageName": "icedtea-8-plugin"
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     },
     "Developer bundle": {
@@ -478,7 +478,7 @@
                 "packageName": "build-essential"
             }
         ],
-        "category": "generic",
+        "category": "programming",
         "requiresConnection": true
     },
     "Visual Studio Code": {
@@ -490,7 +490,7 @@
                 "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections"]
             }
         ],
-        "category": "generic",
+        "category": "programming",
         "requiresConnection": true
     },
     "Atom": {
@@ -502,7 +502,7 @@
                 "ppa": "ppa:webupd8team/atom"
             }
         ],
-        "category": "generic",
+        "category": "programming",
         "requiresConnection": true
     },
     "Android Studio": {
@@ -513,7 +513,7 @@
                 "packageName": "android-studio"
             }
         ],
-        "category": "generic",
+        "category": "programming",
         "requiresConnection": true
     },
     "GitKraken": {
@@ -524,7 +524,7 @@
                 "packageName": "gitkraken"
             }
         ],
-        "category": "generic",
+        "category": "programming",
         "requiresConnection": true
     },
     "rEFInd": {
@@ -538,7 +538,7 @@
                 "postInstall": ["refind-install"]
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     },
     "Discord": {
@@ -549,7 +549,7 @@
                 "packageName": "discord"
             }
         ],
-        "category": "generic",
+        "category": "internet",
         "requiresConnection": true
     },
     "TuxGuitar": {
@@ -560,7 +560,7 @@
                 "packageName": "tuxguitar-vs"
             }
         ],
-        "category": "generic",
+        "category": "audio and video",
         "requiresConnection": true
     },
     "Ukuu": {
@@ -572,7 +572,7 @@
                 "ppa": "ppa:teejee2008/ppa"
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     },
     "Gnome System Monitor": {
@@ -583,7 +583,7 @@
                 "packageName": "gnome-system-monitor"
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     },
     "ANoise": {
@@ -595,7 +595,7 @@
                 "ppa": "ppa:costales/anoise"
             }
         ],
-        "category": "generic",
+        "category": "audio and video",
         "requiresConnection": true
     },
     "Minetest": {
@@ -607,7 +607,7 @@
                 "ppa": "ppa:minetestdevs/stable"
             }
         ],
-        "category": "generic",
+        "category": "games",
         "requiresConnection": true
     },
     "Openshot": {
@@ -619,7 +619,7 @@
                 "ppa": "ppa:openshot.developers/ppa"
             }
         ],
-        "category": "generic",
+        "category": "audio and video",
         "requiresConnection": true
     },
     "Retroarch": {
@@ -630,7 +630,7 @@
                 "packageName": "retroarch"
             }
         ],
-        "category": "generic",
+        "category": "games",
         "requiresConnection": true
     },
     "Ulauncher": {
@@ -642,7 +642,7 @@
                 "ppa": "ppa:agornostal/ulauncher"
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     },
     "Jumpapp": {
@@ -654,7 +654,7 @@
                 "ppa": "ppa:mkropat/ppa"
             }
         ],
-        "category": "generic",
+        "category": "tools",
         "requiresConnection": true
     }
 }

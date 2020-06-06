@@ -4,3 +4,5 @@ TODO
 \.vscode/
 
 pypi/
+
+__pycache__/
