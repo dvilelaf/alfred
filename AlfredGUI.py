@@ -48,31 +48,24 @@ class TaskListWidget(QWidget):
         self.header = QWidget()
         self.headerLayout = QHBoxLayout()
 
+        labelTexts = None
+        labelWidths = None
+
         if taskType == 'generic':
-            self.runLabel = QLabel('Run')
-            self.runLabel.setFixedSize(30, 15)
-            self.runLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-            self.headerLayout.addWidget(self.runLabel)
-
-            self.nameLabel = QLabel('Name')
-            self.nameLabel.setFixedSize(100, 15)
-            self.nameLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-            self.headerLayout.addWidget(self.nameLabel)
-
-            self.descriptionLabel = QLabel('Description')
-            self.descriptionLabel.setFixedSize(500, 15)
-            self.descriptionLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-            self.headerLayout.addWidget(self.descriptionLabel)
+            labelTexts = ['Name', 'Description', 'Run']
+            labelWidths = [100, 500, 30]
 
         else:
-            self.headerLayout.addWidget(QLabel('Name'))
-            self.headerLayout.addWidget(QLabel('Description'))
-            self.headerLayout.addWidget(QLabel('Repo'))
-            self.headerLayout.addWidget(QLabel('PPA'))
-            self.headerLayout.addWidget(QLabel('Deb'))
-            self.headerLayout.addWidget(QLabel('Flatpak'))
-            self.headerLayout.addWidget(QLabel('AppImage'))
-            self.headerLayout.addWidget(QLabel('Snap'))
+            labelTexts = ['Name', 'Description', 'Repo', 'PPA', 'Deb', 'Flatpak', 'AppImage', 'Snap']
+            labelWidths = [100, 500, 100, 70, 70, 70, 70, 70]
+
+        self.labels = []
+
+        for i in range(len(labelTexts)):
+            self.labels.append(QLabel(labelTexts[i]))
+            self.labels[-1].setFixedSize(labelWidths[i], 15)
+            self.labels[-1].setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+            self.headerLayout.addWidget(self.labels[-1])
 
         self.header.setLayout(self.headerLayout)
 
@@ -117,7 +110,7 @@ class MainWindow(QWidget):
 
         # Task List Widgets
         self.taskListWidgets = {}
-        categories = set([recipes[recipe]['category'] for recipe in recipes])
+        categories = sorted(set([recipes[recipe]['category'] for recipe in recipes]))
 
         for category in categories:
             self.taskListWidgets[category] = TaskListWidget(category, [])
