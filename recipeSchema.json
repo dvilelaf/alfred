@@ -29,12 +29,12 @@
             }
         },
 
-        "package": {
+        "repo": {
             "type": "object",
             "required": ["type", "packageName"],
             "properties": {
                 "type": {
-                    "const": "package"
+                    "const": "repo"
                 },
                 "packageName": {
                     "$ref": "#/definitions/nonEmptyString"
@@ -143,7 +143,7 @@
                     "items": {
                         "oneOf": [
                             {"$ref": "#/definitions/generic"},
-                            {"$ref": "#/definitions/package"},
+                            {"$ref": "#/definitions/repo"},
                             {"$ref": "#/definitions/deb"},
                             {"$ref": "#/definitions/snap"},
                             {"$ref": "#/definitions/flatpak"},

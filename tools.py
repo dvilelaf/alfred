@@ -79,3 +79,24 @@ def waitForDpkgLock():
 
         if tries > 10:
             return False
+
+
+# def getSystemInfo():
+
+    #['cat', '/etc/os-release']
+
+
+
+# NAME="elementary OS"
+# VERSION="5.1.5 Hera"
+# ID=elementary
+# ID_LIKE=ubuntu
+# PRETTY_NAME="elementary OS 5.1.5 Hera"
+# LOGO=distributor-logo
+# VERSION_ID="5.1.5"
+# HOME_URL="https://elementary.io/"
+# SUPPORT_URL="https://elementary.io/support"
+# BUG_REPORT_URL="https://github.com/elementary/os/issues/new"
+# PRIVACY_POLICY_URL="https://elementary.io/privacy-policy"
+# VERSION_CODENAME=hera
+# UBUNTU_CODENAME=bionic

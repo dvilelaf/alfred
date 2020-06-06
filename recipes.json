@@ -22,10 +22,10 @@
         "requiresConnection": true
     },
     "Restricted extras": {
-        "description": "Install non-open-source packages like Java, Flash plugin, Unrar, and some audio and video codecs like MP3/AVI/MPEG",
+        "description": "Install non-open-source packages like Java, Flash plugin, Unrar, and some codecs",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "ubuntu-restricted-extras",
                 "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections"]
             }
@@ -104,7 +104,7 @@
         "description": "A virtualization software to run other OSes on top of your current OS",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "virtualbox"
             }
         ],
@@ -126,7 +126,7 @@
         "description": "A mail client from Mozilla",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "thunderbird"
             }
         ],
@@ -181,7 +181,7 @@
         "description": "A tool to record your screen and take screenshots",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "kazam"
             }
         ],
@@ -215,7 +215,7 @@
         "description": "Record and edit audio files",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "audacity"
             }
         ],
@@ -226,7 +226,7 @@
         "description": "Audio file converter",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "soundconverter"
             }
         ],
@@ -249,7 +249,7 @@
         "description": "Music production for everyone: loops, synthesizers, mixer...",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "lmms"
             }
         ],
@@ -316,7 +316,7 @@
         "description": "A document viewer with support for PDF and more",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "evince"
             }
         ],
@@ -339,7 +339,7 @@
         "description": "A tool to compare PDF files",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "diffpdf"
             }
         ],
@@ -361,7 +361,7 @@
         "description": "A game of ancient warfare, similar to Age of Empires",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "0ad"
             }
         ],
@@ -372,7 +372,7 @@
         "description": "A tool to install Windows games on Linux",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "playonlinux"
             }
         ],
@@ -395,7 +395,7 @@
         "description": "A tool to manage your drives",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "gnome-disk-utility"
             }
         ],
@@ -406,7 +406,7 @@
         "description": "A tool to make partitions in your hard drives",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "gparted"
             }
         ],
@@ -417,7 +417,7 @@
         "description": "Add or remove applications from your menu",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "menulibre"
             }
         ],
@@ -428,7 +428,7 @@
         "description": "Manage your passwords",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "seahorse"
             }
         ],
@@ -452,7 +452,7 @@
         "description": "Download and upload files via FTP, FTPS and SFTP",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "filezilla"
             }
         ],
@@ -463,7 +463,7 @@
         "description": "Java, zip, rar and exfat tools",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "icedtea-8-plugin"
             }
         ],
@@ -474,7 +474,7 @@
         "description": "Tools for developers: build-essential, cmake, git, svn, java, python, octave, autotools...",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "build-essential"
             }
         ],
@@ -579,7 +579,7 @@
         "description": "A system resource usage monitor",
         "recipes": [
             {
-                "type": "package",
+                "type": "repo",
                 "packageName": "gnome-system-monitor"
             }
         ],
