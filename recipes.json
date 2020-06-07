@@ -27,7 +27,7 @@
             {
                 "type": "repo",
                 "packageName": "ubuntu-restricted-extras",
-                "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections"]
+                "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"]
             }
         ],
         "category": "generic",
@@ -442,7 +442,7 @@
                 "type": "ppa",
                 "packageName": "gnome-encfs-manager",
                 "ppa": "ppa:gencfsm",
-                "preInstall": ["echo encfs encfs/security-information boolean true | sudo debconf-set-selections"]
+                "preInstall": ["echo encfs encfs/security-information boolean true | debconf-set-selections"]
             }
         ],
         "category": "tools",
@@ -487,7 +487,7 @@
             {
                 "type": "snap",
                 "packageName": "code",
-                "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections"]
+                "preInstall": ["echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"]
             }
         ],
         "category": "programming",
@@ -534,7 +534,7 @@
                 "type": "ppa",
                 "packageName": "refind",
                 "ppa": "ppa:rodsmith/refind",
-                "preInstall": ["echo refind refind/install_to_esp boolean true | sudo debconf-set-selections"],
+                "preInstall": ["echo refind refind/install_to_esp boolean true | debconf-set-selections"],
                 "postInstall": ["refind-install"]
             }
         ],
