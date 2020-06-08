@@ -91,11 +91,8 @@ class MainWindow(QWidget):
 
         super().__init__()
 
-        # Window size and title
+        # Window title
         self.setWindowTitle('Alfred')
-        # self.resize(750, 700)
-        # self.setMinimumWidth(700)
-        # self.setMinimumHeight(500)
 
         # Icon
         self.setWindowIcon(QIcon('/home/david/pCloudDrive/Design/Vectorial/alfred/256B.png'))
