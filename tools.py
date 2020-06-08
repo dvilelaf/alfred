@@ -1,5 +1,5 @@
 import requests
-
+from Command import Command
 
 def checkInternetConnection():
 
@@ -81,22 +81,17 @@ def waitForDpkgLock():
             return False
 
 
-# def getSystemInfo():
+def getDistroInfo():
 
-    #['cat', '/etc/os-release']
+    info = {}
+
+    for i in Command(['cat', '/etc/os-release']).stdout.replace('"', '').split('\n'):
+        key, value = i.split('=')
+        info[key] = value
+
+    return info
 
 
 
-# NAME="elementary OS"
-# VERSION="5.1.5 Hera"
-# ID=elementary
-# ID_LIKE=ubuntu
-# PRETTY_NAME="elementary OS 5.1.5 Hera"
-# LOGO=distributor-logo
-# VERSION_ID="5.1.5"
-# HOME_URL="https://elementary.io/"
-# SUPPORT_URL="https://elementary.io/support"
-# BUG_REPORT_URL="https://github.com/elementary/os/issues/new"
-# PRIVACY_POLICY_URL="https://elementary.io/privacy-policy"
-# VERSION_CODENAME=hera
-# UBUNTU_CODENAME=bionic
+if __name__ == '__main__':
+    print(getDistroInfo())

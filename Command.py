@@ -4,114 +4,123 @@ import sys
 
 class Command:
 
-    def __init__(self, args, stdin=None, piped=False):
+    def __init__(self, args, stdin=None):
 
-        self.command = ' '.join(args)
+        # Init
         self.args = args
         self.stdin = stdin
-
         self.stdout = None
         self.stderr = None
         self.returnCode = None
-        self.succeeded = None
+        self.succeeded = False
 
-        if stdin and type(stdin) is str:
+        # Check args
+        if type(self.args) != list:
+            self.succeeded = False
+            self.stderr = 'Args must be of type list'
+            return
 
-            if stdin[-1] == '\n':
-                self.stdin = str.encode(stdin[:-1])
+        if self.stdin and type(self.stdin) != str:
+            self.stderr = 'Stdin must be of type string'
+            return
+
+        if self.args[0] == 'sudo':
+            self.args.insert(1, '-S') # sudo needs -S option to receive password from stdin
+
+            if not stdin:
+                self.stderr = 'Sudo password not provided'
+                return
+
+        if self.stdin:
+            self.stdin = self.stdin.replace('\n', '')
+
+        # Run
+        self.run()
+
+
+    def __str__(self):
+
+        return f'stdout: {self.stdout}\nstderr: {self.stderr}\nreturn code: {self.returnCode}'
+
+
+    def run(self):
+
+        try:
+
+            if self.stdin:
+
+                if self.args[0] == 'sudo':
+
+                    p = subprocess.Popen(self.args,
+                                         stdin=subprocess.PIPE,
+                                         stdout=subprocess.PIPE)
+
+                    stdout, stderr = p.communicate(f'{self.stdin}\n'.encode()) # Send password
+                    self.stdout = stdout.decode('utf-8') if stdout else stdout
+                    self.stderr = stderr.decode('utf-8') if stderr else stderr
+                    self.succeeded = True
+                    self.returnCode = 0
+                    return
+
+                else:
+
+                    # Add capture_output for Python version 3.7 or greater
+                    if sys.version_info[1] < 7:
+
+                        result = subprocess.run(self.args,
+                                                input=self.stdin.encode(),
+                                                stdout=subprocess.PIPE,
+                                                stderr=subprocess.PIPE,
+                                                #timeout=600,
+                                                check=True)
+
+                    else:
+
+                        result = subprocess.run(self.args,
+                                                input=self.stdin.encode(),
+                                                capture_output=True, # python >= 3.7
+                                                #timeout=600,
+                                                check=True)
+
             else:
-                self.stdin = str.encode(stdin)
 
+                # Add capture_output for Python version 3.7 or greater
+                if sys.version_info[1] < 7:
 
-def runCommand(args, stdin=None, piped=False):
+                    result = subprocess.run(self.args,
+                                            stdout=subprocess.PIPE,
+                                            stderr=subprocess.PIPE,
+                                            #timeout=600,
+                                            check=True)
 
-    if len(args) == 1 and '|' in args[0]:
+                else:
 
-        args = [ i.strip().split(' ') for i in args[0].split('|') ]
-        return runCommand(args, piped=True)
+                    result = subprocess.run(self.args,
+                                            capture_output=True, # python >= 3.7
+                                            #timeout=600,
+                                            check=True)
 
-    if piped:
+            self.stdout = result.stdout.decode("utf-8")
+            self.stderr = result.stderr.decode("utf-8")
+            self.succeeded = True
+            self.returnCode = 0
 
-        if len(args) > 2:
-            return runCommand(args[-1], stdin=runCommand(args[:-1], piped=True).stdout)
+        except subprocess.CalledProcessError as e:
 
-        elif len(args) == 2:
-            return runCommand(args[1], stdin=runCommand(args[0], piped=False).stdout)
+            self.returnCode = e.returnCode if hasattr(e, 'returnCode') else None
+            self.stdout = e.stdout.decode("utf-8")
+            self.stderr = e.stderr.decode("utf-8")
 
+        except subprocess.TimeoutExpired as e:
 
-    Command = Command(args, stdin)
+            self.stderr = f'Command timeout ({e.timeout}s)'
 
-    try:
+        except Exception as e:
 
-        if Command.stdin:
+            self.stderr = e.message if hasattr(e, 'message') else str(e)
 
-            if sys.version_info[1] < 7: # Add capture_output for Python version 3.7 or greater
+        finally:
 
-                result = subprocess.run(Command.args,
-                                        input=Command.stdin,
-                                        stdout=subprocess.PIPE,
-                                        stderr=subprocess.PIPE,
-                                        #timeout=600,
-                                        check=True)
-
-            else:
-
-                result = subprocess.run(Command.args,
-                                        input=Command.stdin,
-                                        stdout=subprocess.PIPE,
-                                        stderr=subprocess.PIPE,
-                                        capture_output=True, # python >= 3.7
-                                        #timeout=600,
-                                        check=True)
-
-        else:
-
-            if sys.version_info[1] < 7:
-
-                result = subprocess.run(Command.args,
-                                        stdout=subprocess.PIPE,
-                                        stderr=subprocess.PIPE,
-                                        #timeout=600,
-                                        check=True)
-
-            else:
-
-                result = subprocess.run(Command.args,
-                                        stdout=subprocess.PIPE,
-                                        stderr=subprocess.PIPE,
-                                        capture_output=True, # python >= 3.7
-                                        #timeout=600,
-                                        check=True)
-
-        Command.stdout = result.stdout.decode("utf-8")
-        Command.stderr = result.stderr.decode("utf-8")
-
-    except subprocess.CalledProcessError as e:
-
-        Command.succeeded = False
-        Command.returnCode = e.returnCode
-        Command.stdout = e.stdout.decode("utf-8")
-        Command.stderr = e.stderr.decode("utf-8")
-
-    except subprocess.TimeoutExpired as e:
-
-        Command.succeeded = False
-        Command.stdout = 'COMMAND TIMEOUT ({}s)'.format(e.timeout)
-
-    except Exception as e:
-
-        Command.succeeded = False
-        Command.stdout = ''
-        if hasattr(e, 'message'):
-            Command.stderr = e.message
-        else:
-            Command.stderr = str(e)
-
-    else:
-
-        Command.returnCode = 0
-        Command.succeeded = True
-
-    finally:
-
-        return Command
+            # Strip whitespaces
+            self.stdout = self.stdout.strip() if self.stdout else self.stdout
+            self.stderr = self.stderr.strip() if self.stderr else self.stderr
