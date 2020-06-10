@@ -9,11 +9,11 @@ from RecipeCollection import RecipeCollection
 packageTypes = ['repo', 'ppa', 'deb', 'flatpak', 'appimage', 'snap']
 
 genericLabelTexts = ['Task', 'Description', 'Run']
-genericRowCellWidths = [1.5, 4, 1]
+genericRowCellWidths = [1.5, 5, 0.7]
 genericLabelAlignments = [Qt.AlignLeft, Qt.AlignLeft, Qt.AlignCenter]
 
 nonGenericLabelTexts = ['Name', 'Description', 'Repo', 'PPA', 'Deb', 'Flatpak', 'AppImage', 'Snap']
-nonGenericRowCellWidths = [1.5, 4, 1, 1, 1, 1, 1, 1]
+nonGenericRowCellWidths = [1.5, 5, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 nonGenericLabelAlignments = [Qt.AlignLeft, Qt.AlignLeft, Qt.AlignCenter, Qt.AlignCenter, Qt.AlignCenter, Qt.AlignCenter, Qt.AlignCenter, Qt.AlignCenter]
 
 
