@@ -24,7 +24,7 @@ class TaskListWidget(QWidget):
         super().__init__()
 
         self.columnHAlignments = columnHAlignments
-        self.nRows = 0
+        self.rows = []
 
         # Header
         self.header = QWidget()
@@ -74,9 +74,14 @@ class TaskListWidget(QWidget):
 
 
     def addRow(self, elements):
-        for column in range(len(elements)):
-            self.gridLayout.addWidget(elements[column], self.nRows, column, Qt.AlignVCenter | self.columnHAlignments[column])
-        self.nRows += 1
+        self.rows.append(elements)
+
+        for column in range(len(self.rows[-1])):
+            self.gridLayout.addWidget(self.rows[-1][column],
+                                      len(self.rows) - 1, column,
+                                      Qt.AlignVCenter | self.columnHAlignments[column])
+
+
 
         # self.radioButton1.clicked.connect(lambda: self.radioButtonClicked(1))
         # self.radioButton3.setEnabled(False)
