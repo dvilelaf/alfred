@@ -130,6 +130,7 @@ class MainWindow(QWidget):
                     taskListWidget.addRow([QLabel(task),
                                            QLabel(categoryTasks[task]['description'])] + packageSelectors)
 
+            taskListWidget.gridLayout.setRowStretch (len(taskListWidget.rows), 1) # Do not stretch rows vertically
             self.taskListWidgets[category] = taskListWidget
 
         # Tabs widget
