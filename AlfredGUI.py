@@ -77,6 +77,8 @@ class TaskListWidget(QWidget):
     def addRow(self, elements):
         self.rows.append(elements)
         self.radioGroups.append(QButtonGroup())
+        self.radioGroups[-1].setExclusive(False)
+        self.radioGroups[-1].buttonClicked.connect(self.check_buttons)
 
         for column in range(len(self.rows[-1])):
             self.gridLayout.addWidget(self.rows[-1][column],
@@ -87,11 +89,17 @@ class TaskListWidget(QWidget):
                 self.radioGroups[-1].addButton(self.rows[-1][column])
 
 
-        # self.radioButton1.clicked.connect(lambda: self.radioButtonClicked(1))
-        # self.radioButton3.setEnabled(False)
+    def check_buttons(self, radioButton):
 
-    # def radioButtonClicked(self, n):
-    #     print(n)
+        # Search for this button's group
+        for radioGroup in self.radioGroups:
+            if radioButton in radioGroup.buttons():
+                # Uncheck every other button in this group
+                for button in radioGroup.buttons():
+                    if button is not radioButton:
+                        button.setChecked(False)
+                break
+
 
 
 class MainWindow(QWidget):
