@@ -206,6 +206,12 @@
             {
                 "type": "snap",
                 "packageName": "spotify"
+            },
+            {
+                "type": "repo",
+                "packageName": "spotify-client",
+                "preInstall": ["curl -sS https://download.spotify.com/debian/pubkey.gpg | apt-key add - ",
+                               "echo \"deb http://repository.spotify.com stable non-free\" | tee /etc/apt/sources.list.d/spotify.list"]
             }
         ],
         "category": "audio and video",
