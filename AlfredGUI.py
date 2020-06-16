@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout,
-                             QTabWidget, QCheckBox, QRadioButton, QScrollArea, QGridLayout)
+                             QTabWidget, QCheckBox, QRadioButton, QScrollArea, QGridLayout, QButtonGroup)
 
 from PyQt5.QtCore import Qt
 from RecipeCollection import RecipeCollection
@@ -25,6 +25,7 @@ class TaskListWidget(QWidget):
 
         self.columnHAlignments = columnHAlignments
         self.rows = []
+        self.radioGroups = []
 
         # Header
         self.header = QWidget()
@@ -75,12 +76,15 @@ class TaskListWidget(QWidget):
 
     def addRow(self, elements):
         self.rows.append(elements)
+        self.radioGroups.append(QButtonGroup())
 
         for column in range(len(self.rows[-1])):
             self.gridLayout.addWidget(self.rows[-1][column],
                                       len(self.rows) - 1, column,
                                       Qt.AlignVCenter | self.columnHAlignments[column])
 
+            if isinstance(self.rows[-1][column], QRadioButton):
+                self.radioGroups[-1].addButton(self.rows[-1][column])
 
 
         # self.radioButton1.clicked.connect(lambda: self.radioButtonClicked(1))
