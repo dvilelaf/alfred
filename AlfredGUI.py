@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import (QApplication, QWidget, QLabel, QPushButton, QVBoxLa
 from PyQt5.QtCore import Qt
 from RecipeCollection import RecipeCollection
 
-packageTypes = ['repo', 'ppa', 'deb', 'flatpak', 'appimage', 'snap']
+packageTypes = {'repo': 0, 'ppa': 1, 'deb': 2, 'flatpak': 3, 'appimage': 4, 'snap': 5}
 
 genericLabelTexts = ['Task', 'Description', 'Run']
 genericRowCellWidths = [1.5, 5, 0.7]
@@ -24,8 +24,8 @@ class TaskListWidget(QWidget):
         super().__init__()
 
         self.columnHAlignments = columnHAlignments
-        self.rows = []
-        self.radioGroups = []
+        self.rows = {}
+        self.radioGroups = {}
 
         # Header
         self.header = QWidget()
@@ -74,25 +74,26 @@ class TaskListWidget(QWidget):
         self.setLayout(self.layout)
 
 
-    def addRow(self, elements):
-        self.rows.append(elements)
-        self.radioGroups.append(QButtonGroup())
-        self.radioGroups[-1].setExclusive(False)
-        self.radioGroups[-1].buttonClicked.connect(self.check_buttons)
+    def addRow(self, name, elements):
+        self.rows[name] = elements
+        self.radioGroups[name] = QButtonGroup()
+        self.radioGroups[name].setExclusive(False)
+        self.radioGroups[name].buttonClicked.connect(self.check_buttons)
 
-        for column in range(len(self.rows[-1])):
-            self.gridLayout.addWidget(self.rows[-1][column],
+        for column in range(len(self.rows[name])):
+            self.gridLayout.addWidget(self.rows[name][column],
                                       len(self.rows) - 1, column,
                                       Qt.AlignVCenter | self.columnHAlignments[column])
 
-            if isinstance(self.rows[-1][column], QRadioButton):
-                self.radioGroups[-1].addButton(self.rows[-1][column])
+            if isinstance(self.rows[name][column], QRadioButton):
+                self.radioGroups[name].addButton(self.rows[name][column])
+                self.radioGroups[name].setId(self.rows[name][column], list(packageTypes.values())[column - 2])
 
 
     def check_buttons(self, radioButton):
 
         # Search for this button's group
-        for radioGroup in self.radioGroups:
+        for radioGroup in list(self.radioGroups.values()):
             if radioButton in radioGroup.buttons():
                 # Uncheck every other button in this group
                 for button in radioGroup.buttons():
@@ -125,22 +126,24 @@ class MainWindow(QWidget):
             if category == 'generic':
                 taskListWidget = TaskListWidget(genericLabelTexts, genericRowCellWidths, genericLabelAlignments, 100)
                 for task in categoryTasks:
-                    taskListWidget.addRow([QLabel(task),
+                    taskListWidget.addRow(task,
+                                          [QLabel(task),
                                            QLabel(categoryTasks[task]['description']),
                                            QCheckBox()])
             else:
                 taskListWidget = TaskListWidget(nonGenericLabelTexts, nonGenericRowCellWidths, nonGenericLabelAlignments, 100)
                 for task in categoryTasks:
                     availablePackageTypes = [recipe['type'] for recipe in categoryTasks[task]['recipes']]
-                    packageSelectors = []
+                    packageRadioButtons = []
                     for packageType in packageTypes:
                         if packageType in availablePackageTypes:
-                            packageSelectors.append(QRadioButton())
+                            packageRadioButtons.append(QRadioButton())
                         else:
-                            packageSelectors.append(QLabel('-'))
+                            packageRadioButtons.append(QLabel('-'))
 
-                    taskListWidget.addRow([QLabel(task),
-                                           QLabel(categoryTasks[task]['description'])] + packageSelectors)
+                    taskListWidget.addRow(task,
+                                          [QLabel(task),
+                                           QLabel(categoryTasks[task]['description'])] + packageRadioButtons)
 
             taskListWidget.gridLayout.setRowStretch (len(taskListWidget.rows), 1) # Do not stretch rows vertically
             self.taskListWidgets[category] = taskListWidget
@@ -154,12 +157,30 @@ class MainWindow(QWidget):
         # Run button
         self.runButton = QPushButton("Run")
         self.runButton.setFixedSize(150, 30)
+        self.runButton.clicked.connect(self.getSelectedRecipes)
 
         # Layout
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.tabsWidget)
         self.layout.addWidget(self.runButton, 0, Qt.AlignHCenter)
         self.setLayout(self.layout)
+
+
+    def getSelectedRecipes(self):
+        selectedRecipes = []
+
+        # Non generic tasks
+        for taskList in self.taskListWidgets.values():
+            for taskName in taskList.radioGroups:
+                checkedId = taskList.radioGroups[taskName].checkedId()
+                if checkedId != -1:
+                    selectedRecipes.append((taskName, list(packageTypes.keys())[checkedId]))
+
+        # Generic tasks
+        for genericTaskName, widgets in self.taskListWidgets['generic'].rows.items():
+            for widget in widgets:
+                if isinstance(widget, QCheckBox) and widget.isChecked():
+                    selectedRecipes.append(genericTaskName)
 
 
 
