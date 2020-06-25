@@ -1,10 +1,12 @@
 import sys
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout,
-                             QTabWidget, QCheckBox, QRadioButton, QScrollArea, QGridLayout, QButtonGroup)
+                             QTabWidget, QCheckBox, QRadioButton, QScrollArea, QGridLayout,
+                             QButtonGroup, QMessageBox, QProgressBar)
 
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 from RecipeCollection import RecipeCollection
+
 
 packageTypes = {'repo': 0, 'ppa': 1, 'deb': 2, 'flatpak': 3, 'appimage': 4, 'snap': 5}
 
@@ -15,6 +17,57 @@ genericLabelAlignments = [Qt.AlignLeft, Qt.AlignLeft, Qt.AlignCenter]
 nonGenericLabelTexts = ['Name', 'Description', 'Repo', 'PPA', 'Deb', 'Flatpak', 'AppImage', 'Snap']
 nonGenericRowCellWidths = [1.5, 5, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 nonGenericLabelAlignments = [Qt.AlignLeft, Qt.AlignLeft, Qt.AlignCenter, Qt.AlignCenter, Qt.AlignCenter, Qt.AlignCenter, Qt.AlignCenter, Qt.AlignCenter]
+
+
+
+class ProgressBar(QWidget):
+
+    nextWindowSignal = pyqtSignal()
+
+    def __init__(self):
+
+        super().__init__()
+
+        self.setWindowTitle('Alfred')
+        # self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+        # self.setWindowFlag(Qt.WindowMaximizeButtonHint, False)
+        # self.setWindowFlag(Qt.WindowMinimizeButtonHint, False)
+
+        self.progress = QProgressBar(self)
+        self.progress.setGeometry(10, 10, 500, 30)
+        self.progress.setValue(50)
+        self.progress.setAlignment(Qt.AlignCenter)
+        self.progress.setFormat('Processing tasks...')
+
+
+    def updateText(self, text):
+        self.progress.setFormat(text)
+
+
+    def nextWindow(self):
+        self.nextWindowSignal.emit()
+
+
+
+class WarningWindow(QMessageBox):
+
+    nextWindowSignal = pyqtSignal()
+
+    def __init__(self):
+
+        super().__init__()
+
+        self.setWindowTitle('Alfred')
+        self.setIcon(QMessageBox.Warning)
+        self.setText("Alfred is about to install the selected applications and you won't be able to cancel this operation once started.\n\nAre you sure you want to continue?")
+        self.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        self.buttonClicked.connect(self.nextWindow)
+
+
+    def nextWindow(self, button):
+        print(button)
+        self.nextWindowSignal.emit()
+
 
 
 class TaskListWidget(QWidget):
@@ -103,7 +156,9 @@ class TaskListWidget(QWidget):
 
 
 
-class MainWindow(QWidget):
+class SelectionWindow(QWidget):
+
+    nextWindowSignal = pyqtSignal()
 
     def __init__(self, tasks):
 
@@ -157,7 +212,7 @@ class MainWindow(QWidget):
         # Run button
         self.runButton = QPushButton("Run")
         self.runButton.setFixedSize(150, 30)
-        self.runButton.clicked.connect(self.getSelectedRecipes)
+        self.runButton.clicked.connect(self.nextWindow)
 
         # Layout
         self.layout = QVBoxLayout()
@@ -182,18 +237,49 @@ class MainWindow(QWidget):
                 if isinstance(widget, QCheckBox) and widget.isChecked():
                     selectedRecipes.append(genericTaskName)
 
+        return selectedRecipes
+
+
+    def nextWindow(self):
+        selectedRecipes = self.getSelectedRecipes()
+        self.nextWindowSignal.emit()
+
+
+
+class Controller:
+
+    def __init__(self):
+        pass
+
+    def showSelectionWindow(self, recipes):
+        self.selectionWindow = SelectionWindow(recipes)
+        self.selectionWindow.nextWindowSignal.connect(self.showWarningWindow)
+        self.selectionWindow.show()
+
+
+    def showWarningWindow(self):
+        self.warningWindow = WarningWindow()
+        self.warningWindow.nextWindowSignal.connect(self.showProgressBar)
+        self.warningWindow.show()
+
+
+    def showProgressBar(self):
+        self.selectionWindow.hide()
+        self.warningWindow.hide()
+        self.progressBar = ProgressBar()
+        # self.progressBar.nextWindowSignal.connect(self.resultWindow)
+        self.progressBar.show()
+
 
 
 if __name__ == '__main__':
 
-    recipes = RecipeCollection('/home/david/pCloudDrive/Code/Projects/alfred/recipes.json',
-                               '/home/david/pCloudDrive/Code/Projects/alfred/recipeSchema.json')
+    recipes = RecipeCollection('/home/david/Nextcloud/Code/Projects/alfred/recipes.json',
+                               '/home/david/Nextcloud/Code/Projects/alfred/recipeSchema.json')
     if recipes.loaded:
         app = QApplication(sys.argv)
-        window = MainWindow(recipes)
-        window.show()
+        controller = Controller()
+        controller.showSelectionWindow(recipes)
         app.exec_()
-
     else:
         sys.exit(recipes.error)
-
