@@ -6,7 +6,6 @@ import time
 
 
 def checkInternetConnection():
-
     try:
         _ = requests.get('https://www.cloudflare.com/', timeout=5)
         return True
@@ -18,7 +17,6 @@ def checkInternetConnection():
 
 
 def downloadURLtoFile(url, filePath):
-
     try:
         response = requests.get(url, allow_redirects=True)
 
@@ -38,7 +36,6 @@ def downloadURLtoFile(url, filePath):
 
 
 def getPPAlist():
-
     repoList = []
 
     for root, dirs, files in os.walk('/etc/apt/'):
@@ -58,13 +55,11 @@ def getPPAlist():
 
 
 def notify(message):
-
     Command(['notify-send', '-i', 'utilities-terminal', 'Alfred', message])
 
 
 
 def waitForDpkgLock():
-
     tries = 0
 
     while True:
@@ -85,7 +80,6 @@ def waitForDpkgLock():
 
 
 def getDistroInfo():
-
     info = {}
 
     for i in Command(['cat', '/etc/os-release']).stdout.replace('"', '').split('\n'):
@@ -97,13 +91,11 @@ def getDistroInfo():
 
 
 def getUnameInfo():
-
     return Command(['uname', '-a']).stdout
 
 
 
 def isPackageInstalled(package):
-
     cmd = Command(['dpkg', '-s', package])
 
     if cmd.succeeded and 'Status: install ok installed' in cmd.stdout:
@@ -114,8 +106,13 @@ def isPackageInstalled(package):
 
 
 def installPackages(packages):
-
     cmd = Command(['apt', 'install'] + packages if type(packages) is list else [packages])
+    return cmd.succeeded
+
+
+
+def repairPackages():
+    cmd = Command(['dpkg', '--configure', '-a'])
     return cmd.succeeded
 
 
