@@ -1,5 +1,9 @@
 import requests
 from Command import Command
+import os
+import re
+import time
+
 
 def checkInternetConnection():
 
@@ -33,7 +37,7 @@ def downloadURLtoFile(url, filePath):
     return True
 
 
-def getRepoList():
+def getPPAlist():
 
     repoList = []
 
@@ -44,7 +48,7 @@ def getRepoList():
                     lines = f.readlines()
 
                     for line in lines:
-                        if re.match('^deb http:\/\/ppa\.launchpad\.net\/[a-z0-9\-]+\/[a-z0-9\-]+', line):
+                        if re.match(r'^deb http:\/\/ppa\.launchpad\.net\/[a-z0-9\-]+\/[a-z0-9\-]+', line):
 
                             data = line.split('/')
                             repoList.append('ppa:' + data[3] + '/' + data[4])
@@ -55,10 +59,8 @@ def getRepoList():
 
 def notify(message):
 
-    userID = runCmd(['id', '-u', os.environ['SUDO_USER']]).stdout.replace('\n', '')
+    Command(['notify-send', '-i', 'utilities-terminal', 'Alfred', message])
 
-    runCmd(['sudo', '-u', os.environ['SUDO_USER'], 'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{}/bus'.format(userID),
-            'notify-send', '-i', 'utilities-terminal', 'Alfred', message])
 
 
 def waitForDpkgLock():
@@ -67,10 +69,10 @@ def waitForDpkgLock():
 
     while True:
 
-        dpkgLock = runCmd(['fuser', '/var/lib/dpkg/lock'])
-        aptLock = runCmd(['fuser', '/var/lib/apt/lists/lock'])
+        dpkgLock = Command(['fuser', '/var/lib/dpkg/lock'])
+        aptLock = Command(['fuser', '/var/lib/apt/lists/lock'])
 
-        if dpkgLock.stdout != '' or aptLock.stdout !='':
+        if dpkgLock.stdout != '' or aptLock.stdout != '':
             time.sleep(3)
             tries += 1
 
@@ -79,6 +81,7 @@ def waitForDpkgLock():
 
         if tries > 10:
             return False
+
 
 
 def getDistroInfo():
@@ -90,6 +93,30 @@ def getDistroInfo():
         info[key] = value
 
     return info
+
+
+
+def getUnameInfo():
+
+    return Command(['uname', '-a']).stdout
+
+
+
+def isPackageInstalled(package):
+
+    cmd = Command(['dpkg', '-s', package])
+
+    if cmd.succeeded and 'Status: install ok installed' in cmd.stdout:
+        return True
+    else:
+        return False
+
+
+
+def installPackages(packages):
+
+    cmd = Command(['apt', 'install'] + packages if type(packages) is list else [packages])
+    return cmd.succeeded
 
 
 
