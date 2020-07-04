@@ -25,7 +25,6 @@ class ProgressBar(QWidget):
     nextWindowSignal = pyqtSignal()
 
     def __init__(self):
-
         super().__init__()
 
         self.setWindowTitle('Alfred')
@@ -54,7 +53,6 @@ class WarningWindow(QMessageBox):
     nextWindowSignal = pyqtSignal()
 
     def __init__(self):
-
         super().__init__()
 
         self.setWindowTitle('Alfred')
@@ -73,7 +71,6 @@ class WarningWindow(QMessageBox):
 class TaskListWidget(QWidget):
 
     def __init__(self, columnHeaders, columnSpans, columnHAlignments, minimumColumnWidth):
-
         super().__init__()
 
         self.columnHAlignments = columnHAlignments
@@ -144,7 +141,6 @@ class TaskListWidget(QWidget):
 
 
     def check_buttons(self, radioButton):
-
         # Search for this button's group
         for radioGroup in list(self.radioGroups.values()):
             if radioButton in radioGroup.buttons():
@@ -161,7 +157,6 @@ class SelectionWindow(QWidget):
     nextWindowSignal = pyqtSignal()
 
     def __init__(self, tasks):
-
         super().__init__()
 
         # Window title
