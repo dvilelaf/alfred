@@ -1,13 +1,14 @@
 from Command import Command
-from PackageCollections import *
-from tools import getDistroInfo, getUnameInfo
+from Collections import *
+from tools import *
 from datetime import datetime
 
 
 class Alfred:
 
-    def __init__(self, recipes):
+    def __init__(self, recipes, selectedRecipes):
         self.recipes = recipes
+        self.selectedRecipes = selectedRecipes
         logFileName = '/var/log/Alfred.log'
         mode = 'a' if os.path.exists(log) else 'w'
         self.logFile = open(logFileName, mode)
@@ -31,5 +32,39 @@ class Alfred:
 
 
     def run(self):
-        # Repair installation interruptions
-        Command(['dpkg', '--configure', '-a'])
+        repairPackages()
+
+        # Create collections
+        self.collections = {'generic': GenericCollection(),
+                            'repo': RepoCollection(),
+                            'ppa': PPACollection(),
+                            'deb': DebCollection(),
+                            'flatpak': FlatpakCollection(),
+                            'appimage': AppImageCollection(),
+                            'snap': SnapCollection()}
+
+        # Add packages to collections
+        for selectedRecipe in self.selectedRecipes:
+            if type(selectedRecipe) is list:
+                packageName = selectedRecipe[0]
+                packageType = selectedRecipe[1]
+
+                preInstalls = None
+                if 'preInstall' in self.recipes[packageType]['recipes'][packageType]:
+                    preInstalls = [self.recipes[packageType]['recipes'][packageType]['preInstall']]
+
+                postInstalls = None
+                if 'postInstall' in self.recipes[packageType]['recipes'][packageType]:
+                    postInstalls = [self.recipes[packageType]['recipes'][packageType]['postInstall']]
+
+                self.collections[packageType].add(packageName, preInstalls=preInstalls, postInstalls=postInstalls)
+
+            else:
+                self.collections['generic'].add(selectedRecipe, self.recipes[selectedRecipe]['recipes'][0]['recipe'])
+
+        # Process collections
+        for _, collection in self.collections:
+            if collection.batched:
+                collection.processBatch()
+            else:
+                collection.process()
