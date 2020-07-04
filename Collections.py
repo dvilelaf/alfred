@@ -4,6 +4,28 @@ import os
 import getpass
 
 
+class GenericCollection:
+
+    def __init__(self):
+        self.cmds = {}
+        self.failed = {}
+        self.batched = False
+
+
+    def add(self, name, cmd):
+        self.cmds[name] = cmd
+
+
+    def process(self):
+        for name, cmd in self.cmds:
+            command = Command(cmd)
+            if not command.succeeded:
+                self.failed[name] = cmd
+
+        return len(self.failed) == 0
+
+
+
 class PackageCollection:
 
     def __init__(self):
@@ -12,6 +34,7 @@ class PackageCollection:
         self.postInstalls = {}
 
         self.failed = {}
+        self.batched = False
 
 
     def add(self, package, preInstalls=None, postInstalls=None):
@@ -68,6 +91,7 @@ class BatchedPackageCollection(PackageCollection):
 
     def __init__(self):
         super().__init__()
+        self.batched = True
 
 
     def installBatch(self):
@@ -88,7 +112,7 @@ class BatchedPackageCollection(PackageCollection):
 
 
 
-class RepoPackages(BatchedPackageCollection):
+class RepoCollection(BatchedPackageCollection):
 
     def __init__(self):
         super().__init__()
@@ -110,7 +134,7 @@ class RepoPackages(BatchedPackageCollection):
 
 
 
-class PPAPackages(RepoPackages):
+class PPACollection(RepoCollection):
 
     def __init__(self):
         super().__init__()
@@ -130,7 +154,7 @@ class PPAPackages(RepoPackages):
 
 
 
-class DebPackages(RepoPackages):
+class DebCollection(RepoCollection):
 
     def __init__(self):
         super().__init__()
@@ -151,7 +175,7 @@ class DebPackages(RepoPackages):
 
 
 
-class FlatpakPackages(PackageCollection):
+class FlatpakCollection(PackageCollection):
 
     def __init__(self):
         super().__init__()
@@ -180,7 +204,7 @@ class FlatpakPackages(PackageCollection):
 
 
 
-class AppImagePackages(PackageCollection):
+class AppImageCollection(PackageCollection):
 
     def __init__(self):
         super().__init__()
@@ -199,7 +223,7 @@ class AppImagePackages(PackageCollection):
 
 
 
-class SnapPackages(PackageCollection):
+class SnapCollection(PackageCollection):
 
     def __init__(self):
         super().__init__()
