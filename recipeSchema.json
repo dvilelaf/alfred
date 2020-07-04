@@ -107,12 +107,18 @@
 
         "flatpak": {
             "type": "object",
-            "required": ["type", "packageName"],
+            "required": ["type", "packageName", "repositoryName", "repositoryAddress"],
             "properties": {
                 "type": {
                     "const": "flatpak"
                 },
                 "packageName": {
+                    "$ref": "#/definitions/nonEmptyString"
+                },
+                "repositoryName": {
+                    "$ref": "#/definitions/nonEmptyString"
+                },
+                "repositoryAddress": {
                     "$ref": "#/definitions/nonEmptyString"
                 }
             }
