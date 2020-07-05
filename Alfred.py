@@ -10,7 +10,7 @@ class Alfred:
         self.recipes = recipes
         self.selectedRecipes = selectedRecipes
         logFileName = '/var/log/Alfred.log'
-        mode = 'a' if os.path.exists(log) else 'w'
+        mode = 'a' if os.path.exists(logFileName) else 'w'
         self.logFile = open(logFileName, mode)
 
         # Set default language
