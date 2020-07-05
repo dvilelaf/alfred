@@ -63,7 +63,7 @@ class Alfred:
                 self.collections['generic'].add(selectedRecipe, self.recipes[selectedRecipe]['recipes'][0]['recipe'])
 
         # Process collections
-        for _, collection in self.collections:
+        for _, collection in self.collections.items():
             if collection.batched:
                 collection.processBatch()
             else:
